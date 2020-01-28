@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1580219087 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\qrcode\main.c
+1580232552 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\qrcode\main.c
 	<stdbool.h>
 	<stddef.h>
 	<stdio.h>
