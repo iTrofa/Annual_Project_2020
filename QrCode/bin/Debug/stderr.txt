@@ -1,0 +1,6 @@
+
+(SDL_rect.exe:7676): Gtk-WARNING **: Could not find signal handler 'on_click_new'
+
+(SDL_rect.exe:7676): Gtk-WARNING **: Could not find signal handler 'on_click_new'
+
+(SDL_rect.exe:7676): Gtk-WARNING **: Could not find signal handler 'on_btnConnect_clicked'

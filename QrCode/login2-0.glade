@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk+" version="2.20"/>
+  <!-- interface-naming-policy project-wide -->
+  <object class="GtkWindow" id="windows1">
+    <property name="title" translatable="yes">Log In</property>
+    <property name="resizable">False</property>
+    <child>
+      <object class="GtkFixed" id="fixedLogin">
+        <property name="visible">True</property>
+        <child>
+          <object class="GtkVBox" id="vboxlogin">
+            <property name="width_request">307</property>
+            <property name="height_request">219</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkEntry" id="Gtk_entryName">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Enter your Username</property>
+                <property name="max_length">35</property>
+                <property name="invisible_char">●</property>
+                <property name="secondary_icon_stock">gtk-edit</property>
+              </object>
+              <packing>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="Gtk_entryMdp">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Enter your Password</property>
+                <property name="max_length">35</property>
+                <property name="visibility">False</property>
+                <property name="invisible_char">●</property>
+                <property name="secondary_icon_stock">gtk-dialog-authentication</property>
+                <property name="secondary_icon_tooltip_text" translatable="yes">Your password must have fewer then 35 characters!</property>
+              </object>
+              <packing>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="btnConnect">
+                <property name="label" translatable="yes">CONNEXION</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="has_tooltip">True</property>
+                <property name="tooltip_text" translatable="yes">Click to connect!</property>
+                <property name="use_action_appearance">False</property>
+                <signal name="clicked" handler="on_btnConnect_clicked" swapped="no"/>
+              </object>
+              <packing>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="x">159</property>
+            <property name="y">85</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lbl_Pseudo">
+            <property name="width_request">231</property>
+            <property name="height_request">29</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Username :</property>
+            <attributes>
+              <attribute name="foreground" value="#3b31a649f267"/>
+              <attribute name="scale" value="2.000000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">197</property>
+            <property name="y">83</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lbl_Mdp">
+            <property name="width_request">273</property>
+            <property name="height_request">34</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Password:</property>
+            <attributes>
+              <attribute name="foreground" value="#3b31a649f267"/>
+              <attribute name="scale" value="2.000000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">179</property>
+            <property name="y">150</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="lbl_index">
+            <property name="width_request">246</property>
+            <property name="height_request">43</property>
+            <property name="visible">True</property>
+            <property name="label" translatable="yes">Log In page!</property>
+            <attributes>
+              <attribute name="underline" value="True"/>
+              <attribute name="foreground" value="#214eb2d4c893"/>
+              <attribute name="scale" value="2.000000"/>
+            </attributes>
+          </object>
+          <packing>
+            <property name="x">198</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator1">
+            <property name="width_request">613</property>
+            <property name="height_request">72</property>
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="x">15</property>
+            <property name="y">8</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkHSeparator" id="hseparator2">
+            <property name="width_request">618</property>
+            <property name="height_request">80</property>
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="x">11</property>
+            <property name="y">324</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEventBox" id="eventbox1">
+            <property name="width_request">246</property>
+            <property name="height_request">30</property>
+            <property name="visible">True</property>
+            <signal name="button-press-event" handler="on_click_new" swapped="no"/>
+            <child>
+              <object class="GtkLabel" id="lbl_new">
+                <property name="width_request">246</property>
+                <property name="height_request">30</property>
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">New? Click Here!</property>
+                <attributes>
+                  <attribute name="underline" value="True"/>
+                  <attribute name="foreground" value="#214eb2d4c893"/>
+                  <attribute name="scale" value="2.000000"/>
+                </attributes>
+                <signal name="button-press-event" handler="on_click_new" swapped="no"/>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">198</property>
+            <property name="y">320</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEventBox" id="eventbox2">
+            <property name="width_request">363</property>
+            <property name="height_request">40</property>
+            <property name="visible">True</property>
+            <child>
+              <object class="GtkLabel" id="lbl_error">
+                <property name="width_request">100</property>
+                <property name="height_request">80</property>
+                <property name="visible">True</property>
+                <property name="yalign">0.49000000953674316</property>
+                <attributes>
+                  <attribute name="foreground" value="#ffff00000000"/>
+                  <attribute name="scale" value="1.000000"/>
+                </attributes>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="x">134</property>
+            <property name="y">46</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
