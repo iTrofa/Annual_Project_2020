@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1581175333 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app registration\main.c
+	<windows.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	<gtk.h>
+
+1580665485 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c app registration\qrcodegen.c
+	<assert.h>
+	<limits.h>
+	<stdlib.h>
+	<string.h>
+	"qrcodegen.h"
+
+1580665485 c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c app registration\qrcodegen.h
+	<stdbool.h>
+	<stddef.h>
+	<stdint.h>
+
+1581189862 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c app registration\main.c
+	<windows.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	"qrcodegen.h"
+	<gtk.h>
+	<SDL/SDL.h>
+	<time.h>
+	<mysql.h>
+

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="C_APP REGISTRATION" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/C_APP REGISTRATION" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-lmingw32" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/SDL-1.2.13/lib/libSDL.dll.a" />
+					<Add library="C:/Program Files (x86)/CodeBlocks/SDL-1.2.13/lib/libSDLmain.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/C_APP REGISTRATION" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-mms-bitfields" />
+			<Add option="-Wall" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/gtk-2.0" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/cairo" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/gdk" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/glib-2.0" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/lib/glib-2.0/include" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/pango-1.0" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/lib/gtk-2.0/include" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/include/atk-1.0" />
+		</Compiler>
+		<Linker>
+			<Add library="gtk-win32-2.0" />
+			<Add library="gobject-2.0" />
+			<Add library="glib-2.0" />
+			<Add directory="C:/Program Files (x86)/Gtk3+/lib" />
+		</Linker>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="qrcodegen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="qrcodegen.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
