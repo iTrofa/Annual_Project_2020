@@ -4,7 +4,7 @@ if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
 }
-class InputValidator
+class SignupValidator
 {
     private array $data;
     private array $error;
@@ -15,7 +15,7 @@ class InputValidator
     private PDO $db;
 
     /**
-     * InputValidator constructor.
+     * SignupValidator constructor.
      * @param array $post
      */
     public function __construct(array $post)

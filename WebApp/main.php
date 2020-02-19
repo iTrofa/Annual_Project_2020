@@ -2,14 +2,16 @@
 <?php
 require('config.php');
 include('header.php');
-echo "<title>Flash Assistance</title>";
-echo "<body>";
-echo "<br><br><br><br>";
-if (session_status() == PHP_SESSION_NONE) {
+?>
+<title>Flash Assistance</title>";
+<body>
+<br><br><br><br>
+<?php
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
  //List of Workers
-$q = "SELECT * FROM person";
+$q = 'SELECT * FROM Person';
 $req = $bdd->prepare($q);
 $req->execute();
 
@@ -36,14 +38,14 @@ while($user = $req->fetch()) {
     <tbody id="myTable">
 <?php
 
-for ($i = 0 ; $i<sizeof($results); $i++){
+for ($i = 0, $iMax = sizeof($results); $i< $iMax; $i++){
     $firstName = $results[$i]['firstName'];
     $lastName = $results[$i]['lastName'];
     $email = $results[$i]['email'];
     $phone = $results[$i]['phoneNumber'];
     $password = $results[$i]['password'];
     $idPerson = $results[$i]['idPerson'];
-    $q = $bdd->prepare("SELECT idPerson FROM worker where idPerson = :idPerson");
+    $q = $bdd->prepare('SELECT idPerson FROM worker where idPerson = :idPerson');
     $q->bindParam(':idPerson', $idPerson);
     $q->execute();
     $worker = $q->fetchall();
