@@ -1,3 +1,23 @@
+<?php
+if (session_status() === PHP_SESSION_NONE)
+{
+    session_start();
+    if (isset($_SESSION['id']))
+    {
+        header('Location: main.php');
+    }
+}
+
+require_once 'SignupValidator.php';
+
+if (!empty($_POST))
+{
+    $validate = new SignupValidator($_POST);
+
+    $validate->validateEmptyInputs();
+
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
  <head>
@@ -35,18 +55,6 @@
 <body>
 
 <?php require_once'header.php' ?>
-<?php
-
-require_once 'SignupValidator.php';
-
-if (!empty($_POST))
-{
-    $validate = new SignupValidator($_POST);
-
-    $validate->validateEmptyInputs();
-
-}
-?>
         <h3><?php echo $_SESSION['valid']['request']  ?? '';
                   echo $_SESSION['error']['request'] ?? '';
                   if(isset($_SESSION['valid']['request']))
@@ -55,33 +63,33 @@ if (!empty($_POST))
             <form action="" method="post">
                 <label>first name
                     <input  type="text" name="firstName" value="<?= $_SESSION['valid']['firstName'] ?? ''
-                    ?>" >
+                    ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['firstName'] ?? '' ?></span>
                 <br>
                 <label>last name
-                    <input  type="text" name="lastName" value="<?= $_SESSION['valid']['lastName'] ?? '' ?>" >
+                    <input  type="text" name="lastName" value="<?= $_SESSION['valid']['lastName'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['lastName'] ?? '' ?></span>
                 <br>
                 <label>email
-                    <input  type="text" name="email" value="<?= $_SESSION['valid']['email'] ?? '' ?>" >
+                    <input  type="text" name="email" value="<?= $_SESSION['valid']['email'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['email'] ?? '' ?></span>
                 <br>
                 <label>phone number
-                    <input  type="text" name="phone" value="<?= $_SESSION['valid']['phone'] ?? '' ?>" >
+                    <input  type="text" name="phone" value="<?= $_SESSION['valid']['phone'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['phone'] ?? '' ?></span>
                 <br>
                 <label> password
-                    <input  type="password" name="password" >
+                    <input  type="password" name="password" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
                 <br>
                 <label> retype password
                     <br>
-                    <input  type="password" name="rePassword" >
+                    <input  type="password" name="rePassword" required>
                 </label><br>
                 <button type="submit" id="btn" class="btn btn-primary btn-block btn-large">Signup</button>
                 <br>

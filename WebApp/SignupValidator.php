@@ -26,9 +26,10 @@ class SignupValidator
         try{
 
             $this->db = new PDO('mysql:host=localhost:3306;dbname=flashAssistance', 'admin', 'password');
+            $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
         }
-        catch (Exception $e)
+        catch (PDOException $e)
         {
             // En cas d'erreur, on affiche un message et on arrête tout
             die('Erreur : ' . $e->getMessage());
@@ -92,7 +93,7 @@ class SignupValidator
 
     private function validateEmail(): void
     {
-        $email =$this->data['email'];
+        $email =strtolower($this->data['email']);
         $q = $this->db->prepare('SELECT email from person where email =:email') ;
         $q->execute([':email' => $email]);
         $res = $q->fetch();
@@ -128,24 +129,16 @@ class SignupValidator
 
     private function validatePhone(): void
     {
-        $phone = filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT);
-        $q = $this->db->prepare('SELECT phoneNumber from person where phoneNumber =:phone') ;
-        $q->execute([':phone' => $phone]);
-        $res = $q->fetch();
+
         if (!filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT))
         {
             $this->addError('phone number is not valid', 'phone');
             $this->valid['phone'] = '';
 
-        } elseif($res === false)
-        {
-             $this->addValid('phone');
         }
         else
         {
-            $this->addError('phone number is already register', 'phone');
-            $this->valid['phone'] = '';
-
+             $this->addValid('phone');
         }
     }
 
@@ -159,25 +152,29 @@ class SignupValidator
             $this->addError('the password is too short','password');
     }
 
-    private function addDatabase(): void
-    {
-        $q = $this->db->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson) VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)');
-        $q->execute
-        (
-          [
-              ':firstName'=>ucfirst($this->data['firstName']),
-              ':lastName'=>ucfirst($this->data['lastName']),
-              ':email'=>$this->data['email'],
-              ':phoneNumber'=>filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
-              ':password'=>password_hash($this->data['password'],PASSWORD_ARGON2ID,['cost'=>14]),
-              ':idPerson'=>v4()
-          ]
-        );
-            if($q)
-            {
-                $this->valid['request'] = 'you are now register';
-                return;
-            }
-            $this->error['request'] = 'there is a technical problem try later';
-    }
+	    private function addDatabase(): void
+	    {
+		$uuid = v4();
+		$res = null;
+            $q = $this->db->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
+             VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)');
+            $res = $q->execute
+            (
+                [
+                    ':firstName' => ucfirst($this->data['firstName']),
+                    ':lastName' => ucfirst($this->data['lastName']),
+                    ':email' => strtolower($this->data['email']),
+                    ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
+                    ':password' => password_hash($this->data['password'], PASSWORD_ARGON2ID, ['cost' => 14]),
+                    ':idPerson' => $uuid
+                ]
+            );
+		    if($res)
+		    {
+		        $this->valid['request'] = 'you are now registered';
+		        $_SESSION['id'] =$uuid;
+		        return;
+		    }
+		    $this->error['request'] = 'there is a technical problem try later';
+	    }
 }

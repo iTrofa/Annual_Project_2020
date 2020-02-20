@@ -170,6 +170,11 @@ input:focus {
     color: red;
 }
 
+.valid
+{
+    color: green;
+}
+
 .signup {
     position: absolute;
     top: 30%;
