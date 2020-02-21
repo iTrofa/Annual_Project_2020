@@ -9,6 +9,7 @@
 #include <SDL/SDL.h>
 #include <time.h>
 #include <mysql.h>
+#include "savepng.h"
 
 //Global variables
 GtkBuilder *builder;
@@ -17,6 +18,8 @@ GtkWidget *fixed;
 GtkWidget *Gtk_entryName;
 GtkWidget *Gtk_entryLastName;
 GtkWidget *Gtk_entryPhone;
+GtkWidget *Gtk_entryFunction;
+GtkWidget *Gtk_entryLocalisation;
 GtkWidget *Gtk_entryEmail;
 GtkWidget *btnGenerate;
 GtkWidget *lbl_error;
@@ -29,7 +32,10 @@ char lastName[50];
 char phone[10];
 char email[120];
 char password[35];
+char fonction[50];
+char localisation[50];
 char ch[2];
+char sql_qry[250];
 
 MYSQL *mysql;
 int counter = 0;
@@ -39,15 +45,18 @@ int counter = 0;
 G_MODULE_EXPORT void onclickGenerate(GtkButton *button);
 static void printQr(const unsigned char qrcode[]);
 void done();
+void uuid(char*);
+int checkLocalisation(char *);
 
 int main(int argc, char *argv[]){
+    srand(time(NULL));
     SDL_Init(SDL_INIT_VIDEO);
     freopen( "CON", "w", stdout );
     freopen( "CON", "w", stderr );
     gtk_init(&argc, &argv);
 /*  	doSegmentDemo();*/
     builder = gtk_builder_new();
-    gtk_builder_add_from_file (builder, "login2-0.glade", NULL);
+    gtk_builder_add_from_file (builder, "login3-0.glade", NULL);
 
     /*GdkColor color;
     color.red = 0xFFCC;
@@ -84,6 +93,8 @@ int main(int argc, char *argv[]){
     Gtk_entryPassword = GTK_WIDGET(gtk_builder_get_object(builder, "Gtk_entryPassword"));
     Gtk_entryEmail = GTK_WIDGET(gtk_builder_get_object(builder, "Gtk_entryEmail"));
     Gtk_entryPhone = GTK_WIDGET(gtk_builder_get_object(builder, "Gtk_entryPhone"));
+    Gtk_entryFunction = GTK_WIDGET(gtk_builder_get_object(builder, "Gtk_entryFunction"));
+    Gtk_entryLocalisation = GTK_WIDGET(gtk_builder_get_object(builder, "Gtk_entryLocalisation"));
     btnGenerate = GTK_WIDGET(gtk_builder_get_object(builder, "btnGenerate"));
     eventbox1 = GTK_WIDGET(gtk_builder_get_object(builder, "eventbox1"));
     eventbox2 = GTK_WIDGET(gtk_builder_get_object(builder, "eventbox2"));
@@ -101,7 +112,9 @@ int main(int argc, char *argv[]){
     gtk_main();
 }
 void onclickGenerate(GtkButton *button){
-
+    char newerror[100];
+    int verification = 0;
+    int errorlbl = 0;
     //const gchar* str_text=gtk_label_get_text (GTK_LABEL(lblName));
 
     /* On stocke le nom et lastName dans la variable Name et LastName*/
@@ -110,6 +123,9 @@ void onclickGenerate(GtkButton *button){
      sprintf(email,"%s",gtk_entry_get_text(Gtk_entryEmail));
      sprintf(phone,"%s",gtk_entry_get_text(Gtk_entryPhone));
      sprintf(password,"%s",gtk_entry_get_text(Gtk_entryPassword));
+     sprintf(fonction,"%s",gtk_entry_get_text(Gtk_entryFunction));
+     sprintf(localisation,"%s",gtk_entry_get_text(Gtk_entryLocalisation));
+
 
 
      /* Une fois qu'on a stocker les infos de login dans les variables tout est possible
@@ -121,8 +137,32 @@ void onclickGenerate(GtkButton *button){
      printf("\n--User Info : %s",email);
      printf("\n--User Info : %s",phone);
      printf("\n--User Info : %s\n",password);
+     printf("\n--User Info : %s\n",fonction);
+     printf("\n--User Info : %s\n",localisation);
 
-
+     if(strcmp(name, "") == 0 || strcmp(lastName, "") == 0 || strcmp(email, "") == 0 || strcmp(phone, "") == 0 || strcmp(password, "") == 0 || strcmp(fonction, "") == 0 || strcmp(localisation, "") == 0){
+        printf("Error");
+        errorlbl = 1;
+        gtk_label_set_text(lbl_error, "Please Fill in all the inputs !\n");
+     }
+    if(errorlbl == 0){
+    if(checkLocalisation(localisation) == 0){
+        verification = 1;
+    }
+    else{
+        if(errorlbl == 0){
+        printf("Out: %d", strcmpi(localisation, "Paris"));
+        gtk_label_get_text(lbl_error);
+        sprintf(newerror, "Choose the nearest city: Paris, Marseille, Tours, Rennes or Nantes !");
+        gtk_label_set_text(lbl_error, newerror);
+        }else if(errorlbl == 1){
+        gtk_label_get_text(lbl_error);
+        sprintf(newerror, "%s Choose the nearest city: Paris, Marseille, Tours, Rennes or Nantes !", gtk_label_get_text(lbl_error));
+        gtk_label_set_text(lbl_error, newerror);
+        }
+        }
+    }
+    if(verification == 1){
     	{  // Illustration "silver"
 		const char *silver0 = name;
 		const char *silver1 = lastName;
@@ -148,17 +188,16 @@ void onclickGenerate(GtkButton *button){
 			free(concat);
 		}
 		}
-
-
+     }
 }
 
 
 
 // Prints the given QR Code to the console.
 static void printQr(const unsigned char qrcode[]){
-    if(counter == 1){
-    done();
-    }else{
+    char *uuid2[40];
+    char *uuid3[40];
+
     SDL_Surface *ecran = NULL, *rectangle = NULL, *shot = NULL;
     SDL_Rect position;
     ecran = SDL_SetVideoMode(1080, 720, 32, SDL_HWSURFACE);
@@ -202,40 +241,102 @@ static void printQr(const unsigned char qrcode[]){
     position.y += 15;
     SDL_Flip(ecran); // Mise à jour de l'écran
     SDL_SaveBMP_RW(ecran, SDL_RWFromFile("qrcode.bmp", "wb"), 1);
-   /* SDL_SavePNG_RW(ecran, SDL_RWFromFile("qrcode.png", "wb"), 1); */
-   /* shot = SDL_PNGFormatAlpha(ecran);    /* SDL_PNGFormatAlpha is optional, but might be necessary for SCREEN surfaces */
-    /*SDL_SavePNG(shot, "screen.png");
+    shot = SDL_PNGFormatAlpha(ecran);    /* SDL_PNGFormatAlpha is optional, but might be necessary for SCREEN surfaces */
+    SDL_SavePNG(shot, "qrcode.png");
     SDL_FreeSurface(shot);
-    */
 
-   /* pause();*/
 
     SDL_FreeSurface(rectangle); // Libération de la surface
 
-/*    SDL_FreeSurface(rectangle2); // Libération de la surface*/
     SDL_Quit();
 
     /*Vérification log_in SQL*/
 
     mysql = mysql_init(NULL);
     mysql_options(mysql,MYSQL_READ_DEFAULT_GROUP,"option");
-    if(mysql_real_connect(mysql,"localhost","root","root","C_PROJECT",3308,NULL,0)) {
-        /*sprintf(sql_cmd,"INSERT INTO user(username, password) VALUES ('%s', '%s')", UserPseudo, UserMdp);
-        printf("%s\n", sql_cmd);*/
-        counter = 1;
-       /* if(mysql_query(mysql, sql_cmd)){
-            printf("\nThat username is already taken, choose another!\n");
-            gtk_label_set_text(lbl_error, "That username is already taken, choose another!");
+    if(mysql_real_connect(mysql,"localhost","root","","flashassistance",3308,NULL,0)) {
+        uuid(uuid2);
+        sprintf(sql_qry,"INSERT INTO person(firstName, lastName, email, phoneNumber, password, idPerson, function, localisation) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, lastName, email, phone, password, uuid2, fonction, localisation);
+        printf("%s\n", sql_qry);
+
+        if(mysql_query(mysql, sql_qry)){
+            printf("\error MySQL!\n");
+            gtk_label_set_text(lbl_error, "There was an error with the Server!");
         }else{
             printf("You did it");
-            counter = 1;
-        }*/
-    } else{
+            uuid(uuid3);
+            sprintf(sql_qry,"INSERT INTO worker(idWorker, qrCode, idPerson) VALUES ('%s', '%s', '%s')", uuid3, "qrcode.bmp", uuid2);
+            printf("%s\n", sql_qry);
+             if(mysql_query(mysql, sql_qry)){
+                printf("\Error MySQL!\n");
+                gtk_label_set_text(lbl_error, "There was an error with the Server!");
+             }else{
+                counter = 1;
+                printf("\nYou did it x2");
+             }
+        }
+    }else{
         printf("\nConnection Error !");
      }
-    }
+    done();
 }
 void done(){
-    printf("DONE");
-    SDL_Quit();
+    printf("DONE !");
+    gtk_entry_set_text(Gtk_entryName, "");
+    gtk_entry_set_text(Gtk_entryLastName, "");
+    gtk_entry_set_text(Gtk_entryEmail, "");
+    gtk_entry_set_text(Gtk_entryPhone, "");
+    gtk_entry_set_text(Gtk_entryPassword, "");
+    gtk_entry_set_text(Gtk_entryFunction, "");
+    gtk_entry_set_text(Gtk_entryLocalisation, "");
+    gtk_label_set_text(lbl_error, "REGISTRATION COMPLETED AND SAVED");
+    GdkColor color;
+    color.red = 0x0000;
+    color.green = 0xFFFF;
+    color.blue = 0x0000;
+    gtk_widget_modify_bg(eventbox2, GTK_STATE_NORMAL, &color);
+}
+void uuid(char *uuid){
+    const char *hex_digits = "0123456789ABCDEF";
+    /*printf("%llu",strlen("f4e59137-7c8a-4c80-9f50-b0a962e4309b"));*/
+    sprintf( uuid,"%04x%04x-%04x-%04x-%04x-%04x%04x%04x",
+            // 32 bits for "time_low"
+                  rand() % 0xffff , rand() % 0xffff ,
+
+            // 16 bits for "time_mid"
+              rand() %0xffff ,
+
+            // 16 bits for "time_hi_and_version",
+            // four most significant bits holds version number 4
+              rand() % 0x0fff | 0x4000,
+
+            // 16 bits, 8 bits for "clk_seq_hi_res",
+            // 8 bits for "clk_seq_low",
+            // two most significant bits holds zero and one for variant DCE1.1
+              rand() % 0x3fff  | 0x8000,
+
+            // 48 bits for "node"
+             rand() % 0xffff ,rand() % 0xffff ,rand() % 0xffff );
+     printf("%s\n", uuid);
+}
+int checkLocalisation(char *localisation){
+
+        if(strcmpi(localisation, "Paris") == 0 || strcmpi(localisation, "Marseille") == 0 || strcmpi(localisation, "Tours") == 0 || strcmpi(localisation, "Rennes") == 0 || strcmpi(localisation, "Nantes") == 0){
+        printf("In %d \n", strcmpi(localisation, "Paris"));
+        printf("You're in !");
+        if(strcmpi(localisation, "Paris") == 0){
+                strcpy(localisation, "Paris");
+        }else if(strcmpi(localisation, "Marseille") == 0){
+                strcpy(localisation, "Marseille");
+        }else if(strcmpi(localisation, "Tours") == 0){
+                strcpy(localisation, "Tours");
+        }else if(strcmpi(localisation, "Rennes") == 0){
+                strcpy(localisation, "Rennes");
+        }else if(strcmpi(localisation, "Nantes") == 0){
+                strcpy(localisation, "Nantes");
+        }
+        return 0;
+        }else{
+        return 1;
+        }
 }
