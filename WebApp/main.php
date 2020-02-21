@@ -4,6 +4,7 @@ require('config.php');
 include('header.php');
 echo "<title>Flash Assistance</title>";
 echo "<body>";
+
 echo "<br><br><br><br>";
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -30,7 +31,8 @@ while($user = $req->fetch()) {
           <th>Email</th>
           <th>Phone Number</th>
           <th>Password</th>
-          <th>Worker</th>
+          <th>Function</th>
+          <th>Localisation</th>
       </tr>
     </thead>
     <tbody id="myTable">
@@ -43,7 +45,9 @@ for ($i = 0 ; $i<sizeof($results); $i++){
     $phone = $results[$i]['phoneNumber'];
     $password = $results[$i]['password'];
     $idPerson = $results[$i]['idPerson'];
-    $q = $bdd->prepare("SELECT idPerson FROM worker where idPerson = :idPerson");
+    $function = $results[$i]['function'];
+    $localisation = $results[$i]['localisation'];
+   /* $q = $bdd->prepare("SELECT idPerson FROM worker where idPerson = :idPerson");
     $q->bindParam(':idPerson', $idPerson);
     $q->execute();
     $worker = $q->fetchall();
@@ -52,7 +56,7 @@ for ($i = 0 ; $i<sizeof($results); $i++){
         $worker = "Not a worker";
     }else{
         $worker = "Worker";
-    }
+    }*/
     echo "<tr>";
         echo "<td>".$idPerson."</td>";
         echo "<td>".$firstName."</td>";
@@ -60,7 +64,8 @@ for ($i = 0 ; $i<sizeof($results); $i++){
         echo "<td>".$email."</td>";
         echo "<td>".$phone."</td>";
         echo "<td>".$password."</td>";
-        echo "<td>".$worker."</td>";
+        echo "<td>".$function."</td>";
+        echo "<td>".$localisation."</td>";
     echo "</tr>";
    /* echo $i+1 .'- <b>idPerson</b> : ' . $idPerson;
     echo '<br>';
@@ -82,7 +87,9 @@ for ($i = 0 ; $i<sizeof($results); $i++){
         </tbody>
     </table>
 </div>
-
+<br>
+<br>
+<br>
 
 
 
