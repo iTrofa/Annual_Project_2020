@@ -33,3 +33,64 @@
 	<time.h>
 	<mysql.h>
 
+1581960024 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\main.c
+	<windows.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	"qrcodegen.h"
+	<gtk.h>
+	<SDL/SDL.h>
+	<time.h>
+	<mysql.h>
+	"savepng.h"
+
+1580665485 c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\qrcodegen.h
+	<stdbool.h>
+	<stddef.h>
+	<stdint.h>
+
+1580665485 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\qrcodegen.c
+	<assert.h>
+	<limits.h>
+	<stdlib.h>
+	<string.h>
+	"qrcodegen.h"
+
+1580678806 source:c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\savepng.c
+	<SDL/SDL.h>
+	<png.h>
+	<SDL/SDL_image.h>
+
+1577416438 c:\program files (x86)\gtk3+\include\png.h
+	"zlib.h"
+	"pngconf.h"
+
+1577416438 c:\program files (x86)\gtk3+\include\zlib.h
+	"zconf.h"
+
+1577416438 c:\program files (x86)\gtk3+\include\zconf.h
+	<windows.h>
+	<sys/types.h>
+	<unistd.h>
+	<unixio.h>
+	<sys/types.h>
+
+1577416438 c:\program files (x86)\gtk3+\include\pngconf.h
+	<limits.h>
+	"config.h"
+	"pngusr.h"
+	<stdio.h>
+	<stdio.h>
+	<sys/types.h>
+	<setjmp.h>
+	<strings.h>
+	<string.h>
+	<time.h>
+	<dos.h>
+
+1580678806 c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\savepng.h
+	<SDL/SDL_video.h>
+
