@@ -1,0 +1,7 @@
+{
+    "require": {
+        "symfony/dotenv": "^5.0",
+        "ext-pdo": "*",
+      "ext-ctype": "*"
+    }
+}

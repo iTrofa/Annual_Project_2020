@@ -1,7 +1,12 @@
 <?php
+require_once 'vendor/autoload.php';
+use Symfony\Component\Dotenv\Dotenv;
+
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/.env');
 try{
-    global  $db;
-    $db = new PDO('mysql:host=localhost:3306;dbname=flashAssistance', 'admin', 'password');
+    $db = new PDO("mysql:host=localhost:{$_ENV['DBPORT']}};dbname={$_ENV['DBNAME']}", (string)
+    ($_ENV['DBLOGIN']), (string)($_ENV['DBPASSWORD']));
     $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 
