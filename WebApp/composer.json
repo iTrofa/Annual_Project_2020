@@ -2,6 +2,7 @@
     "require": {
         "symfony/dotenv": "^5.0",
         "ext-pdo": "*",
-      "ext-ctype": "*"
+      "ext-ctype": "*",
+        "symfony/var-dumper": "^5.0"
     }
 }

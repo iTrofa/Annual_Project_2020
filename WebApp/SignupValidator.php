@@ -1,4 +1,6 @@
 <?php
+ini_set('error_log',1);
+ini_set('display_errors',1);
 require_once 'config.php';
 if (session_status() === PHP_SESSION_NONE)
 {
@@ -20,21 +22,12 @@ class SignupValidator
      */
     public function __construct(array $post)
     {
+        global $db;
         $this->data = $post;
         $this->valid = [];
         $this->error = [];
-        try{
+        $this->db = $db;
 
-            $this->db = new PDO('mysql:host=localhost:3306;dbname=flashAssistance', 'admin', 'password');
-            $this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-        }
-        catch (PDOException $e)
-        {
-            // En cas d'erreur, on affiche un message et on arrête tout
-            die('Erreur : ' . $e->getMessage());
-        }
-;
     }
 
     public function validateEmptyInputs(): void
@@ -155,7 +148,6 @@ class SignupValidator
 	    private function addDatabase(): void
 	    {
 		$uuid = v4();
-		$res = null;
             $q = $this->db->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
              VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)');
             $res = $q->execute

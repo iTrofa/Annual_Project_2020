@@ -4,18 +4,20 @@ use Symfony\Component\Dotenv\Dotenv;
 
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/.env');
-try{
-    $db = new PDO("mysql:host=localhost:{$_ENV['DBPORT']}};dbname={$_ENV['DBNAME']}", (string)
-    ($_ENV['DBLOGIN']), (string)($_ENV['DBPASSWORD']));
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
 
-}
-catch (Exception $e)
-{
-    // En cas d'erreur, on affiche un message et on arrête tout
-    die('Erreur : ' . $e->getMessage());
-}
+    try
+    {
+
+            $db = new PDO(($_ENV['DSN']),$_ENV['DBUSER'],$_ENV['DBPASSWORD']);
+            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+    } catch (PDOException $e)
+    {
+        // En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : ' . $e->getMessage());
+    }
+
   function v4()
   {
       try

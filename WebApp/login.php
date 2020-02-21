@@ -8,7 +8,7 @@ if (session_status() === PHP_SESSION_NONE)
     }
 }
 
-require'config.php';
+require 'config.php';
 require_once 'LoginValidator.php';
 
 $return['error'] = '';
@@ -20,7 +20,7 @@ if (!empty($_POST))
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr" xmlns="http://www.w3.org/1999/html">
+<html lang="fr">
 <head>
 
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
@@ -28,12 +28,13 @@ if (!empty($_POST))
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" defer></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
     <!------ Include the above in your HEAD tag ---------->
+    <!--
     <script src='http://production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'
             defer></script>
     <script src='http://production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'
             defer></script>
     <script src='http://production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'
-            defer></script>
+            defer></script> -->
     <meta charset='UTF-8'>
     <meta name="robots" content="noindex">
     <link rel="shortcut icon" type="image/x-icon" href="images/logo_dark.png"/>
@@ -52,24 +53,24 @@ if (!empty($_POST))
 
 </head>
 <body>
-<div class="login">
-    <h1>Login</h1>
-    <span class="valid"> <?= $return['valid'] ?? '' ?> </span>
-    <span class="error"> <?= $return['error'] ?? '' ?> </span>
-    <form method="post">
-        <label>Email:
-            <input type="email" name="email" placeholder="Email" required>
-        </label>
-        <label>Password:
-            <input type="password" name="password" placeholder="Password" required>
-        </label>
-        <button type="submit"  id="btn" class="btn btn-primary btn-block btn-large">Let me in.</button>
-        <?php
-        $return['error'] = $return['error'] ?? '';
-        $return['valid'] = $return['valid'] ?? '';
-        ?>
-    </form>
-</div>
+    <div class="login">
+        <h1>Login</h1>
+        <span class="valid"> <?= $return['valid'] ?? '' ?> </span>
+        <span class="error"> <?= $return['error'] ?? '' ?> </span>
+        <form method="post">
+            <label>Email:
+                <input type="email" name="email" placeholder="Email" required>
+            </label>
+            <label>Password:
+                <input type="password" name="password" placeholder="Password" required>
+            </label>
+            <button type="submit" id="btn" class="btn btn-primary btn-block btn-large">Let me in.</button>
+            <?php
+            $return['error'] = $return['error'] ?? '';
+            $return['valid'] = $return['valid'] ?? '';
+            ?>
+        </form>
+    </div>
 </body>
 </html>
 

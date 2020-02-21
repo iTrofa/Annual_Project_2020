@@ -1,14 +1,15 @@
 <?php
 
-
+require_once 'config.php';
 class LoginValidator
 {
     private array $data;
     private PDO $db;
     public function __construct(array $post)
     {
+        global $db;
         $this->data = $post;
-        $this->db = new PDO('mysql:host=localhost:3306;dbname=flashAssistance', 'admin', 'password');
+        $this->db = $db;
     }
 
     public function checkPassword():array
