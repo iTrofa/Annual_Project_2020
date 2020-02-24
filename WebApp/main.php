@@ -7,6 +7,7 @@ if (session_status() == PHP_SESSION_NONE)
 <html lang="fr">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/logo_dark.png"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <!-- Optional JavaScript -->
@@ -22,7 +23,6 @@ if (session_status() == PHP_SESSION_NONE)
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Flash Assistance</title>
-    <link rel="icon" href="images/logo_dark.png"/>
     <script src="header.js"></script>
 </head>
 <body>

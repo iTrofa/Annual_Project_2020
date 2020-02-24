@@ -18,7 +18,7 @@
                         <a class="nav-link" href="#">Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="logout.php">Log Out</a>
                     </li>
                 </ul>
             <form class="form-inline">

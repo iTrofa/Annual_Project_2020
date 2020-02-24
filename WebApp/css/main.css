@@ -1,3 +1,33 @@
+@font-face {
+    font-family: 'Playfair Display', serif;
+    src: url("https://fonts.googleapis.com/css?family=Playfair+Display&display=swap");
+}
+
 .bg-primary2{
     background-color: orange;
+}
+.footer{
+    position: relative;
+    bottom: 0;
+}
+.fontPlay{
+    font-family: 'Playfair Display', serif;
+    display: inline-block;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: .85;
+    color: midnightblue;
+}
+.fontPlaynoDisplay{
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: .85;
+}
+.fontPlaySmall{
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: .85;
+    color: darkred;
 }
