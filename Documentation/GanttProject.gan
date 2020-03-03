@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Network Side of Project" company="" webLink="http://" view-date="2020-04-01" view-index="0" gantt-divider-location="300" resource-divider-location="300" version="2.8.10" locale="en_US">
+    <description/>
+    <view zooming-state="default:1" id="gantt-chart">
+        <field id="tpd3" name="Name" width="167" order="0"/>
+        <field id="tpd4" name="Begin date" width="65" order="1"/>
+        <field id="tpd5" name="End date" width="64" order="2"/>
+        <timeline><![CDATA[37,34,15,9,17,21,0,23,19,7,30]]></timeline>
+        <option id="color.recent"><![CDATA[#3333ff #66ff66 #99ff99 #ff3333]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Name" width="210" order="0"/>
+        <field id="1" name="Default role" width="86" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="9" name="Identify the Project" color="#ff3333" meeting="true" start="2020-01-22" duration="0" complete="100" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="0" name="Project Planning" color="#99ff99" meeting="false" start="2020-01-22" duration="7" complete="100" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
+        <task id="3" name="Create Project Charter" color="#66ff66" meeting="false" start="2020-01-28" duration="14" complete="100" thirdDate="2020-01-06" thirdDate-constraint="0" expand="true"/>
+        <task id="7" name="Project Management" color="#66ff66" meeting="false" start="2020-01-27" duration="14" complete="100" thirdDate="2020-01-06" thirdDate-constraint="0" expand="true"/>
+        <task id="13" name="Network Model" color="#99ff99" meeting="false" start="2020-01-30" duration="14" complete="100" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="15" name="Step 1 - Building a Network" color="#ff3333" meeting="true" start="2020-02-03" duration="0" complete="100" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="17" name="Developping Front-Office and Back-Office" color="#66ff66" meeting="false" start="2020-02-03" duration="40" complete="35" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="19" name="Dynamic PAT instalation" color="#66ff66" meeting="false" start="2020-03-02" duration="21" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="21" name="Functional ESXi w/Front and Back" color="#66ff66" meeting="false" start="2020-03-02" duration="21" complete="0" thirdDate="2020-01-13" thirdDate-constraint="0" expand="true"/>
+        <task id="23" name="Putting Every Piece in Place" color="#ff3333" meeting="true" start="2020-03-02" duration="0" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="28" name="Continue Network System" color="#66ff66" meeting="false" start="2020-03-30" duration="14" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="30" name="The Final Touches" color="#ff3333" meeting="true" start="2020-04-17" duration="0" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="32" name="Review Process" color="#66ff66" meeting="false" start="2020-04-17" duration="6" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="34" name="Organise all Files for Delivery" color="#99ff99" meeting="false" start="2020-04-17" duration="6" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="36" name="Installer Finished" color="#66ff66" meeting="false" start="2020-04-17" duration="6" complete="0" thirdDate="2020-01-23" thirdDate-constraint="0" expand="true"/>
+        <task id="37" name="The D Day" color="#3333ff" meeting="true" start="2020-04-27" duration="0" complete="0" thirdDate="2020-03-02" thirdDate-constraint="0" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
