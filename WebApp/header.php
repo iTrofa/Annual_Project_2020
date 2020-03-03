@@ -9,13 +9,13 @@
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Account <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="addServices.php">Account <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="services.php">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Subscriptions</a>
+                        <a class="nav-link" href="subscription.php">Subscriptions</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log Out</a>
