@@ -54,41 +54,39 @@ if (!empty($_POST))
      <link rel="stylesheet" href="css/login.css" class="cp-pen-styles">
  </head>
 <body>
-
-<?php require_once'header.php' ?>
-        <h3><?php echo $_SESSION['valid']['request']  ?? '';
+ <h3><?php echo $_SESSION['valid']['request']  ?? '';
                   echo $_SESSION['error']['request'] ?? '';
                   if(isset($_SESSION['valid']['request']))
                   unset($_SESSION['valid'], $_SESSION['error'])?></h3>
         <div class="signup">
             <form action="" method="post">
-                <label>first name
+                <label>First name
                     <input  type="text" name="firstName" value="<?= $_SESSION['valid']['firstName'] ?? ''
                     ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['firstName'] ?? '' ?></span>
                 <br>
-                <label>last name
+                <label>Last name
                     <input  type="text" name="lastName" value="<?= $_SESSION['valid']['lastName'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['lastName'] ?? '' ?></span>
                 <br>
-                <label>email
+                <label>Email
                     <input  type="text" name="email" value="<?= $_SESSION['valid']['email'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['email'] ?? '' ?></span>
                 <br>
-                <label>phone number
+                <label>Phone number
                     <input  type="text" name="phone" value="<?= $_SESSION['valid']['phone'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['phone'] ?? '' ?></span>
                 <br>
-                <label> password
+                <label> Password
                     <input  type="password" name="password" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
                 <br>
-                <label> retype password
+                <label> Retype Password
                     <br>
                     <input  type="password" name="rePassword" required>
                 </label><br>
@@ -99,6 +97,5 @@ if (!empty($_POST))
 <?php
 unset($_SESSION['error'], $_SESSION['valid']);
 ?>
-<?php require_once'footer.php' ?>
 </body>
 </html>

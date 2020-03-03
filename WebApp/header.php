@@ -18,7 +18,7 @@
                         <a class="nav-link" href="subscription.php">Subscriptions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search.php">Historique</a>
+                        <a class="nav-link" href="search.php">History</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="logout.php">Log Out</a>

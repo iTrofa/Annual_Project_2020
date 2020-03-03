@@ -21,8 +21,8 @@ class LoginValidator
         if(password_verify($this->data['password'],$res['password']))
         {
             $_SESSION['id'] = $res['idPerson'];
-            return ['valid'=>'vous êtes bien connecté'];
+            return ['valid'=>'You are connected'];
         }
-            return ['error'=>'vos identifiants sont incorrects'];
+            return ['error'=>'Your identifiers are incorrect'];
     }
 }

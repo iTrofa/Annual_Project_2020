@@ -23,7 +23,15 @@ echo "<link rel='stylesheet' href='css/services.css'>";
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/main.css">
 <title>Flash Assistance</title>
-<script src="header.js"></script>
+<script src="header.js" defer></script>
+<style>
+   /* input:invalid {
+        border: solid red 3px;
+    }
+    input:valid {
+        border: solid green 3px;
+    }*/
+</style>
     <body>
     <?php
     echo $_POST['reservationInput'] .  " " . substr($_POST['userOption'], 0, -3) . "s " . $_POST['noinput'];
@@ -31,8 +39,15 @@ echo "<link rel='stylesheet' href='css/services.css'>";
     <br><br>
     <form onchange="payment()">
     <input type="date" id="reservationDate">
+    <input type="date" hidden id="test" value="<?= date("Y-m-d"); ?>">
     </form>
-    <p id="payementAnswer"></p>
+
+    <div id="payementAnswer">
+    </div>
+    <br>
+    <div id="endDates">
+
+    </div>
     </body>
 <?php
 include ("footer.php");

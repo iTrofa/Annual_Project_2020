@@ -5,6 +5,7 @@ if (session_status() === PHP_SESSION_NONE)
     if (isset($_SESSION['id']))
     {
         header('Location: main.php');
+        exit;
     }
 }
 
@@ -55,7 +56,7 @@ if (!empty($_POST))
 <body>
     <div class="login">
         <h1>Login</h1>
-        <span class="valid"> <?= $return['valid'] ?? '' ?> </span>
+        <span class="valid"> <?= $return['valid']?? '' ?> </span>
         <span class="error"> <?= $return['error'] ?? '' ?> </span>
         <form method="post">
             <label>Email:
@@ -65,9 +66,16 @@ if (!empty($_POST))
                 <input type="password" name="password" placeholder="Password" required>
             </label>
             <button type="submit" id="btn" class="btn btn-primary btn-block btn-large">Let me in.</button>
+            <br>
+            <a href="signup.php" style="color: midnightblue; text-transform: none"><h4>Sign Up</h4>
+            </a>
             <?php
             $return['error'] = $return['error'] ?? '';
             $return['valid'] = $return['valid'] ?? '';
+            if ($return['valid'] != ""){
+                header("Location: main.php");
+                exit;
+            }
             ?>
         </form>
     </div>

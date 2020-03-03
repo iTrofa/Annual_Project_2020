@@ -24,8 +24,9 @@ if (session_status() == PHP_SESSION_NONE)
     <link rel="stylesheet" href="css/main.css">
     <title>Flash Assistance</title>
     <script src="header.js"></script>
+    <script src="footer.js"></script>
 </head>
-<body>
+<body onload="checkFooter()">
 <?php
 
 require('config.php');
