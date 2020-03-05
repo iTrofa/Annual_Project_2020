@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/Affichage.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <script src="footer.js"></script>
-    
+
     <title>Historique des services</title>
   </head>
   <body>
@@ -24,14 +24,23 @@
     $req = $db->prepare('SELECT function FROM person WHERE idPerson = ?');
     $req->execute(array($_SESSION['id']));
       // lancement de la requête  
-    if("admin" == $req->fetch()){
-      $req = $db->prepare('SELECT * FROM log');
-      $req->execute(array());
-    }else{
+    while($function = $req->fetch()){
+      $reponse[] = $function;
+      if($function['function'] == "admin" ){
+        $req = $db->prepare('SELECT dateInterv,name,category FROM log,service');
+        $req->execute(array());
+          while($admin = $req->fetch()){
+            $reponse[] = $admin;
+            echo $admin['dateInterv'] . ' ';
+            echo $admin['name'] . ' ';
+            echo $admin['category'] . ' ';
+            ?> <br> <?php
+          }  
+      }else{
 
 
-      
-      $req = $db->prepare('SELECT idLog FROM log,person WHERE idPerson = ?');
+        
+      $req = $db->prepare('SELECT idLog FROM log WHERE id_person = ?');
       $req->execute(array($_SESSION['id']));
       while($idLog = $req->fetch()){
         $reponse[] = $idLog;
@@ -42,6 +51,7 @@
         while($history = $req->fetch()){
           $reponse[] = $history;
           echo $history['dateInterv'] . ' ' ;
+          echo $history['service'] . ' ';
           $req = $db->prepare('SELECT name, category FROM service WHERE idService = ?');
           $req->execute(array($history['service']));
           while($history = $req->fetch()){
@@ -53,7 +63,7 @@
         }
       }
     }
-    
+   } 
   ?>
     </div>
     <?php 
