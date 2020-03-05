@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="css/Affichage.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <title>Historique des services</title>
+    <script src="footer.js">defer</script>
   </head>
-  <body>
+  <body onload="checkFooter()">
     <?php
       require_once 'header.php';
      ?>
