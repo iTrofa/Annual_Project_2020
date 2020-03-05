@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/Affichage.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="footer.js"></script>
+    
     <title>Historique des services</title>
   </head>
   <body>
@@ -40,8 +42,14 @@
         while($history = $req->fetch()){
           $reponse[] = $history;
           echo $history['dateInterv'] . ' ' ;
-          echo $history['service'];
-          ?> <br> <?php
+          $req = $db->prepare('SELECT name, category FROM service WHERE idService = ?');
+          $req->execute(array($history['service']));
+          while($history = $req->fetch()){
+            $reponse[] = $history;
+            echo $history['name'] . ' ';
+            echo $history['category'];
+          }
+        ?> <br> <?php
         }
       }
     }
