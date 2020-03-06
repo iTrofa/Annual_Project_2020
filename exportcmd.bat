@@ -1,2 +1,2 @@
-C:\MAMP\bin\mysql\bin\mysqldump.exe --extended-insert=FALSE -uroot -proot -P3308 flashassistance > SQL_PARSER\sql\test.sql
+C:\xampp\mysql\bin\mysqldump.exe --extended-insert=FALSE -uroot -P3308 flashassistance > SQL_PARSER\sql\test.sql
 pause
