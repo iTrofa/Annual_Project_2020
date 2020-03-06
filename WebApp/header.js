@@ -28,6 +28,7 @@ function myFunction(){
             document.getElementById('reservationInput').value = '1';
         }
     }
+    updatePrice();
 }
 
 function payment() {
@@ -58,6 +59,10 @@ function payment() {
         removedates.addEventListener("click", removeallDates);
         endDates.appendChild(removedates);
     }
+    if(countDate>5){
+        console.log("in");
+        checkFooter();
+    }
 }
 
 function formatDate(date) {
@@ -86,4 +91,26 @@ function removeallDates(){
         element.removeChild(element.firstChild);
     }
     countDate = 1;
+}
+
+function updatePrice() {
+    var place = document.getElementById("updatePrice");
+    var price = document.getElementById("updatePrice").value / 8;
+    var firstInput = document.getElementById('reservationInput').value;
+    var timeVariable = document.getElementById('userOption').value;
+    var hours = document.getElementById('noinput').value;
+
+    if(timeVariable == 'Hour(s)') {
+        price = price * firstInput;
+    }else if(timeVariable == 'Day(s)'){
+        price = price * firstInput * hours;
+    }else if(timeVariable == "Month(s)"){
+        price = price * firstInput * hours * firstInput;
+    }else if(timeVariable == "Year(s)"){
+        price= price * firstInput * hours * 12 * firstInput;
+    }
+
+    (Math.round(price * 100) / 100).toFixed(2);
+    price = price + "€";
+    place.innerHTML = price;
 }

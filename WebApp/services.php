@@ -58,14 +58,15 @@ if(isset($_GET['services'])){
     $chosenServiceDemo = $results[0]['demo'];
     $chosenServiceId = $results[0]['idService'];
     $chosenServicePrice = $results[0]['price'];
+    $chosenServiceImage = $results[0]['image'];
     $chosenServicefinal = strtolower($chosenService);
     $chosenServicefinal = str_replace(" ", "", $chosenServicefinal);
-    $image = "images/".$chosenServicefinal.".jpg";
+    $image = "images/".$chosenServiceImage;
     ?>
     <h2 class="fontPlaynoDisplay">Personalise your Service !</h2>
 <!--    <div class="image" style="background-image: url('<?php /*echo $image */?>'); background-repeat: no-repeat; width: 100%; height: 100%;"></div>
 -->   <?php
-    echo "<img src='$image' style='width:40%;'> ";
+    echo "<img src='$image' alt='$chosenServicefinal' style='width:40%;'> ";
     echo "<p class='fontPlay'>" . $chosenService . "&nbsp;</p>";
     /*echo "<p>" . $chosenServiceDemo . "</p>";
     echo "<p>" . $chosenServiceId . "</p>";*/
@@ -78,7 +79,7 @@ if(isset($_GET['services'])){
       echo "<h1>Reservations</h1>";
       echo "<br>";
       echo "<h3>Choose your Package</h3>";
-    echo "<form action='payment.php' method=\"post\" id='reservation'>";
+    echo "<form action='payment.php' method=\"post\" onchange='updatePrice()' id='reservation'>";
         echo "<input type=\"number\" max='8' min='1' class='inputSmaller' name='reservationInput' id = 'reservationInput' placeholder='Number of..'>";
     echo "<select name='userOption' onchange=\"myFunction()\"id='userOption'>";
     echo "<option>-----</option>";
@@ -92,10 +93,18 @@ if(isset($_GET['services'])){
         echo "<br>";
         echo "<button type=\"submit\" class=\"btn btn-primary btn-block2 btn-large\">Confirm</button>";
     echo "</form>";
-    echo "</div>";
-
-    echo "</div"
     ?>
+    <div class="card" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">
+        <div class="card-header">
+            Price
+        </div>
+        <ul class="list-group list-group-flush">
+            <?= "<li class='list-group-item'>". $chosenService . "</li>"?>
+            <?= "<li id='updatePrice' value=$chosenServicePrice class='list-group-item'></li>"?>
+        </ul>
+    </div>
+    </div>
+    </div>
     <?php
 }else{?>
 <div class="container">
@@ -109,13 +118,14 @@ if(isset($_GET['services'])){
             $service = $results[$i]['name'];
             $servicedemo = $results[$i]['demo'];
             $serviceid = $results[$i]['idService'];
+            $serviceImage = $results[$i]['image'];
             $servicefinal = strtolower($service);
             $servicefinal = trim($servicefinal);
             $servicefinal = str_replace(' ', '', $servicefinal);
             echo "<div class='col-md-4 col'>";
                 echo "<div class='thumbnail'>";
                     echo "<a href='services.php?services=$serviceid'>";
-                    $image = "images/".$servicefinal.".jpg";
+                    $image = "images/".$serviceImage;
                          echo "<img src='$image' alt='$servicefinal' style='width:100%'>";
                         echo "<div class='caption'>";
                             echo "<p>" . $service. "</p>";

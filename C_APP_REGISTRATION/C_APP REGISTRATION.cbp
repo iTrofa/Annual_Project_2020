@@ -13,12 +13,13 @@
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-mwindows" />
 				</Compiler>
 				<Linker>
 					<Add option="-lmingw32" />
 					<Add library="C:/Program Files (x86)/CodeBlocks/SDL-1.2.13/lib/libSDL.dll.a" />
 					<Add library="C:/Program Files (x86)/CodeBlocks/SDL-1.2.13/lib/libSDLmain.a" />
-					<Add library="C:/Users/luism/OneDrive/Ambiente de Trabalho/Annual_Project_2020/C_APP_REGISTRATION/libmysqlclient.a" />
+					<Add library="C:/xampp/htdocs/Annual_Project_2020/C_APP_REGISTRATION/libmysqlclient.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">

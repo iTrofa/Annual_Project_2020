@@ -1,1 +1,2 @@
-C:\MAMP\bin\mysql\bin\mysql.exe -uroot -proot -P3308 flashassistancebackup < FINAL.sql
+C:\xampp\mysql\bin\mysql.exe -uroot -P3308 flashassistancebackup < FINAL.sql
+pause
