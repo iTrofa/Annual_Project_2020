@@ -1,6 +1,5 @@
 <?php
-if (session_status() == PHP_SESSION_NONE)
-{
+if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
@@ -56,7 +55,6 @@ while ($user = $req->fetch()) {
             <th>Lastname</th>
             <th>Email</th>
             <th>Phone Number</th>
-            <th>Password</th>
             <th>Function</th>
             <th>Localisation</th>
         </tr>
@@ -64,13 +62,11 @@ while ($user = $req->fetch()) {
         <tbody id="myTable">
         <?php
 
-        for ($i = 0; $i < sizeof($results); $i++)
-        {
+        for ($i = 0; $i < sizeof($results); $i++) {
             $firstName = $results[$i]['firstName'];
             $lastName = $results[$i]['lastName'];
             $email = $results[$i]['email'];
             $phone = $results[$i]['phoneNumber'];
-            $password = $results[$i]['password'];
             $idPerson = $results[$i]['idPerson'];
             $function = $results[$i]['function'];
             $localisation = $results[$i]['localisation'];
@@ -90,25 +86,9 @@ while ($user = $req->fetch()) {
             echo "<td>" . $lastName . "</td>";
             echo "<td>" . $email . "</td>";
             echo "<td>" . $phone . "</td>";
-            echo "<td>" . $password . "</td>";
             echo "<td>" . $function . "</td>";
             echo "<td>" . $localisation . "</td>";
             echo "</tr>";
-            /* echo $i+1 .'- <b>idPerson</b> : ' . $idPerson;
-             echo '<br>';
-             echo $i+1 . '- <b>First Name</b> : ' . $firstName;
-             echo '<br>';
-             echo $i+1 . '- <b>Last Name</b> : ' . $lastName;
-             echo '<br>';
-             echo $i+1 .'- <b>Email</b> : ' . $email;
-             echo '<br>';
-             echo $i+1 .'- <b>Phone Number</b> : ' . $phone;
-             echo '<br>';
-             echo $i+1 .'- <b>Password</b> : ' . $password;
-             echo '<br>';
-             echo $i+1 .'- <b>Function</b> : ' . $worker;
-             echo '<br>';
-            */
         }
         ?>
         </tbody>
@@ -120,47 +100,6 @@ while ($user = $req->fetch()) {
 
 
 <?php
-
-/*
- //CONNEXION
- if(!empty($_POST['email'])) {
-    $q = $bdd->prepare('SELECT password from person where email = :email ');
-    $q->bindParam(':email', $_POST['email']);
-    $q->execute();
-    $res = $q->fetchall();
- /*   echo $res[0]['password'];
-    echo $_POST['password'];*/
-//$correctPassword = password_verify($_POST["password"], $res[0]['password']);
-/*    if ($_POST["password"] != $res[0]['password']){
-        $correctPassword = 0;
-    }else{
-        $correctPassword = 1;
-    }
-/*echo $correctPassword;*/
-/*}
-
-    echo "<h1>CONNECTION PAGE.</h1>";
-    echo "<form method='post'>";
-    echo "<label>Email: </label>";
-    echo "<input type='email' name='email'/>";
-    echo "<br>";
-    echo "<label>Password: </label>";
-    echo "<input type='password' name='password'/><br>";
-    echo "<input type='submit' value='Access'/>";
-    echo "</form>";
-
-if (isset($_POST['password']) && !empty($_POST['password'])) {
-    if ($correctPassword) {
-        session_start();
-        $_SESSION['password'] = $_POST['password'];
-/*        echo "C BON";*/
-/*   header('location:config.php');
-   exit;
-} else {
-   echo '<h1>Password incorrect ! Try again.</h1>';
-}
-}
-*/
 include("footer.php"); ?>
 </body>
 </html>

@@ -1,5 +1,15 @@
 <?php
 require('config.php');
+
+require_once 'AddServiceValidator.php';
+
+if (!empty($_POST))
+{
+    $validate = new AddServiceValidator($_POST);
+
+    $validate->validateEmptyInputs();
+
+}
 ?>
 <head>
 <title>Services - Flash Assistance</title>
@@ -34,7 +44,86 @@ while($user = $req->fetch()) {
     $results[] = $user;
 }
 ?>
-<div class="container" id="mainContainer">
+    <div class="container" id="mainContainer" style="display: block;">
+        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%" value="Check List"</input>
+        <h2 style="text-align: center">Add a Service :</h2>
+        <br>
+        <span style="text-align: center ; display: none; color: red; font-weight: bold; text-transform: capitalize" id="errorSpan"></span>
+        <?php if(!empty($_POST) && isset($_POST['submitService'])){
+            if(!empty($_POST['cat'])&& !empty($_POST['serviceName']) && !empty($_POST['image']) && !empty($_POST['price'])) {
+                $_POST['price'] *= 8;
+                if (isset($_POST['demo'])) {
+                    echo $_POST['demo'] . " ";
+                    $q = $db->prepare("INSERT INTO service(name, image, demo, price, category ) VALUES (:name, :image, :demo, :price, :category)");
+                    $q->bindParam(':name', $_POST['serviceName']);
+                    $q->bindParam(':image', $_POST['image']);
+                    $q->bindParam(':demo', $_POST['demo']);
+                    $q->bindParam(':price', $_POST['price']);
+                    $q->bindParam(':category', $_POST['cat']);
+                    $q->Execute();
+
+                }
+                echo '<script type="text/javascript">';
+                echo 'checkFields(1)';
+                echo '</script>';
+                $q = $db->prepare("INSERT INTO service(name, image, price, category ) VALUES (:name, :image, :price, :category)");
+                $q->bindParam(':name', $_POST['serviceName']);
+                $q->bindParam(':image', $_POST['image']);
+                $q->bindParam(':price', $_POST['price']);
+                $q->bindParam(':category', $_POST['cat']);
+                $q->Execute();
+            }else{
+                echo '<script type="text/javascript">';
+                echo 'checkFields(0)';
+                echo '</script>';
+            }
+        }
+        ?>
+        <br>
+        <form style="text-align: center" method="post">
+            <label>Service Category</label>
+            <br>
+            <select id="existingCat" onclick="serviceCategory()">
+                <option>--Existing--</option>
+                <?php
+                for($i=0; $i<sizeof($results);$i++){
+                    $serviceCat = $results[$i]["category"];
+                    echo "<option>$serviceCat</option>";
+                }?>
+            </select>
+            <input type="text"  name="cat" id="newServiceCat" placeholder="Write here if New OR Select from Existing list on the Left. Exemple: Gardening">
+            <br>
+            <label>Service Name</label>
+            <br>
+            <input type="text" name="serviceName" placeholder="Exemple: Child Care">
+            <br>
+            <label>Service Image</label>
+            <br>
+            <input type="file" name="image">
+            <br>
+            <label>Service Price</label>
+            <br>
+            <input type="text"  name="price" placeholder="Price per hour in €">
+            <br>
+            <label>Demo</label>
+            <div class="form-check">
+                <input type="checkbox"  name="demo" style="width: 1%" class="form-check-input">
+            </div>
+            <br>
+            <input type="submit"  name="submitService" class="btn-large btn-primary btn" value="Add Service">
+        </form>
+        <br><br><br>
+    </div>
+    <input type="hidden" id="newServ">
+<div class="container" style="display:none;" id="hiddenContainer">
+    <?php
+    if(!empty($_GET)){
+        /*if($_GET['new'] == 0){
+            echo "<h2><span style='color: green'>Service Added</span></h2>";
+        }*/
+    }
+    ?>
+    <br>
     <h2>List of all the Services we currently provide :</h2>
     <br>
     <input class='form-control mb-4' id='serviceSearch' type='text' placeholder='Type something to search list items'>
@@ -46,12 +135,13 @@ while($user = $req->fetch()) {
             $service = $results[$i]['name'];
             $servicedemo = $results[$i]['demo'];
             $serviceid = $results[$i]['idService'];
+            $serviceImage = $results[$i]['image'];
             $servicefinal = strtolower($service);
             $servicefinal = trim($servicefinal);
             $servicefinal = str_replace(' ', '', $servicefinal);
             echo "<div class='col-md-4 col'>";
                 echo "<div class='thumbnail'>";
-            $image = "images/".$servicefinal.".jpg";
+            $image = "images/".$serviceImage;
                     echo "<a href=$image>";
                          echo "<img src='$image' alt='$servicefinal' style='width:100%'>";
                         echo "<div class='caption'>";
@@ -65,35 +155,8 @@ while($user = $req->fetch()) {
         </div>
     </div>
     <br>
-    <div class="container" id="hiddenContainer" style="display: none;">
-        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%" value="Go Back"</input>
-        <br><br><br>
-        <h2>Add a Service :</h2>
-        <br><br>
-        <form>
-            <label>Service Category</label>
-            <br>
-            <input type="text">
-            <br>
-            <label>Service Name</label>
-            <br>
-            <input type="text">
-            <br>
-            <label>Service Image</label>
-            <br>
-            <input type="file">
-            <br>
-            <label>Demo</label>
-            <div class="form-check">
-            <input type="checkbox" style="width: 1%" class="form-check-input">
-            </div>
-        </form>
-        <br><br>
 
-    </div>
 <?php
  echo "</body>";
 include ("footer.php");
-
-
-
+?>
