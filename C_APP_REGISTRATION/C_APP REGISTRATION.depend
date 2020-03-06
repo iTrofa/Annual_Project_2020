@@ -94,3 +94,38 @@
 1580678806 c:\users\luism\onedrive\ambiente de trabalho\annual_project_2020\c_app_registration\savepng.h
 	<SDL/SDL_video.h>
 
+1583346548 source:c:\xampp\htdocs\annual_project_2020\c_app_registration\main.c
+	<windows.h>
+	<stdlib.h>
+	<stdio.h>
+	<stdbool.h>
+	<stddef.h>
+	<string.h>
+	"qrcodegen.h"
+	<gtk.h>
+	<SDL/SDL.h>
+	<time.h>
+	<mysql.h>
+	"savepng.h"
+	<ctype.h>
+
+1580665485 c:\xampp\htdocs\annual_project_2020\c_app_registration\qrcodegen.h
+	<stdbool.h>
+	<stddef.h>
+	<stdint.h>
+
+1580678806 c:\xampp\htdocs\annual_project_2020\c_app_registration\savepng.h
+	<SDL/SDL_video.h>
+
+1580665485 source:c:\xampp\htdocs\annual_project_2020\c_app_registration\qrcodegen.c
+	<assert.h>
+	<limits.h>
+	<stdlib.h>
+	<string.h>
+	"qrcodegen.h"
+
+1580678806 source:c:\xampp\htdocs\annual_project_2020\c_app_registration\savepng.c
+	<SDL/SDL.h>
+	<png.h>
+	<SDL/SDL_image.h>
+
