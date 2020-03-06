@@ -5,10 +5,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/Affichage.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
-    <script src="footer.js"></script>
 
     <title>Historique des services</title>
-    <script src="footer.js">defer</script>
+    <script src="footer.js" defer></script>
   </head>
   <body onload="checkFooter()">
     <?php
@@ -67,8 +66,8 @@
    } 
   ?>
     </div>
-    <?php 
-      include('footer.php');
-    ?>
   </body>
+  <?php 
+    include('footer.php');
+  ?>
 </html>
