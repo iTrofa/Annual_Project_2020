@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `flashassistance`
+-- Base de données : `flashAssistance`
 --
 
 -- --------------------------------------------------------
@@ -60,9 +60,9 @@ CREATE TABLE `estimate` (
 
 CREATE TABLE `log` (
   `idlog` varchar(50) NOT NULL,
-  `date` date DEFAULT NULL,
+  `dateLog` date DEFAULT NULL,
   `idService` varchar(50) DEFAULT NULL,
-  `late` tinyint(4) DEFAULT NULL,
+  `late` tinyint(4) DEFAULT 0,
   `idPerson` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
