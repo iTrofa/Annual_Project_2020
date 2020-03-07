@@ -28,7 +28,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body onload="checkFooter()">
 <?php
 
-require('config.php');
+require('DbManager.php');
 include('header.php');
 ?>
 

@@ -1,7 +1,7 @@
 <?php
 ini_set('error_log',1);
 ini_set('display_errors',1);
-require_once 'config.php';
+require_once 'DbManager.php';
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -14,7 +14,7 @@ class SignupValidator
     private array $fields =
         ['phone', 'email', 'firstName',
         'lastName','password','rePassword'];
-    private PDO $db;
+    private DbManager $dbManager;
 
     /**
      * SignupValidator constructor.
@@ -26,7 +26,7 @@ class SignupValidator
         $this->data = $post;
         $this->valid = [];
         $this->error = [];
-        $this->db = $db;
+        $this->dbManager = new  DbManager();
 
     }
 
@@ -87,7 +87,7 @@ class SignupValidator
     private function validateEmail(): void
     {
         $email =strtolower($this->data['email']);
-        $q = $this->db->prepare('SELECT email from person where email =:email') ;
+        $q = $this->dbManager->getDb()->$this->dbManager->getDb()->prepare('SELECT email from person where email =:email') ;
         $q->execute([':email' => $email]);
         $res = $q->fetch();
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -147,8 +147,8 @@ class SignupValidator
 
 	    private function addDatabase(): void
 	    {
-		$uuid = v4();
-            $q = $this->db->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
+		$uuid = DbManager::v4();
+            $q = $this->dbManager->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
              VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)');
             $res = $q->execute
             (
