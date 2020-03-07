@@ -8,9 +8,23 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <div class="dropdown">
+                        <button style="background-color: orange" class="btn btn_header dropdown-toggle" type="button" data-toggle="dropdown">Account
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="background-color: orange">
+                            <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
+                            <li><a class="nav-link" href="logout.php">Log Out</a></li>
+                            <!--<li><a class="nav-link" href="#"></a></li>-->
+                        </ul>
+
+
+
+
+
+                   <!-- <li class="nav-item active">
                         <a class="nav-link" href="addServices.php">Account <span class="sr-only">(current)</span></a>
-                    </li>
+                    </li>-->
+                    </div>
                     <li class="nav-item">
                         <a class="nav-link" href="services.php">Services</a>
                     </li>
@@ -19,9 +33,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="search.php">History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Out</a>
                     </li>
                 </ul>
             <form class="form-inline">
