@@ -1,5 +1,5 @@
 
-    <header>
+    <header id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
             <a class="navbar-brand" href="main.php">Flash Assistance</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,6 +13,7 @@
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="background-color: orange">
                             <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
+                            <li><a class="nav-link" href="strideAPI.php">STRIDE API TEST</a></li>
                             <li><a class="nav-link" href="logout.php">Log Out</a></li>
                             <!--<li><a class="nav-link" href="#"></a></li>-->
                         </ul>
