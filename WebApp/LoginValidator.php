@@ -13,13 +13,14 @@ class LoginValidator
 
     public function checkPassword():array
     {
-        $q = $this->db->prepare("SELECT password,idPerson from person where email= :email");
+        $q = $this->db->getDb()->prepare("SELECT firstName, password,idPerson from person where email= :email");
 
         $q->execute([':email'=>$this->data['email']]);
         $res = $q->fetch(PDO::FETCH_ASSOC);
         if(password_verify($this->data['password'],$res['password']))
         {
             $_SESSION['id'] = $res['idPerson'];
+            $_SESSION['firstName'] = $res['firstName'];
             return ['valid'=>'You are connected'];
         }
             return ['error'=>'Your identifiers are incorrect'];

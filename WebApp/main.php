@@ -39,13 +39,15 @@ $q = "SELECT * FROM person";
 $req = $db->prepare($q);
 $req->execute();
 
+
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
 }
 ?>
 <div class="container">
-    <h2>List of all workers:</h2>
+    <h1 id="welcomeInput">Welcome to Flash Assistance <?= $_SESSION['firstName']?></h1><br><br>
+    <h2 style="padding-top: 25%">List of all Users:</h2>
     <input class='form-control mb-4' id='tableSearch' type='text' placeholder='Type something to search list items'>
     <table class="table">
         <thead>

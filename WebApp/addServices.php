@@ -3,7 +3,8 @@ require('DbManager.php');
 
 require_once 'AddServiceValidator.php';
 
-if (!empty($_POST)) {
+if (!empty($_POST))
+{
     $validate = new AddServiceValidator($_POST);
 
     $validate->validateEmptyInputs();
@@ -48,14 +49,15 @@ if (!empty($_POST)) {
     $DbManager = new  DbManager();
     $req = $DbManager->getDb()->query($q);
 
-    $results = [];
-    while ($user = $req->fetch()) {
-        $results[] = $user;
-    }
-    ?>
+$results = [];
+while($user = $req->fetch()) {
+    $results[] = $user;
+}
+$q = $DbManager->getDb()->query("SELECT category from service");
+$serviceCat = $q->fetchall();
+?>
     <div class="container" id="mainContainer" style="display: block;">
-        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%"
-               value="Check List"</input>
+        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%" value="Check List"</input>
         <h2 style="text-align: center">Add a Service :</h2>
         <br>
         <span style="text-align: center ; display: none; color: red; font-weight: bold; text-transform: capitalize"
@@ -77,7 +79,9 @@ if (!empty($_POST)) {
                 echo '<script type="text/javascript">';
                 echo 'checkFields(1)';
                 echo '</script>';
-                $q = $DbManager->getDb()->prepare("INSERT INTO service(name, image, price, category ) VALUES (:name, :image, :price, :category)");
+                $q = $DbManager->getDb()->prepare("INSERT INTO service(idService, name, image, price, category ) VALUES (:id, :name, :image, :price, :category)");
+                $id = $DbManager::v4();
+                $q->bindParam(':id', $id);
                 $q->bindParam(':name', $_POST['serviceName']);
                 $q->bindParam(':image', $_POST['image']);
                 $q->bindParam(':price', $_POST['price']);
@@ -98,10 +102,11 @@ if (!empty($_POST)) {
             <select id="existingCat" onclick="serviceCategory()">
                 <option>--Existing--</option>
                 <?php
-                for ($i = 0, $iMax = count($results); $i < $iMax; $i++) {
-                    $serviceCat = $results[$i]["category"];
-                    echo "<option>$serviceCat</option>";
-                } ?>
+                $finalServiceCat = array_unique($serviceCat);
+                var_dump($finalServiceCat);
+                for($i=0; $i<sizeof($serviceCat);$i++){
+                    echo "<option>".$serviceCat[$i]['category']."</option>";
+                }?>
             </select>
             <input type="text" name="cat" id="newServiceCat"
                    placeholder="Write here if New OR Select from Existing list on the Left. Exemple: Gardening">

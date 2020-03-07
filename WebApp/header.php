@@ -1,5 +1,5 @@
 
-    <header>
+    <header id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
             <a class="navbar-brand" href="main.php">Flash Assistance</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
@@ -8,9 +8,24 @@
 
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
+                    <div class="dropdown">
+                        <button style="background-color: orange" class="btn btn_header dropdown-toggle" type="button" data-toggle="dropdown">Account
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu" style="background-color: orange">
+                            <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
+                            <li><a class="nav-link" href="strideAPI.php">STRIDE API TEST</a></li>
+                            <li><a class="nav-link" href="logout.php">Log Out</a></li>
+                            <!--<li><a class="nav-link" href="#"></a></li>-->
+                        </ul>
+
+
+
+
+
+                   <!-- <li class="nav-item active">
                         <a class="nav-link" href="addServices.php">Account <span class="sr-only">(current)</span></a>
-                    </li>
+                    </li>-->
+                    </div>
                     <li class="nav-item">
                         <a class="nav-link" href="services.php">Services</a>
                     </li>
@@ -19,9 +34,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="search.php">History</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout.php">Log Out</a>
                     </li>
                 </ul>
             <form class="form-inline">
