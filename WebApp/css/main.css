@@ -31,3 +31,10 @@
     line-height: .85;
     color: darkred;
 }
+#welcomeInput{
+    color: midnightblue;
+    text-align: center;
+}
+.btn_header{
+    color: white;
+}

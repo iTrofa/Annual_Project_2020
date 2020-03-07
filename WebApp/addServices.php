@@ -43,6 +43,9 @@ $results = [];
 while($user = $req->fetch()) {
     $results[] = $user;
 }
+$q = $db->prepare("SELECT category from service");
+$q->execute();
+$serviceCat = $q->fetchall();
 ?>
     <div class="container" id="mainContainer" style="display: block;">
         <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%" value="Check List"</input>
@@ -66,7 +69,9 @@ while($user = $req->fetch()) {
                 echo '<script type="text/javascript">';
                 echo 'checkFields(1)';
                 echo '</script>';
-                $q = $db->prepare("INSERT INTO service(name, image, price, category ) VALUES (:name, :image, :price, :category)");
+                $q = $db->prepare("INSERT INTO service(idService, name, image, price, category ) VALUES (:id, :name, :image, :price, :category)");
+                $id = v4();
+                $q->bindParam(':id', $id);
                 $q->bindParam(':name', $_POST['serviceName']);
                 $q->bindParam(':image', $_POST['image']);
                 $q->bindParam(':price', $_POST['price']);
@@ -86,9 +91,10 @@ while($user = $req->fetch()) {
             <select id="existingCat" onclick="serviceCategory()">
                 <option>--Existing--</option>
                 <?php
-                for($i=0; $i<sizeof($results);$i++){
-                    $serviceCat = $results[$i]["category"];
-                    echo "<option>$serviceCat</option>";
+                $finalServiceCat = array_unique($serviceCat);
+                var_dump($finalServiceCat);
+                for($i=0; $i<sizeof($serviceCat);$i++){
+                    echo "<option>".$serviceCat[$i]['category']."</option>";
                 }?>
             </select>
             <input type="text"  name="cat" id="newServiceCat" placeholder="Write here if New OR Select from Existing list on the Left. Exemple: Gardening">

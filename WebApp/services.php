@@ -91,7 +91,7 @@ if(isset($_GET['services'])){
         echo "<br>";
         echo "<input name='noinput' min='1' max='8' type='hidden' id='noinput' placeholder='' class='input'>";
         echo "<br>";
-        echo "<button type=\"submit\" class=\"btn btn-primary btn-block2 btn-large\">Confirm</button>";
+        echo "<button type=\"submit\" class=\"btn1 btn1-primary btn-block2 btn-large\">Confirm</button>";
     echo "</form>";
     ?>
     <div class="card" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">

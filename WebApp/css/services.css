@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-.btn {
+.btn1 {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -34,7 +34,7 @@
     *margin-left: .3em;
 }
 
-.btn:hover, .btn:active, .btn.active, .btn.disabled, .btn[disabled] {
+.btn1:hover, .btn1:active, .btn1.active, .btn1.disabled, .btn1[disabled] {
     background-color: #e6e6e6;
 }
 
@@ -47,7 +47,7 @@
     border-radius: 5px;
 }
 
-.btn:hover {
+.btn1:hover {
     color: #333333;
     text-decoration: none;
     background-color: #e6e6e6;
@@ -59,16 +59,16 @@
     transition: background-position 0.1s linear;
 }
 
-.btn-primary, .btn-primary:hover {
+.btn1-primary, .btn1-primary:hover {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
     color: #ffffff;
 }
 
-.btn-primary.active {
+.btn1-primary.active {
     color: rgba(255, 255, 255, 0.75);
 }
 
-.btn-primary {
+.btn1-primary {
     background-color: #4a77d4;
     background-image: -moz-linear-gradient(top, #6eb6de, #4a77d4);
     background-image: -ms-linear-gradient(top, #6eb6de, #4a77d4);
@@ -83,7 +83,7 @@
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.btn-primary:hover, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+.btn1-primary:hover, .btn1-primary:active, .btn1-primary.active, .btn1-primary.disabled, .btn1-primary[disabled] {
     filter: none;
     background-color: #4a77d4;
 }

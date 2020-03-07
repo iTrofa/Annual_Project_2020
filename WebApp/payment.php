@@ -50,7 +50,7 @@ echo "<link rel='stylesheet' href='css/services.css'>";
     <div id="endDates">
 
     </div>
-    <div class="row py-5 p-4 bg-white rounded shadow-sm">
+    <!--<div class="row py-5 p-4 bg-white rounded shadow-sm">
         <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
             <div class="p-4">
@@ -84,7 +84,7 @@ echo "<link rel='stylesheet' href='css/services.css'>";
                 </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
             </div>
         </div>
-    </div>
+    </div>-->
     <br><br>
     </body>
 <?php
