@@ -31,10 +31,10 @@
         <?php
         $req = $DbManager->getDb()->query('SELECT dateLog,idService FROM log');
         $res = $req->fetchAll();
-
+        $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
         foreach ($res as $param)
         {
-            $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
+
             $req->execute([':service'=>$param['idService']]);
             $p = $req->fetch();
             ?> <p><?= $param['dateLog']?>, <?=$p['name']?>,  <?= $p['category'] ?></p><br>
@@ -48,9 +48,9 @@
       $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
       $req->execute(array($_SESSION['id']));
       $res = $req->fetchAll();
-     if(!empty($res)) {
+            $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
+            if(!empty($res)) {
          foreach ($res as $param) {
-             $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
              $req->execute([':service' => $param['idService']]);
              $p = $req->fetch();
              ?> <p><?= $param['dateLog'] ?>, <?= $p['name'] ?>, <?= $p['category'] ?></p><br>

@@ -112,6 +112,7 @@ class AddServiceValidator
                 ':demo' => ucfirst($this->data['demo'])
             ]
         );
+
         if($res)
         {
             $this->valid['request'] = 'Service Successfully Added';
