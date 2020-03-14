@@ -9,7 +9,7 @@ if (session_status() === PHP_SESSION_NONE)
     }
 }
 
-require 'config.php';
+require 'DbManager.php';
 require_once 'LoginValidator.php';
 
 $return['error'] = '';

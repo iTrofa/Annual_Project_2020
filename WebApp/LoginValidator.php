@@ -1,20 +1,19 @@
 <?php
 
-require_once 'config.php';
+require_once 'DbManager.php';
 class LoginValidator
 {
     private array $data;
-    private PDO $db;
+    private DbManager $db;
     public function __construct(array $post)
     {
-        global $db;
         $this->data = $post;
-        $this->db = $db;
+        $this->db = new DbManager();
     }
 
     public function checkPassword():array
     {
-        $q = $this->db->prepare("SELECT firstName, password,idPerson from person where email= :email");
+        $q = $this->db->getDb()->prepare("SELECT firstName, password,idPerson from person where email= :email");
 
         $q->execute([':email'=>$this->data['email']]);
         $res = $q->fetch(PDO::FETCH_ASSOC);

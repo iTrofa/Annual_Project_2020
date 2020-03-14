@@ -1,6 +1,6 @@
 
 <?php
-require('config.php');
+require('DbManager.php');
 include('header.php');
 echo "<title>Services - Flash Assistance</title>";
 echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>";

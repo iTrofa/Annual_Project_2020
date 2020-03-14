@@ -16,9 +16,9 @@
     <?php
     session_start();
 
-    include('config.php');
-
-    $req = $db->prepare('SELECT function FROM person WHERE idPerson = ?');
+    include('DbManager.php');
+    $DbManager = new DbManager();
+    $req =  $DbManager->getDb()->prepare('SELECT function FROM person WHERE idPerson = ?');
     $req->execute(array($_SESSION['id']));
 
     // lancement de la requête
@@ -29,12 +29,12 @@
     <h1>history of all purchases:</h1>
     <div>
         <?php
-        $req = $db->query('SELECT dateLog,idService FROM log');
+        $req = $DbManager->getDb()->query('SELECT dateLog,idService FROM log');
         $res = $req->fetchAll();
 
         foreach ($res as $param)
         {
-            $req = $db->prepare('SELECT name,category FROM service where idService = :service ');
+            $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
             $req->execute([':service'=>$param['idService']]);
             $p = $req->fetch();
             ?> <p><?= $param['dateLog']?>, <?=$p['name']?>,  <?= $p['category'] ?></p><br>
@@ -45,12 +45,12 @@
         <h1>history of all purchases:</h1>
         <div>
             <?php
-      $req = $db->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
+      $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
       $req->execute(array($_SESSION['id']));
       $res = $req->fetchAll();
      if(!empty($res)) {
          foreach ($res as $param) {
-             $req = $db->prepare('SELECT name,category FROM service where idService = :service ');
+             $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
              $req->execute([':service' => $param['idService']]);
              $p = $req->fetch();
              ?> <p><?= $param['dateLog'] ?>, <?= $p['name'] ?>, <?= $p['category'] ?></p><br>

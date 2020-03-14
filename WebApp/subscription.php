@@ -39,7 +39,6 @@ if (session_status() == PHP_SESSION_NONE)
 <body onload="checkFooter()">
 <?php
 
-require('config.php');
 include('header.php');
 ?>
 <br><br>

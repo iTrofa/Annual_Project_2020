@@ -1,5 +1,5 @@
 <?php
-require('config.php');
+require('DbManager.php');
 
 require_once 'AddServiceValidator.php';
 
@@ -32,26 +32,27 @@ if (!empty($_POST)) {
         <link rel='stylesheet' href='css/services.css'>
         <link rel="icon" href="images/logo_dark.png">
         <script src="addServices.js"></script>
-        <script src="footer.js">defer</script>
+        <script src="footer.js" defer></script>
     </head>
-<?php
-echo "<body onload='checkFooter()'>";
-include('header.php');
-echo "<br><br><br><br>";
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-//List of Workers
-$q = "SELECT * FROM service";
-$req = $db->prepare($q);
-$req->execute();
+    <body onload='checkFooter()'>
+
+    <?php
+
+    include('header.php');
+    echo "<br><br><br><br>";
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    //List of Workers
+    $q = "SELECT * FROM service";
+    $DbManager = new  DbManager();
+    $req = $DbManager->getDb()->query($q);
 
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
 }
-$q = $db->prepare("SELECT category from service");
-$q->execute();
+$q = $DbManager->getDb()->query("SELECT category from service");
 $serviceCat = $q->fetchall();
 ?>
     <div class="container" id="mainContainer" style="display: block;">
@@ -64,51 +65,31 @@ $serviceCat = $q->fetchall();
         <?php if (!empty($_POST) && isset($_POST['submitService'])) {
             if (!empty($_POST['cat']) && !empty($_POST['serviceName']) && !empty($_POST['image']) && !empty($_POST['price'])) {
                 $_POST['price'] *= 8;
-                $q = $db->prepare("SELECT idCategory from categoryservice where nameCategory = :cat");
-                $q->bindParam(":cat", $_POST['cat']);
-                $q->execute();
-                $res = $q->fetchAll();
-                if (!empty($res)) {
-                    $finalCategory = $res[0]['idCategory'];
-                } else {
-                    $idCategory = v4();
-                    $q = $db->prepare("INSERT INTO categoryservice(idCategory, nameCategory) VALUES (:idCategory, :nameCategory)");
-                    $q->bindParam(":idCategory", $idCategory);
-                    $q->bindParam(":nameCategory", $_POST['cat']);
-                    $q->execute();
-                    $finalCategory = $idCategory;
-                }
-                $q = $db->prepare("SELECT name FROM service where name = :name");
-                $q->bindParam(':name', $_POST['serviceName']);
-                $q->execute();
-                $name = $q->fetchAll();
-                if (empty($name)) {
-                    if (isset($_POST['demo'])) {
-                        echo $_POST['demo'] . " ";
-                        $q = $db->prepare("INSERT INTO service(name, image, demo, price, category ) VALUES (:name, :image, :demo, :price, :category)");
-                        $q->bindParam(':name', $_POST['serviceName']);
-                        $q->bindParam(':image', $_POST['image']);
-                        $q->bindParam(':demo', $_POST['demo']);
-                        $q->bindParam(':price', $_POST['price']);
-                        $q->bindParam(':category', $finalCategory);
-                        $q->Execute();
-                    }
-                    echo '<script type="text/javascript">';
-                    echo 'checkFields(1)';
-                    echo '</script>';
-                    $q = $db->prepare("INSERT INTO service(idService, name, image, price, category ) VALUES (:id, :name, :image, :price, :category)");
-                    $id = v4();
-                    $q->bindParam(':id', $id);
+                if (isset($_POST['demo'])) {
+                    echo $_POST['demo'] . ' ';
+                    $q = $DbManager->getDb()->prepare("INSERT INTO service(name, image, demo, price, category ) VALUES (:name, :image, :demo, :price, :category)");
                     $q->bindParam(':name', $_POST['serviceName']);
                     $q->bindParam(':image', $_POST['image']);
                     $q->bindParam(':price', $_POST['price']);
                     $q->bindParam(':category', $_POST['cat']);
                     $q->Execute();
                 }
-            }else {
                 echo '<script type="text/javascript">';
-                echo 'checkFields(0)';
+                echo 'checkFields(1)';
                 echo '</script>';
+                $q = $DbManager->getDb()->prepare("INSERT INTO service(idService, name, image, price, category ) VALUES (:id, :name, :image, :price, :category)");
+                $id = $DbManager::v4();
+                $q->bindParam(':id', $id);
+                $q->bindParam(':name', $_POST['serviceName']);
+                $q->bindParam(':image', $_POST['image']);
+                $q->bindParam(':price', $_POST['price']);
+                $q->bindParam(':category', $_POST['cat']);
+                $q->Execute();
+            } else { ?>
+                <script type="text/javascript">
+                    checkFields(0);
+                </script>
+                <?php
             }
         }
         ?>
@@ -138,7 +119,7 @@ $serviceCat = $q->fetchall();
             <br>
             <label>Service Price</label>
             <br>
-            <input type="number" step="0.50" name="price" placeholder="Price per hour in €">
+            <input type="text" name="price" placeholder="Price per hour in €">
             <br>
             <label>Demo</label>
             <div class="form-check">
@@ -164,36 +145,36 @@ $serviceCat = $q->fetchall();
         <input class='form-control mb-4' id='serviceSearch' type='text'
                placeholder='Type something to search list items'>
         <input type="button" class="btn-large btn-primary btn" onclick="hideServices()" style="color: black;width: 15%"
-               value="Add a Service"</input>
+               value="Add a Service">
         <br><br>
         <div class="row">
             <?php
-            for ($i = 0; $i < sizeof($results); $i++) {
+            for ($i = 0, $iMax = count($results); $i < $iMax; $i++) {
                 $service = $results[$i]['name'];
                 $servicedemo = $results[$i]['demo'];
                 $serviceid = $results[$i]['idService'];
-                $serviceImage = $results[$i]['image'];
+                $image = $results[$i]['image'];
                 $servicefinal = strtolower($service);
                 $servicefinal = trim($servicefinal);
                 $servicefinal = str_replace(' ', '', $servicefinal);
-                echo "<div class='col-md-4 col'>";
-                echo "<div class='thumbnail'>";
-                $image = "images/" . $serviceImage;
-                echo "<a href=$image>";
-                echo "<img src='$image' alt='$servicefinal' style='width:100%'>";
-                echo "<div class='caption'>";
-                echo "<p>" . $service . "</p>";
-                echo "</div>";
-                echo "</a>";
-                echo "</div>";
-                echo "</div>";
+                ?>
+                <div class='col-md-4 col'>
+                    <div class='thumbnail'>
+                        <a href=<?= $image ?>>
+                            <img src='<?= $image ?>' alt='<?= $servicefinal ?>' style='width:100%'>
+                            <div><?= $service ?> class="caption">
+                                <p>w</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <?php
             }
             ?>
         </div>
     </div>
     <br>
-
+    </body>
 <?php
-echo "</body>";
 include("footer.php");
 ?>

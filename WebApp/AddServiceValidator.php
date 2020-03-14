@@ -1,7 +1,7 @@
 <?php
 ini_set('error_log',1);
 ini_set('display_errors',1);
-require_once 'config.php';
+require_once 'DbManager.php';
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -14,7 +14,7 @@ class AddServiceValidator
     private array $fields =
         ['category', 'service', 'image', 'price',
             'demo'];
-    private PDO $db;
+    private DbManager $db;
 
 
 
@@ -24,11 +24,10 @@ class AddServiceValidator
      */
     public function __construct(array $post)
     {
-        global $db;
         $this->data = $post;
         $this->valid = [];
         $this->error = [];
-        $this->db = $db;
+        $this->db = new DbManager();
 
     }
 
@@ -109,7 +108,7 @@ class AddServiceValidator
                 ':category' => ucfirst($this->data['category']),
                 ':service' => ucfirst($this->data['name']),
                 ':price' => ucfirst($this->data['price']),
-                ':image' => strtolower($this->data['image']),
+                ':image' => strtolower('images/' . $this->data['image']),
                 ':demo' => ucfirst($this->data['demo'])
             ]
         );
