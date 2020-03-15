@@ -1,5 +1,8 @@
 <?php
 require('DbManager.php');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 <head>
     <title>Services - Flash Assistance</title>
@@ -39,14 +42,12 @@ include('header.php'); ?>
 <body onload='checkFooter()'>
 <br><br><br><br>
 <?php
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
+
 //List of Workers
 $DbManager = new DbManager();
 $q = "SELECT * FROM service";
 $req = $DbManager->getDb()->query($q);
-
+$req->execute();
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;

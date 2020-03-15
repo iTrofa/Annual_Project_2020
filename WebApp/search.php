@@ -26,7 +26,7 @@
 
     if($res['function'] === "admin" ){
         ?>
-    <h1>history of all purchases:</h1>
+    <h1 style="text-align: center">History of all purchases:</h1>
     <div>
         <?php
         $req = $DbManager->getDb()->query('SELECT dateLog,idService FROM log');
@@ -42,7 +42,7 @@
         }
       }else{
         ?>
-        <h1>history of all purchases:</h1>
+        <h1 style="text-align: center">History of all purchases:</h1>
         <div>
             <?php
       $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
@@ -58,7 +58,7 @@
          }
      }
       else{
-          echo "you didn't buy anything yet <a href='services.php'>you should buy something </a>";
+          echo "<p style='text-align: center'>You didn't buy anything yet. <a href='services.php'>You should buy something </a></p>";
       }
     }
   ?>

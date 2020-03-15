@@ -132,13 +132,6 @@ $serviceCat = $q->fetchall();
     </div>
     <input type="hidden" id="newServ">
     <div class="container" style="display:none;" id="hiddenContainer">
-        <?php
-        if (!empty($_GET)) {
-            /*if($_GET['new'] == 0){
-                echo "<h2><span style='color: green'>Service Added</span></h2>";
-            }*/
-        }
-        ?>
         <br>
         <h2>List of all the Services we currently provide :</h2>
         <br>
@@ -162,8 +155,8 @@ $serviceCat = $q->fetchall();
                     <div class='thumbnail'>
                         <a href=<?= $image ?>>
                             <img src='<?= $image ?>' alt='<?= $servicefinal ?>' style='width:100%'>
-                            <div><?= $service ?> class="caption">
-                                <p>w</p>
+                            <div class="caption">
+                                <p><?= $service?></p>
                             </div>
                         </a>
                     </div>
