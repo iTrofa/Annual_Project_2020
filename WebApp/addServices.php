@@ -3,8 +3,7 @@ require('DbManager.php');
 
 require_once 'AddServiceValidator.php';
 
-if (!empty($_POST))
-{
+if (!empty($_POST)) {
     $validate = new AddServiceValidator($_POST);
 
     $validate->validateEmptyInputs();
@@ -50,14 +49,15 @@ if (!empty($_POST))
     $req = $DbManager->getDb()->query($q);
 
 $results = [];
-while($user = $req->fetch()) {
+while ($user = $req->fetch()) {
     $results[] = $user;
 }
 $q = $DbManager->getDb()->query("SELECT category from service");
 $serviceCat = $q->fetchall();
 ?>
     <div class="container" id="mainContainer" style="display: block;">
-        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%" value="Check List"</input>
+        <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%"
+               value="Check List"</input>
         <h2 style="text-align: center">Add a Service :</h2>
         <br>
         <span style="text-align: center ; display: none; color: red; font-weight: bold; text-transform: capitalize"
@@ -70,11 +70,9 @@ $serviceCat = $q->fetchall();
                     $q = $DbManager->getDb()->prepare("INSERT INTO service(name, image, demo, price, category ) VALUES (:name, :image, :demo, :price, :category)");
                     $q->bindParam(':name', $_POST['serviceName']);
                     $q->bindParam(':image', $_POST['image']);
-                    $q->bindParam(':demo', $_POST['demo']);
                     $q->bindParam(':price', $_POST['price']);
                     $q->bindParam(':category', $_POST['cat']);
                     $q->Execute();
-
                 }
                 echo '<script type="text/javascript">';
                 echo 'checkFields(1)';
@@ -104,9 +102,9 @@ $serviceCat = $q->fetchall();
                 <?php
                 $finalServiceCat = array_unique($serviceCat);
                 var_dump($finalServiceCat);
-                for($i=0; $i<sizeof($serviceCat);$i++){
-                    echo "<option>".$serviceCat[$i]['category']."</option>";
-                }?>
+                for ($i = 0; $i < sizeof($serviceCat); $i++) {
+                    echo "<option>" . $serviceCat[$i]['category'] . "</option>";
+                } ?>
             </select>
             <input type="text" name="cat" id="newServiceCat"
                    placeholder="Write here if New OR Select from Existing list on the Left. Exemple: Gardening">
@@ -128,19 +126,12 @@ $serviceCat = $q->fetchall();
                 <input type="checkbox" name="demo" style="width: 1%" class="form-check-input">
             </div>
             <br>
-            <input type="submit" name="su+bmitService" class="btn-large btn-primary btn" value="Add Service">
+            <input type="submit" name="submitService" class="btn-large btn-primary btn" value="Add Service">
         </form>
         <br><br><br>
     </div>
     <input type="hidden" id="newServ">
     <div class="container" style="display:none;" id="hiddenContainer">
-        <?php
-        if (!empty($_GET)) {
-            /*if($_GET['new'] == 0){
-                echo "<h2><span style='color: green'>Service Added</span></h2>";
-            }*/
-        }
-        ?>
         <br>
         <h2>List of all the Services we currently provide :</h2>
         <br>
@@ -164,8 +155,8 @@ $serviceCat = $q->fetchall();
                     <div class='thumbnail'>
                         <a href=<?= $image ?>>
                             <img src='<?= $image ?>' alt='<?= $servicefinal ?>' style='width:100%'>
-                            <div><?= $service ?> class="caption">
-                                <p>w</p>
+                            <div class="caption">
+                                <p><?= $service?></p>
                             </div>
                         </a>
                     </div>
