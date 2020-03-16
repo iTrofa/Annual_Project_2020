@@ -54,7 +54,7 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
 
 
 <div class="bd-example">
-    <div id="carouselExampleCaptions" style="width: 70%;margin-left: 18%;" class="carousel slide" data-ride="carousel">
+    <div id="carouselExampleCaptions" style="width: 50%;margin-left: 25%;" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
@@ -77,9 +77,9 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block" class="carousel-color">
+                <div class="carousel-caption d-none d-md-block carousel-color">
                     <h5 class="carousel-label-color">Raking Leaves</h5>
-                    <p>Get this amazing service only for the price of a toilet paper.</p>
+                    <p class="carousel-label-color">Get this amazing service only for the price of a toilet paper.</p>
                 </div>
             </div>
         </div>
