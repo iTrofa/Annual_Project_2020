@@ -62,24 +62,24 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="d-block w-100" alt="Third slide [800x400]" src="images/childcare.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Babysitting</h5>
-                    <p>Amazing ChildCare</p>
-                </div>
-            </div>
-            <div class="carousel-item">
                 <img class="d-block w-100" alt="Third slide [800x400]" src="images/lawnmower.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Lawnmower</h5>
-                    <p>Your lawn will be perfect !</p>
+                <div class="carousel-caption d-none d-md-block carousel-color">
+                    <h5 class="carousel-label-color">Lawnmower</h5>
+                    <p class="carousel-label-color">Your lawn will be perfect !</p>
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" style="width: 1013.440px;height: 506.712px;" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Raking Leaves</h5>
-                    <p>Get this amazing service only for the price of a toilet paper.</p>
+                <img class="d-block w-100" alt="Third slide [800x400]" src="images/childcare.jpg" data-holder-rendered="true">
+                <div class="carousel-caption d-none d-md-block carousel-color">
+                    <h5 class="carousel-label-color">Babysitting</h5>
+                    <p class="carousel-label-color">Amazing ChildCare</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
+                <div class="carousel-caption d-none d-md-block carousel-color">
+                    <h5 class="carousel-label-color">Raking Leaves</h5>
+                    <p class="carousel-label-color">Get this amazing service only for the price of a toilet paper.</p>
                 </div>
             </div>
         </div>
@@ -261,4 +261,3 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
 include("footer.php"); ?>
 </body>
 </html>
-
