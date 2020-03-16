@@ -4,6 +4,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+<html>
 <head>
     <title>Services - Flash Assistance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -134,7 +135,7 @@ if (!empty($_GET['services'])) {
                 $servicefinal = str_replace(' ', '', $servicefinal); ?>
                 <div class='col-md-4 col'>
                     <div class='thumbnail'>
-                        <a href='services.php?services=$serviceid'>
+                        <a href='services.php?services=<?=$serviceid?>'>
                             <img src='<?= $image ?>' alt='$servicefinal' style='width:100%'>
                             <div class='caption'>
                                 <p><?= $service ?></p>
@@ -154,10 +155,10 @@ if (!empty($_GET['services'])) {
 <br>
 <br>
 
-
-</body>";
 <?php
-
 include 'footer.php';
 ?>
+</body>
+</html>
+
 
