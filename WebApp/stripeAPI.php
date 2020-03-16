@@ -35,6 +35,7 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 <?php
 include('header.php');
 ?>
+<h5><?= $_GET['return'] ?? ''?></h5>
     <form action="charge.php" method="post" id="payment-form">
         <div style="text-align: center;">
             <label for="card-element">Credit or debit card</label>
