@@ -76,7 +76,7 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="d-block w-100" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
+                <img class="d-block w-100" style="width: 1013.440px;height: 506.712px;" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Raking Leaves</h5>
                     <p>Get this amazing service only for the price of a toilet paper.</p>
