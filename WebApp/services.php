@@ -38,9 +38,9 @@ if (session_status() == PHP_SESSION_NONE) {
         });
     </script>
 </head>
+<body onload='checkFooter()'>
 <?php
 include('header.php'); ?>
-<body onload='checkFooter()'>
 <br><br><br><br>
 <?php
 
@@ -62,7 +62,6 @@ if (!empty($_GET['services'])) {
     $results = [];
     while ($user = $q->fetch()) {
         $results[] = $user;
-
     }
     $chosenService = $results[0]['name'];
     $chosenServiceDemo = $results[0]['demo'];
@@ -110,11 +109,12 @@ if (!empty($_GET['services'])) {
             </div>
             <ul class="list-group list-group-flush">
                 <li class='list-group-item'> <?= $chosenService ?></li>
-                <li id='updatePrice' value=<?= $chosenServicePrice ?>class='list-group-item'></li>
+                <li id='updatePrice' value='<?= $chosenServicePrice ?>' class='list-group-item'></li>
             </ul>
         </div>
     </div>
     <?php
+echo "</div>";
 } else {
     ?>
     <div class="container">
@@ -154,9 +154,8 @@ if (!empty($_GET['services'])) {
 <br>
 <br>
 <br>
-
 <?php
-include 'footer.php';
+include('footer.php');
 ?>
 </body>
 </html>
