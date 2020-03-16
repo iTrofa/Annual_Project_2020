@@ -13,7 +13,7 @@
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="background-color: orange">
                             <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
-                            <li><a class="nav-link" href="strideAPI.php">STRIDE API TEST</a></li>
+                            <li><a class="nav-link" href="stripeAPI.php">STRIDE API TEST</a></li>
                             <li><a class="nav-link" href="logout.php">Log Out</a></li>
                             <!--<li><a class="nav-link" href="#"></a></li>-->
                         </ul>

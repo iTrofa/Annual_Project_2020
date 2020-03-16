@@ -1,7 +1,9 @@
 
 <?php
-require('config.php');
-include('header.php');
+require('DbManager.php');
+?>
+<html>
+<?php
 echo "<title>Services - Flash Assistance</title>";
 echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>";
 echo "<link rel='stylesheet' href='css/services.css'>";
@@ -22,22 +24,40 @@ echo "<link rel='stylesheet' href='css/services.css'>";
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/stripe.css"/>
 <title>Flash Assistance</title>
 <script src="header.js" defer></script>
 <script src="footer.js"defer></script>
 <style>
-   /* input:invalid {
-        border: solid red 3px;
-    }
-    input:valid {
-        border: solid green 3px;
-    }*/
+
 </style>
     <body onload="checkFooter()">
+<?php
+include('header.php');
+?>
+    <form action="charge.php" method="post" id="payment-form">
+        <div style="text-align: center;">
+            <label for="card-element">Credit or debit card</label>
+            <div style="width: 70%;margin-top: 3%;margin-bottom: 3%" id="card-element">
+                <!-- a Stripe Element will be inserted here. -->
+            </div>
+            <!-- Used to display form errors -->
+            <div id="card-errors"></div>
+        </div>
+        <button>Submit Payment</button>
+    </form>
+    <!-- The needed JS files -->
+    <!-- JQUERY File -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Stripe JS -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- Your JS File -->
+    <script src="charge.js"></script>
 
-    </body>
 <?php
 include ("footer.php");
-
+?>
+    </body>
+</html>
 
 
