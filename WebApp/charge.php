@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('vendor/autoload.php');
 \Stripe\Stripe::setApiKey('sk_test_LgZBATKRdH41pyA60Bi3yxT600KSnzL8bW');
 $token = $_POST['stripeToken'];
@@ -6,7 +7,7 @@ $token = $_POST['stripeToken'];
 
 // Create a Customer
 $customer = \Stripe\Customer::create(array(
-    "email" => "paying.user@example.com",
+    "email" => $_SESSION['email'],
     "source" => $token,
 ));
 // Save the customer id in your own database!
@@ -14,7 +15,7 @@ $customer = \Stripe\Customer::create(array(
 // Charge the Customer instead of the card
 $charge = \Stripe\Charge::create(array(
     "amount" => 2000,
-    "currency" => "usd",
+    "currency" => "eur",
     "customer" => $customer->id
 ));
 
