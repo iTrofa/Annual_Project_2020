@@ -6,7 +6,7 @@ $token = $_POST['stripeToken'];
 
 // Create a Customer
 $customer = \Stripe\Customer::create(array(
-    "email" => "paying.user@example.com",
+    "email" => $_SESSION['email'],
     "source" => $token,
 ));
 // Save the customer id in your own database!
@@ -14,7 +14,7 @@ $customer = \Stripe\Customer::create(array(
 // Charge the Customer instead of the card
 $charge = \Stripe\Charge::create(array(
     "amount" => 2000,
-    "currency" => "usd",
+    "currency" => "eur",
     "customer" => $customer->id
 ));
 
