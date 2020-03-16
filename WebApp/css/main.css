@@ -39,3 +39,11 @@
     color: white;
 }
 
+.carousel-color{
+    background-color: rgba(104,104,104,0.7) ;
+
+}
+
+.carousel-label-color{
+    color: black;
+}
