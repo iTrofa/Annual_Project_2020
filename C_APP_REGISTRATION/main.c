@@ -194,7 +194,7 @@ static void printQr(const unsigned char qrcode[])
 
     SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 
-    position.x = 0; // Les coordonnées de la surface seront (0, 0)
+    position.x = 0; // Les coordonnï¿½es de la surface seront (0, 0)
     position.y = 0;
 
     int size = qrcodegen_getSize(qrcode);
@@ -208,7 +208,7 @@ static void printQr(const unsigned char qrcode[])
             if(qrcodegen_getModule(qrcode, x, y))
             {
                 SDL_FillRect(rectangle, NULL, SDL_MapRGB(ecran->format, 0, 0, 0));
-                SDL_BlitSurface(rectangle, NULL, ecran, &position); // Collage de la surface sur l'écran
+                SDL_BlitSurface(rectangle, NULL, ecran, &position); // Collage de la surface sur l'ï¿½cran
 
                 position.x += 15;
             }
@@ -216,7 +216,7 @@ static void printQr(const unsigned char qrcode[])
             {
                 // Remplissage de la surface avec du blanc
                 SDL_FillRect(rectangle, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
-                SDL_BlitSurface(rectangle, NULL, ecran, &position); // Collage de la surface sur l'écran
+                SDL_BlitSurface(rectangle, NULL, ecran, &position); // Collage de la surface sur l'ï¿½cran
 
                 position.x += 15;
             }
@@ -228,13 +228,13 @@ static void printQr(const unsigned char qrcode[])
     fputs("\n", stdout);
     position.x = 0;
     position.y += 15;
-    SDL_Flip(ecran); // Mise à jour de l'écran
+    SDL_Flip(ecran); // Mise ï¿½ jour de l'ï¿½cran
     //SDL_SaveBMP_RW(ecran, SDL_RWFromFile("qrcode.bmp", "wb"), 1);
     shot = SDL_PNGFormatAlpha(ecran);    /* SDL_PNGFormatAlpha is optional, but might be necessary for SCREEN surfaces */
     SDL_SavePNG(shot, "qrcode.png");
     SDL_FreeSurface(shot);
 
-    SDL_FreeSurface(rectangle); // Libération de la surface
+    SDL_FreeSurface(rectangle); // Libï¿½ration de la surface
 
     SDL_Quit();
 
@@ -327,7 +327,7 @@ void add_database()
 
         if(mysql_query(mysql, sql_qry))
         {
-            printf("\error MySQL! %s\n",mysql_error(mysql));
+            printf("error MySQL! %s\n",mysql_error(mysql));
             change_label(" There was an error with the Server!",true);
         }
         else
@@ -338,7 +338,7 @@ void add_database()
             printf("%s\n", sql_qry);
             if(mysql_query(mysql, sql_qry))
             {
-                printf("\Error MySQL! %s\n",mysql_error(mysql));
+                printf("Error MySQL! %s\n",mysql_error(mysql));
 
                 change_label(" There was an error with the Server!",true);
             }
