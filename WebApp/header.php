@@ -12,6 +12,7 @@
                         <button style="background-color: orange" class="btn btn_header dropdown-toggle" type="button" data-toggle="dropdown">Account
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="background-color: orange">
+                            <li><a class="nav-link" href="yourAccount.php">Your Account</a></li>
                             <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
                             <li><a class="nav-link" href="stripeAPI.php">STRIPE API TEST</a></li>
                             <li><a class="nav-link" href="logout.php">Log Out</a></li>
