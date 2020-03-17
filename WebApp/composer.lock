@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "565418409e6722c951ee237a22b51853",
+    "content-hash": "2c43510789c67950802bcdf5d2c74d5e",
     "packages": [
         {
             "name": "stripe/stripe-php",
@@ -263,7 +263,9 @@
     "prefer-lowest": false,
     "platform": {
         "ext-pdo": "*",
-        "ext-ctype": "*"
+        "ext-ctype": "*",
+        "ext-json": "*",
+        "ext-fileinfo": "*"
     },
     "platform-dev": []
 }

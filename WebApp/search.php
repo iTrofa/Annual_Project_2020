@@ -54,7 +54,7 @@ if (session_status() == PHP_SESSION_NONE) {
         }
       }else{
         ?>
-        <h1 style="text-align: center">History of all purchases:</h1>
+        <h1 style="text-align: center">History of <your></your> purchases:</h1>
         <div>
             <?php
       $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
