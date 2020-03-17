@@ -44,45 +44,48 @@ while ($user = $req->fetch()) {
 $q = $DbManager->getDb()->prepare("SELECT * FROM service");
 $q->execute();
 $service = $q->fetchAll();
-/*$serviceName = $service['name'][PDO::FETCH_ASSOC];
-$serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
 ?>
-<div class="container">
     <h1 id="welcomeInput">Welcome to Flash Assistance <?= $_SESSION['firstName']?></h1><br><br>
-</div>
+<?php
+$firstImage = $service[0]['image'];
+$firstDesc = $service[0]['description'];
+$firstSerName = $service[0]['name'];
+?>
 
-
-
+<a href="services.php">
 <div class="bd-example">
     <div id="carouselExampleCaptions" style="width: 50%;margin-left: 25%;" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
-            <li data-target="#carouselExampleCaptions" data-slide-to="2" class=""></li>
+            <?php
+            echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\"0\" class=\"active\"></li>";
+            for($i=1; $i<count($service);$i++){
+            echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\".$i.\" class=\"\"></li>";
+            }
+            ?>
         </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" alt="Third slide [800x400]" src="images/lawnmower.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block carousel-color">
-                    <h5 class="carousel-label-color">Lawnmower</h5>
-                    <p class="carousel-label-color">Your lawn will be perfect !</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" alt="Third slide [800x400]" src="images/childcare.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block carousel-color">
-                    <h5 class="carousel-label-color">Babysitting</h5>
-                    <p class="carousel-label-color">Amazing ChildCare</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" alt="Third slide [800x400]" src="images/Raking-leaves.jpg" data-holder-rendered="true">
-                <div class="carousel-caption d-none d-md-block carousel-color">
-                    <h5 class="carousel-label-color">Raking Leaves</h5>
-                    <p class="carousel-label-color">Get this amazing service only for the price of a toilet paper.</p>
-                </div>
-            </div>
-        </div>
+        <?php
+        echo "<div class=\"carousel-inner\">";
+            echo "<div class=\"carousel-item active\">";
+                echo "<img class='d-block w-100' alt='' src='$firstImage' data-holder-rendered='true'>";
+                echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
+                    echo "<h5 class=\"carousel-label-color\">$firstSerName</h5>";
+                    echo "<p class=\"carousel-label-color\">$firstDesc</p>";
+                echo "</div>";
+            echo "</div>";
+            for ($i = 1; $i<count($service);$i++){
+                $image = $service[$i]['image'];
+                $desc = $service[$i]['description'];
+                $SerName = $service[0]['name'];
+
+            echo "<div class=\"carousel-item\">";
+                echo "<img class=\"d-block w-100\" alt=\"\" src=\"$image\" data-holder-rendered=\"true\">";
+                echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
+                    echo "<h5 class=\"carousel-label-color\">$SerName</h5>";
+                    echo "<p class=\"carousel-label-color\">$desc</p>";
+                echo "</div>";
+            echo "</div>";
+            }
+            ?>
         <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
@@ -93,115 +96,18 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
         </a>
     </div>
 </div>
+</a>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-<div id="carouselExampleIndicators" style="text-align: center" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block" style="width: 30%"  src="images/childcare.jpg" alt="First slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Buy our Service</h5>
-                <p>Only some money and Covid-19 LUL</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="d-block" style="width: 30%" src="images/Raking-leaves.jpg" alt="Second slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Buy our Service</h5>
-                <p>Only some money and Covid-19 LUL</p>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img class="d-block"  style="width: 30%" src="images/lawnmower.jpg" alt="Third slide">
-            <div class="carousel-caption d-none d-md-block">
-                <h5>Buy our Service</h5>
-                <p>Only some money and Covid-19 LUL</p>
-            </div>
-        </div>
+<br><br>
+<div class="row" style="margin: 0; margin-top: 7.5%">
+    <div class="col-sm-5" style="margin-left: 20%">
+      <img src="images/childcare.jpg" style="width: 59%;display: inline-block;">
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>-->
-
-
-
-<!--<div class="container">
-    <h2>Carousel Example</h2>
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">-->
-        <!-- Indicators -->
-       <!-- <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>-->
-
-        <!-- Wrapper for slides -->
-      <!--  <div class="carousel-inner">
-
-            <div class="item active">
-                <img src="images/Raking-leaves.jpg" alt="Los Angeles" style="width:40%;">
-                <div class="carousel-caption">
-                    <h3>Los Angeles</h3>
-                    <p>LA is always so much fun!</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="images/lawnmower.jpg" alt="Chicago" style="width:40%;">
-                <div class="carousel-caption">
-                    <h3>Chicago</h3>
-                    <p>Thank you, Chicago!</p>
-                </div>
-            </div>
-
-            <div class="item">
-                <img src="images/childcare.jpg" alt="New York" style="width:40%;">
-                <div class="carousel-caption">
-                    <h3>New York</h3>
-                    <p>We love the Big Apple!</p>
-                </div>
-            </div>
-
-        </div>-->
-
-        <!-- Left and right controls -->
-       <!-- <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
-            <span class="sr-only">Next</span>
-        </a>
+    <div class="col-sm-3">
+        <h5 style="margin-top: 15%">Enjoy all your favorite services for to half the price</h5>
+        <a href="subscription.php"><input type="button" value="Get your Subscription" class="btn-primary btn-large btn"/></a>
     </div>
-</div>-->
-
+</div>
 <!--<div class="container">
     <h2 style="padding-top: 25%">List of all Users:</h2>
     <input class='form-control mb-4' id='tableSearch' type='text' placeholder='Type something to search list items'>
@@ -220,7 +126,7 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
         <tbody id="myTable">
         <?php
 
-        for ($i = 0; $i < sizeof($results); $i++) {
+     /*   for ($i = 0; $i < sizeof($results); $i++) {
             $firstName = $results[$i]['firstName'];
             $lastName = $results[$i]['lastName'];
             $email = $results[$i]['email'];
@@ -238,7 +144,7 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
              }else{
                  $worker = "Worker";
              }*/
-            echo "<tr>";
+          /*  echo "<tr>";
             echo "<td>" . $idPerson . "</td>";
             echo "<td>" . $firstName . "</td>";
             echo "<td>" . $lastName . "</td>";
@@ -247,14 +153,12 @@ $serviceImage = $service['image'][PDO::FETCH_ASSOC];*/
             echo "<td>" . $function . "</td>";
             echo "<td>" . $localisation . "</td>";
             echo "</tr>";
-        }
+        }*/
         ?>
         </tbody>
     </table>
 </div>-->
-<br>
-<br>
-<br>
+<br><br><br>
 
 
 <?php

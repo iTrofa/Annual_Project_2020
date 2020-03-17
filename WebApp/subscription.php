@@ -1,11 +1,3 @@
-
-    <!--<link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
-    <title>Price Comparison Table</title>-->
-
-
-
-
 <?php
 if (session_status() == PHP_SESSION_NONE)
 {
@@ -32,7 +24,7 @@ if (session_status() == PHP_SESSION_NONE)
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
-    <title>Price Comparison Table</title>
+    <title>Subscriptions - Flash Assistance</title>
     <script src="header.js"></script>
     <script src="footer.js"></script>
 </head>
@@ -41,8 +33,8 @@ if (session_status() == PHP_SESSION_NONE)
 
 include('header.php');
 ?>
-<br><br>
-<div class="container">
+<br>
+<div class="container" style="margin-top: 7%;">
     <section class="price-comparison">
     <div class="price-column">
       <div class="price-header">

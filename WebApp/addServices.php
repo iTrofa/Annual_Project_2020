@@ -52,7 +52,7 @@ $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
 }
-$q = $DbManager->getDb()->query("SELECT category from service");
+$q = $DbManager->getDb()->query("SELECT nameCategory from categoryservice");
 $serviceCat = $q->fetchall();
 ?>
     <div class="container" id="mainContainer" style="display: block;">
@@ -103,7 +103,7 @@ $serviceCat = $q->fetchall();
                 $finalServiceCat = array_unique($serviceCat);
                 var_dump($finalServiceCat);
                 for ($i = 0; $i < sizeof($serviceCat); $i++) {
-                    echo "<option>" . $serviceCat[$i]['category'] . "</option>";
+                    echo "<option>" . $serviceCat[$i]['nameCategory'] . "</option>";
                 } ?>
             </select>
             <input type="text" name="cat" id="newServiceCat"

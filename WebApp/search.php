@@ -1,3 +1,9 @@
+<?php
+require('DbManager.php');
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,9 +29,6 @@
       require_once 'header.php';
      ?>
     <?php
-    session_start();
-
-    include('DbManager.php');
     $DbManager = new DbManager();
     $req =  $DbManager->getDb()->prepare('SELECT function FROM person WHERE idPerson = ?');
     $req->execute(array($_SESSION['id']));
