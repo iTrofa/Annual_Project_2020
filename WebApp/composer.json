@@ -5,6 +5,8 @@
       "ext-ctype": "*",
         "symfony/var-dumper": "^5.0",
         "stripe/stripe-php": "^7.27",
-      "ext-zip": "*"
+        "ext-zip": "*",
+        "ext-json": "*",
+        "ext-fileinfo": "*"
     }
 }

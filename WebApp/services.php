@@ -4,7 +4,6 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 ?>
-<html>
 <head>
     <title>Services - Flash Assistance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -38,9 +37,9 @@ if (session_status() == PHP_SESSION_NONE) {
         });
     </script>
 </head>
-<body onload='checkFooter()'>
 <?php
 include('header.php'); ?>
+<body onload='checkFooter()'>
 <br><br><br><br>
 <?php
 
@@ -62,6 +61,7 @@ if (!empty($_GET['services'])) {
     $results = [];
     while ($user = $q->fetch()) {
         $results[] = $user;
+
     }
     $chosenService = $results[0]['name'];
     $chosenServiceDemo = $results[0]['demo'];
@@ -88,7 +88,7 @@ if (!empty($_GET['services'])) {
         <h1>Reservations</h1>
         <br>
         <h3>Choose your Package</h3>
-        <form action='payment.php' method=\"post\" onchange='updatePrice()' id='reservation'>
+        <form action='payment.php' method="post" onchange='updatePrice()' id='reservation'>
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
                    placeholder='Number of..'>
             <select name='userOption' onchange="myFunction()" id='userOption'>
@@ -109,12 +109,11 @@ if (!empty($_GET['services'])) {
             </div>
             <ul class="list-group list-group-flush">
                 <li class='list-group-item'> <?= $chosenService ?></li>
-                <li id='updatePrice' value='<?= $chosenServicePrice ?>' class='list-group-item'></li>
+                <li id="updatePrice" value="<?= $chosenServicePrice ?>" class="list-group-item"></li>
             </ul>
         </div>
     </div>
     <?php
-echo "</div>";
 } else {
     ?>
     <div class="container">
@@ -135,9 +134,9 @@ echo "</div>";
                 $servicefinal = str_replace(' ', '', $servicefinal); ?>
                 <div class='col-md-4 col'>
                     <div class='thumbnail'>
-                        <a href='services.php?services=<?=$serviceid?>'>
-                            <img src='<?= $image ?>' alt='$servicefinal' style='width:100%'>
-                            <div class='caption'>
+                        <a href="services.php?services=<?=$serviceid?>">
+                            <img src="<?= $image ?>" alt="<?=$servicefinal ?>" style="width:100%">
+                            <div class="caption">
                                 <p><?= $service ?></p>
                             </div>
                         </a>
@@ -154,10 +153,11 @@ echo "</div>";
 <br>
 <br>
 <br>
-<?php
-include('footer.php');
-?>
-</body>
-</html>
 
+
+</body>
+<?php
+
+include 'footer.php';
+?>
 
