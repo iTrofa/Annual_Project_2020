@@ -1,8 +1,6 @@
 <?php
+require_once "session.php";
 require('DbManager.php');
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 ?>
 <head>
     <title>Services - Flash Assistance</title>

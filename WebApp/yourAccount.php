@@ -1,5 +1,5 @@
-
 <?php
+require_once "session.php";
 require('DbManager.php');
 ?>
 <html>

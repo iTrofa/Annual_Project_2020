@@ -15,6 +15,7 @@
                             <li><a class="nav-link" href="yourAccount.php">Your Account</a></li>
                             <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
                             <li><a class="nav-link" href="stripeAPI.php">STRIPE API TEST</a></li>
+                            <li><a class="nav-link" href="addWebGL.php">Add Demo WebGL</a></li>
                             <li><a class="nav-link" href="logout.php">Log Out</a></li>
                             <!--<li><a class="nav-link" href="#"></a></li>-->
                         </ul>
