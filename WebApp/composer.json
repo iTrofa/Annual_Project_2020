@@ -4,6 +4,7 @@
         "ext-pdo": "*",
       "ext-ctype": "*",
         "symfony/var-dumper": "^5.0",
-        "stripe/stripe-php": "^7.27"
+        "stripe/stripe-php": "^7.27",
+      "ext-zip": "*"
     }
 }
