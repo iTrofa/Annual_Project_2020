@@ -1,7 +1,29 @@
-
 <?php
+require_once "session.php";
 require('DbManager.php');
-include('header.php');
+$service = $_GET['services'];
+$DbManager = new DbManager();
+$q = $DbManager->getDb()->prepare("SELECT * from service WHERE idService = :idService");
+$q->bindParam(':idService', $service);
+$q->execute();
+$chosenService = $q->fetchAll();
+if(empty($chosenService)){
+    header('Location: services.php?error=noservice');
+    exit;
+}
+
+function isValidUuid( $service ) {
+    if (!is_string($service) || (preg_match('/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/', $service) !== 1)) {
+        return false;
+    }
+    return true;
+}
+
+if(!isValidUuid($service)) {
+    header('Location: services.php');
+    exit;
+}
+echo "<html>";
 echo "<title>Services - Flash Assistance</title>";
 echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>";
 echo "<link rel='stylesheet' href='css/services.css'>";
@@ -35,10 +57,39 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 </style>
     <body onload="checkFooter()">
     <?php
-    echo $_POST['reservationInput'] .  " " . substr($_POST['userOption'], 0, -3) . "s " . $_POST['noinput'];
+    include('header.php');
     ?>
+    <main>
+    <?php
+        echo $_POST['reservationInput'] .  " " . substr($_POST['userOption'], 0, -3) . "s " . $_POST['noinput'];
 
-    <br><br>
+switch ($_POST['userOption']){
+    case "Hour(s)":
+        $timevariable = 1;
+        break;
+    case "Day(s)":
+        $timevariable = 1*$_POST['noinput'];
+        break;
+    case "Month(s)":
+        $timevariable = 31;
+        break;
+    case "Year(s)":
+        $timevariable = 31*12;
+        break;
+}
+echo $_POST['reservationInput'];
+echo $timevariable;
+$price = $_POST['reservationInput'] * $timevariable;
+echo " " . $service;
+
+
+    var_dump($chosenService);
+
+    $price *= $chosenService[0]['price'];
+
+?>
+    
+    <!--<br><br>
     <form onchange="payment()">
     <input type="date" id="reservationDate">
     <input type="date" hidden id="test" value="<?= date("Y-m-d"); ?>">
@@ -47,10 +98,10 @@ echo "<link rel='stylesheet' href='css/services.css'>";
     <div id="payementAnswer">
     </div>
     <br>
-    <div id="endDates">
+    <div id="endDates">-->
 
     </div>
-    <!--<div class="row py-5 p-4 bg-white rounded shadow-sm">
+    <div class="row py-5 p-4 bg-white rounded shadow-sm" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
             <div class="p-4">
@@ -64,31 +115,32 @@ echo "<link rel='stylesheet' href='css/services.css'>";
                     </div>
                 </div>
             </div>
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
+           <!-- <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
             <div class="p-4">
                 <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
                 <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-            </div>
+            </div>-->
         </div>
         <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
             <div class="p-4">
-                <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                <p class="font-italic mb-4">Tax costs are calculated based on values you have entered and each service.</p>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$price."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$price*0.21."€"?></strong></li>
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold">$400.00</h5>
+                        <h5 class="font-weight-bold"><?=$price+$price*0.21 ."€"?></h5>
                     </li>
-                </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                </ul><a href="stripeAPI.php" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
             </div>
         </div>
-    </div>-->
+    </div>
     <br><br>
-    </body>
+    </main>
 <?php
 include ("footer.php");
-
+?>
+</body>
+</html>
 
 

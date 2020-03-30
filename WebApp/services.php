@@ -35,10 +35,9 @@ require('DbManager.php');
         });
     </script>
 </head>
+<body onload='checkFooter()'>
 <?php
 include('header.php'); ?>
-<body onload='checkFooter()'>
-<br><br><br><br>
 <?php
 
 //List of Workers
@@ -51,7 +50,9 @@ while ($user = $req->fetch()) {
     $results[] = $user;
 }
 if (!empty($_GET['services'])) {
-    echo "<div class='container'>";
+    ?>
+    <div class='container'>
+    <?php
     $q = $DbManager->getDb()->prepare("SELECT * FROM service where idService =:id");
     $q->bindParam(':id', $_GET['services']);
     $q->execute();
@@ -69,6 +70,7 @@ if (!empty($_GET['services'])) {
     $chosenServicefinal = strtolower($chosenService);
     $chosenServicefinal = str_replace(' ', '', $chosenServicefinal);
     ?>
+    <br><br><br><br>
     <h2 class="fontPlaynoDisplay">Personalise your Service !</h2>
     <!--    <div class="image" style="background-image: url('<?php /*echo $image */
     ?>'); background-repeat: no-repeat; width: 100%; height: 100%;"></div>
@@ -82,15 +84,16 @@ if (!empty($_GET['services'])) {
     <br><br>
     <p class='fontPlaySmall'>Get for every 12 interventions 2 free. Only <?= $chosenServicePrice * 10 ?>€ </p>
     <br>
+    </div>
     <div class="container container2">
         <h1>Reservations</h1>
         <br>
         <h3>Choose your Package</h3>
-        <form action='payment.php' method="post" onchange='updatePrice()' id='reservation'>
+
+        <form action='payment.php?services=<?=$_GET['services']?>' method="post" onchange='updatePrice()' id='reservation'>
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
                    placeholder='Number of..'>
             <select name='userOption' onchange="myFunction()" id='userOption'>
-                <option>-----</option>
                 <option>Hour(s)</option>
                 <option>Day(s)</option>
                 <option>Month(s)</option>
