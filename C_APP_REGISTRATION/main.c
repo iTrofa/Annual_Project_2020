@@ -64,11 +64,6 @@ int main(int argc, char *argv[])
     builder = gtk_builder_new();
     gtk_builder_add_from_file (builder, "login3-0.glade", NULL);
 
-    /*GdkColor color;
-    color.red = 0xFFCC;
-    color.green = 0xFFCC;
-    color.blue = 0xFFCC;*/
-
     window = GTK_WIDGET(gtk_builder_get_object(builder, "windows1"));
     fixed  = GTK_WIDGET(gtk_builder_get_object(builder, "fixedLogin"));
 
@@ -183,7 +178,7 @@ void onclickGenerate(GtkButton *button)
 
 
 
-// Prints the given QR Code to the console.
+// Prints the given QR Code to the SDL window.
 static void printQr(const unsigned char qrcode[])
 {
     SDL_Surface *ecran = NULL, *rectangle = NULL, *shot = NULL;
@@ -322,31 +317,13 @@ void add_database()
     if(mysql_real_connect(mysql,"localhost","root","","flashassistance",3308,NULL,0))
     {
         uuid(uuid2);
-        sprintf(sql_qry,"INSERT INTO person(firstName, lastName, email, phoneNumber, password, idPerson, function, localisation) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, lastName, email, phone, password, uuid2, fonction, localisation);
+        sprintf(sql_qry,"INSERT INTO person(firstName, lastName, email, phoneNumber, password, idPerson, function, localisation, qrCode) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')", name, lastName, email, phone, password, uuid2, fonction, localisation, "qrcode.png");
         printf("%s\n", sql_qry);
 
         if(mysql_query(mysql, sql_qry))
         {
             printf("error MySQL! %s\n",mysql_error(mysql));
             change_label(" There was an error with the Server!",true);
-        }
-        else
-        {
-            printf("You did it");
-            uuid(uuid3);
-            sprintf(sql_qry,"INSERT INTO worker(idWorker, qrCode, idPerson) VALUES ('%s', '%s', '%s')", uuid3, "qrcode.bmp", uuid2);
-            printf("%s\n", sql_qry);
-            if(mysql_query(mysql, sql_qry))
-            {
-                printf("Error MySQL! %s\n",mysql_error(mysql));
-
-                change_label(" There was an error with the Server!",true);
-            }
-            else
-            {
-                counter = 1;
-                printf("\nYou did it x2");
-            }
         }
     }
     else
