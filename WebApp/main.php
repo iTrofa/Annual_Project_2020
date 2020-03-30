@@ -73,7 +73,7 @@ $firstSerName = $service[0]['name'];
             for ($i = 1; $i<count($service);$i++){
                 $image = $service[$i]['image'];
                 $desc = $service[$i]['description'];
-                $SerName = $service[0]['name'];
+                $SerName = $service[$i]['name'];
 
             echo "<div class=\"carousel-item\">";
                 echo "<img class=\"d-block w-100\" alt=\"\" src=\"$image\" data-holder-rendered=\"true\">";
@@ -106,56 +106,6 @@ $firstSerName = $service[0]['name'];
         <a href="subscription.php"><input type="button" value="Get your Subscription" class="btn-primary btn-large btn"/></a>
     </div>
 </div>
-<!--<div class="container">
-    <h2 style="padding-top: 25%">List of all Users:</h2>
-    <input class='form-control mb-4' id='tableSearch' type='text' placeholder='Type something to search list items'>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Function</th>
-            <th>Localisation</th>
-        </tr>
-        </thead>
-        <tbody id="myTable">
-        <?php
-
-     /*   for ($i = 0; $i < sizeof($results); $i++) {
-            $firstName = $results[$i]['firstName'];
-            $lastName = $results[$i]['lastName'];
-            $email = $results[$i]['email'];
-            $phone = $results[$i]['phoneNumber'];
-            $idPerson = $results[$i]['idPerson'];
-            $function = $results[$i]['function'];
-            $localisation = $results[$i]['localisation'];
-            /* $q = $bdd->prepare("SELECT idPerson FROM worker where idPerson = :idPerson");
-             $q->bindParam(':idPerson', $idPerson);
-             $q->execute();
-             $worker = $q->fetchall();
-             $worker = $worker[0]['idPerson'];
-             if($worker == ""){
-                 $worker = "Not a worker";
-             }else{
-                 $worker = "Worker";
-             }*/
-          /*  echo "<tr>";
-            echo "<td>" . $idPerson . "</td>";
-            echo "<td>" . $firstName . "</td>";
-            echo "<td>" . $lastName . "</td>";
-            echo "<td>" . $email . "</td>";
-            echo "<td>" . $phone . "</td>";
-            echo "<td>" . $function . "</td>";
-            echo "<td>" . $localisation . "</td>";
-            echo "</tr>";
-        }*/
-        ?>
-        </tbody>
-    </table>
-</div>-->
 <br><br><br>
 
 
