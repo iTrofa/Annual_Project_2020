@@ -1,0 +1,13 @@
+
+.gradle/
+.idea/
+Supprimerait build.gradle
+build/
+gradle/
+src/test/
+src/main/resources/db.properties
+ #example
+ #jdbc.driver.class = org.mariadb.jdbc.Driver
+ #jdbc.url=jdbc:mariadb://localhost:3306/flashAssistanceBackup
+ #jdbc.login=admin
+ #jdbc.pwd=password
