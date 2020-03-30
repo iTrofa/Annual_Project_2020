@@ -17,21 +17,21 @@ function myFunction(){
         reservation.type = 'hidden';
         document.getElementById('reservationInput').max = '8';
         document.getElementById('reservationInput').value = '1';
-    }else{
+    }else if (element == 'Day(s)'){
         console.log(element);
         reservation = document.getElementById('noinput');
         reservation.type = 'number';
         reservation.placeholder = "How many hours per " + element.slice(0, -3);
         document.getElementById('reservationInput').max = '31';
-        if(element == 'Year(s)'){
-            document.getElementById('reservationInput').max = '3';
-            document.getElementById('reservationInput').value = '1';
-        }
+    }else if (element == 'Month(s)' || 'Year(s)'){
+        document.getElementById('reservationInput').value = '';
+        reservation = document.getElementById('noinput');
+        reservation.type = 'hidden';
     }
     updatePrice();
 }
 
-function payment() {
+/*function payment() {
     var dateControl = document.getElementById("reservationDate");
     var endDates = document.getElementById("endDates");
     console.log(dateControl.value);
@@ -64,7 +64,7 @@ function payment() {
         checkFooter();
     }
 }
-
+*/
 function formatDate(date) {
     console.log(date.length);
     var finaldate = new Array(10);
@@ -78,7 +78,7 @@ function removeDate(){
     console.log(this.id);
 
 }
-
+/*
 function removeallDates(){
     console.log(this);
     // Supprime tous les enfant d'un élément
@@ -91,7 +91,7 @@ function removeallDates(){
         element.removeChild(element.firstChild);
     }
     countDate = 1;
-}
+}*/
 
 function updatePrice() {
     var place = document.getElementById("updatePrice");

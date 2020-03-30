@@ -5,7 +5,7 @@
         <form method="post" enctype="multipart/form-data">
             <label>Demo Directory Name</label><br><br>
             <input type="text" name="fileDir"><br><br>
-            <label> Demo Zip File</label><br><br>
+            <label> Demo Zip File (Only Zip Files Allowed)</label><br><br>
             <input type="file" name="fileName"><br><br>
             <input type="submit" name="fileSubmit" value="Submit Demo">
         </form>
