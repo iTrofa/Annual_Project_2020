@@ -1,5 +1,5 @@
-
 <?php
+require_once "session.php";
 require('DbManager.php');
 ?>
 <html>
@@ -27,15 +27,23 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 <link rel="stylesheet" href="css/stripe.css"/>
 <title>Flash Assistance</title>
 <script src="header.js" defer></script>
-<script src="footer.js"defer></script>
+<script src="footer.js" defer></script>
 <style>
 
 </style>
     <body onload="checkFooter()">
 <?php
 include('header.php');
+$finalprice = $_SESSION['price'];
+
 ?>
-<h5><?= $_GET['return'] ?? ''?></h5>
+
+<h5><?php if(isset($_GET['return'])) {
+        echo $_GET['return'] . "<br><br>";
+        echo "<a href=\"services.php\" class=\"btn btn-dark rounded-pill py-2 btn-block\" style='width: 15%;background-color: blue;'>See more of our Services</a>";
+
+    }
+?></h5>
     <form action="charge.php" method="post" id="payment-form">
         <div style="text-align: center;">
             <label for="card-element">Credit or debit card</label>
@@ -51,7 +59,7 @@ include('header.php');
     <!-- JQUERY File -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Stripe JS -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/">    </script>
     <!-- Your JS File -->
     <script src="charge.js"></script>
 
