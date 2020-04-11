@@ -1,4 +1,8 @@
-
+<?php
+require_once "session.php";
+require_once "DbManager.php";
+$DbManager = new DbManager();
+?>
     <header id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
             <a class="navbar-brand" href="main.php">Flash Assistance</a>
@@ -17,6 +21,8 @@
                             <li><a class="nav-link" href="stripeAPI.php">STRIPE API TEST</a></li>
                             <li><a class="nav-link" href="addWebGL.php">Add Demo WebGL</a></li>
                             <li><a class="nav-link" href="clientManagement.php">Client Management</a></li>
+                            <li><a class="nav-link" href="updateSubscription.php">Add Subscription</a></li>
+                            <li><a class="nav-link" href="Ordonnance.php">Ordonnance test</a></li>
                             <li><a class="nav-link" href="logout.php">Log Out</a></li>
                             <!--<li><a class="nav-link" href="#"></a></li>-->
                         </ul>
@@ -40,8 +46,26 @@
                     </li>
                 </ul>
             <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                <?php
+                   $q = $DbManager->getDb()->prepare("SELECT idOrders FROM orders WHERE status = 'active' && idPerson = ?");
+                   $q->execute([
+                       $_SESSION['id']
+                    ]);
+                   $res = $q->fetchAll();
+                   $link = "paymentCart.php?";
+                   for($i = 0; $i< count($res); $i++){
+                       if($i > 0)
+                           $link = $link . "&";
+                       $link = $link . "cart". $i . "=" . $res[$i]['idOrders'];
+                   }
+                    if(count($res) > 0) {?>
+                        <ul class="navbar-nav mr-auto" >
+                            <li class="nav-item"><a class="nav-link" style="color: red; font-weight: bold" href = "<?=$link?>" >Check Your Cart</a >
+                            </li >
+                        </ul >
+                   <?php } ?>
+                <!--<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>-->
             </form>
             </div>
         </nav>
