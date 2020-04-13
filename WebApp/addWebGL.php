@@ -1,5 +1,6 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
 ?>
 <html>
 <head>
@@ -25,12 +26,12 @@ require_once "session.php";
     require_once "header.php";
     ?>
     <main>
-        <form method="post" enctype="multipart/form-data">
-            <label>Demo Directory Name</label><br><br>
+        <form method="post" enctype="multipart/form-data" style="text-align: center">
+            <label><?=_("Demo Directory Name")?></label><br><br>
             <input type="text" name="fileDir"><br><br>
-            <label> Demo Zip File (Only Zip Files Allowed)</label><br><br>
+            <label><?=_("Demo Zip File (Only Zip Files Allowed)")?></label><br><br>
             <input type="file" name="fileName"><br><br>
-            <input type="submit" name="fileSubmit" value="Submit Demo">
+            <input type="submit" name="fileSubmit" value="<?=_('Submit Demo')?>">
         </form>
     </main>
     <?php
@@ -41,9 +42,7 @@ require_once "session.php";
 <?php
 // Get Project path
 define('_PATH', dirname(__FILE__));
-var_dump($_FILES);
-echo "<br>";
-var_dump($_POST);
+
 // Zip file name
 if(!empty($_FILES) && !empty($_POST['fileDir'])){
     $filename = $_FILES["fileName"]["tmp_name"];

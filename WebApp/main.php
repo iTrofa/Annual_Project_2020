@@ -26,7 +26,10 @@ require_once "session.php";
 require_once "localization.php";
 include('header.php');
 ?>
-
+<div style="margin-left: 7%">
+    <a href="lang.php?lang=en_US"><img src="images/Countries/usa.png" style="width: 7%; height: 10%"></a>
+    <a href="lang.php?lang=fr_FR"><img src="images/Countries/france.png" style="width: 7%; height: 10%"></a>
+</div>
 <br><br><br><br>
 <?php
 //List of Workers
@@ -42,9 +45,10 @@ while ($user = $req->fetch()) {
 $q = $DbManager->getDb()->prepare("SELECT * FROM service");
 $q->execute();
 $service = $q->fetchAll();
-?>
+if(isset($_SESSION['firstName'])){?>
     <h1 id="welcomeInput"><?= _("Welcome to Flash Assistance") . " " . $_SESSION['firstName']?></h1><br><br>
 <?php
+}
 $firstImage = $service[0]['image'];
 $firstDesc = $service[0]['description'];
 $firstSerName = $service[0]['name'];
@@ -103,7 +107,7 @@ $firstSerName = $service[0]['name'];
     </div>
     <div class="col-sm-3">
         <h5 style="margin-top: 15%"><?= _("Enjoy all your favorite services for to half the price")?></h5>
-        <a href="subscription.php"><input type="button" value="Get your Subscription" class="btn-primary btn-large btn"/></a>
+        <a href="subscription.php"><input type="button" value="<?=_('Get your Subscription')?>" class="btn-primary btn-large btn"/></a>
     </div>
 </div>
 <br><br><br>

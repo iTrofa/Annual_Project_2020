@@ -1,5 +1,6 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
 $DbManager = new DbManager();
 
 if (isset($_POST) && !empty($_POST)) {
@@ -85,7 +86,7 @@ require_once "header.php";
             <label>Feature F</label><br>
             <input type="text" name="featureF" class="inputSmaller"><br>
         </div>
-        <input type="submit" style="margin-top: 1%;" class="btn-large btn-primary btn" value="Submit Changes">
+        <input type="submit" style="margin-top: 1%;" class="btn-large btn-primary btn" value="<?=_('Submit Changes')?>">
     </form>
 </main>
 <?php

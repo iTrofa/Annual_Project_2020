@@ -82,9 +82,9 @@ if (!empty($_GET['services'])) {
     <!--<p> <?= $chosenServiceDemo ?></p>
            <p><?= $chosenServiceId ?></p>"; -->
 
-    <p class='fontPlay'><?= $chosenServicePrice ?>€/day </p>
+    <p class='fontPlay'><?= $chosenServicePrice ?>€/<?=_("day")?> </p>
     <br><br>
-    <p class='fontPlaySmall'><?= _("Get for every 12 interventions 2 free. Only") . $chosenServicePrice * 10 ?>€ </p>
+    <p class='fontPlaySmall'><?= _("Get for every 12 interventions 2 free. Only") . " " . $chosenServicePrice * 10 ?>€ </p>
     <br>
     </div>
     <div class="container container2">
@@ -94,12 +94,12 @@ if (!empty($_GET['services'])) {
 
         <form action='payment.php?services=<?=$_GET['services']?>' method="post" onchange='updatePrice()' id='reservation'>
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
-                   placeholder='Number of..'>
+                   placeholder='<?= _("Number of..")?>'>
             <select name='userOption' onchange="myFunction()" id='userOption'>
-                <option>Hour(s)</option>
-                <option>Day(s)</option>
-                <option>Month(s)</option>
-                <option>Year(s)</option>
+                <option><?= _("Hour(s)")?></option>
+                <option><?= _("Day(s)")?></option>
+                <option><?= _("Month(s)")?></option>
+                <option><?= _("Year(s)")?></option>
             </select>
             <br>
             <input onchange="updatePrice()" name='noinput' min='1' max='8' type='hidden' id='noinput' placeholder='' class='input'>
@@ -138,7 +138,7 @@ if (!empty($_GET['services'])) {
         </form>
         <div class="card col-lg-6" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">
             <div class="card-header">
-                Price <span title="<?= _('Estimated price if you all the checkboxes.')?>">*</span>
+                <?=_("Price")?> <span title="<?= _('Estimated price if you all the checkboxes.')?>">*</span>
             </div>
             <ul class="list-group list-group-flush">
                 <li class='list-group-item'> <?= $chosenService ?></li>
@@ -153,7 +153,7 @@ if (!empty($_GET['services'])) {
         <h2><?= _("List of all the Services we currently provide :")?></h2>
         <br>
         <input class='form-control mb-4' id='serviceSearch' type='text'
-               placeholder='Type something to search list items'>
+               placeholder='<?=_("Type something to search list items")?>'>
         <br>
         <div class="row">
             <?php
