@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Annual Project 2020\n"
-"POT-Creation-Date: 2020-04-13 11:10+0200\n"
-"PO-Revision-Date: 2020-04-13 11:10+0200\n"
+"POT-Creation-Date: 2020-04-13 18:30+0200\n"
+"PO-Revision-Date: 2020-04-13 18:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -15,57 +15,265 @@ msgstr ""
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: header.php:17
+#: SignupValidator.php:39
+msgid "is empty"
+msgstr "est vide"
+
+#: SignupValidator.php:79
+msgid "your"
+msgstr "votre"
+
+#: SignupValidator.php:80
+msgid "can only contain letters"
+msgstr "peut contenir seulement des lettres"
+
+#: SignupValidator.php:98
+msgid "the email must ve valid"
+msgstr "L'email doit être valide"
+
+#: SignupValidator.php:107
+msgid "the email is already registered"
+msgstr "L'email est déjà utilisé par un autre compte"
+
+#: SignupValidator.php:132
+msgid "phone number is not valid"
+msgstr "Le numéro de téléphone n'est pas valide"
+
+#: SignupValidator.php:147
+msgid "the passwords are different"
+msgstr "Les mots de passes sont pas les mêmes"
+
+#: SignupValidator.php:151
+msgid "the password is too short"
+msgstr "Mot de passe trop petit"
+
+#: SignupValidator.php:174
+msgid "you are now registered"
+msgstr "Vous êtes bien inscris"
+
+#: addServices.php:61
+msgid "Check List"
+msgstr "Vérifier Liste"
+
+#: addServices.php:63
+msgid "Add Category"
+msgstr "Ajouter Catégorie"
+
+#: addServices.php:68
+msgid "Category Name"
+msgstr "Nom de la Catégorie"
+
+#: addServices.php:69
+msgid "category name"
+msgstr "nom de la catégorie"
+
+#: addServices.php:71
+msgid "Add category"
+msgstr "Ajouter Catégorie"
+
+#: addServices.php:74
+msgid "Add a Service :"
+msgstr "Ajouter un Service :"
+
+#: addServices.php:82
+msgid "Service Category"
+msgstr "Catégorie de Service"
+
+#: addServices.php:87
+msgid "select category"
+msgstr "sélectionner catégorie"
+
+#: addServices.php:96
+msgid "Service Name"
+msgstr "Nom du Service"
+
+#: addServices.php:101
+msgid "Exemple: Child Care"
+msgstr "Exemple: Garde d'Enfants"
+
+#: addServices.php:104
+msgid "Service Description"
+msgstr "Description du Service"
+
+#: addServices.php:111
+msgid "Service Image"
+msgstr "Image du Service"
+
+#: addServices.php:118
+msgid "Service Price"
+msgstr "Prix du Service"
+
+#: addServices.php:122
+msgid "Price per hour in €"
+msgstr "Prix par heure en €"
+
+#: addServices.php:125
+msgid "Demo"
+msgstr "Demo"
+
+#: addServices.php:130
+msgid "Add Service"
+msgstr "Ajouter un Service"
+
+#: addServices.php:137 services.php:153
+msgid "List of all the Services we currently provide :"
+msgstr "Liste de tout les Services qu'on propose actuellement :"
+
+#: addServices.php:140 clientManagement.php:39 services.php:156
+msgid "Type something to search list items"
+msgstr "Ecris quelque chose pour chercher des items"
+
+#: addServices.php:142 header.php:20
+msgid "Add a Service"
+msgstr "Ajouter un Service"
+
+#: addWebGL.php:30
+msgid "Demo Directory Name"
+msgstr "Nom du Dossier de la Demo"
+
+#: addWebGL.php:32
+msgid "Demo Zip File (Only Zip Files Allowed)"
+msgstr "Fichier Zip de la Demo"
+
+#: addWebGL.php:34
+msgid "Submit Demo"
+msgstr "Envoyer Demo"
+
+#: clientManagement.php:19
+msgid "Client Management - Flash Assistance"
+msgstr "Gestion des Clients - Flash Assistance"
+
+#: clientManagement.php:38
+msgid "List of all Users:"
+msgstr "Liste de tout les Utilisateurs:"
+
+#: clientManagement.php:43
+msgid "ID"
+msgstr "Identifiant"
+
+#: clientManagement.php:44
+msgid "Firstname"
+msgstr "Prénom"
+
+#: clientManagement.php:45
+msgid "Lastname"
+msgstr "Nom"
+
+#: clientManagement.php:46 login.php:94 signup.php:113 yourAccount.php:47
+msgid "Email"
+msgstr "Email"
+
+#: clientManagement.php:47
+msgid "Phone Number"
+msgstr "Numéro de Téléphone"
+
+#: clientManagement.php:48
+msgid "Function"
+msgstr "Travail"
+
+#: clientManagement.php:49
+msgid "Localisation"
+msgstr "Localisation"
+
+#: header.php:16
 msgid "Account"
 msgstr "Compte"
 
-#: header.php:20
+#: header.php:19
 msgid "Your Account"
 msgstr "Votre Compte"
 
 #: header.php:21
-msgid "Add a Service"
-msgstr "Ajouter un Service"
+msgid "Add Demo WebGL"
+msgstr "Ajouter Demo WebGL"
 
 #: header.php:22
-msgid "Add Demo WebGL"
-msgstr "Ajoute Demo WebGL"
-
-#: header.php:23
 msgid "Client Management"
 msgstr "Gestion des clients"
 
-#: header.php:24
+#: header.php:23
 msgid "Update Subscription"
 msgstr "Mettre à jour Abonnements"
 
-#: header.php:25
+#: header.php:24
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: header.php:37
+#: header.php:36
 msgid "Services"
 msgstr "Services"
 
-#: header.php:40
+#: header.php:39
 msgid "Subscriptions"
 msgstr "Abonnements"
 
-#: header.php:43
+#: header.php:42
 msgid "History"
 msgstr "Historique"
 
-#: header.php:61
+#: header.php:60
 msgid "Check Your Cart"
 msgstr "Regardez votre panier"
 
-#: main.php:47
+#: login.php:83 signup.php:91
+msgid "Click here for English"
+msgstr "Appuie ici pour de l'Anglais"
+
+#: login.php:84 signup.php:92
+msgid "Click here for French"
+msgstr "Appuie ici pour du Français"
+
+#: login.php:89
+msgid "Login"
+msgstr "S'identifier"
+
+#: login.php:93
+msgid "Email:"
+msgstr "Email:"
+
+#: login.php:96
+msgid "Password:"
+msgstr "Mot de Passe:"
+
+#: login.php:97 signup.php:123 yourAccount.php:53
+msgid "Password"
+msgstr "Mot de Passe"
+
+#: login.php:99
+msgid "Let me in."
+msgstr "Laisse moi rentrer."
+
+#: login.php:101
+msgid "Sign Up"
+msgstr "S'inscrire"
+
+#: main.php:49
 msgid "Welcome to Flash Assistance"
 msgstr "Bienvenue sur Flash Assistance"
 
-#: main.php:106
+#: main.php:108
 msgid "Enjoy all your favorite services for to half the price"
 msgstr "Profite de tout tes services favoris pour 50% du prix"
+
+#: main.php:109
+msgid "Get your Subscription"
+msgstr "Obtient ton Abonnement"
+
+#: search.php:39
+msgid "History of all purchases:"
+msgstr "Historique de tout les achats:"
+
+#: search.php:55
+msgid "History of your purchases:"
+msgstr "Historique de tout tes achats:"
+
+#: search.php:71
+msgid "You haven't bought anything yet"
+msgstr "T'as rien acheté pour l'instant"
+
+#: search.php:72
+msgid "Perhaps you should buy something"
+msgstr "Peut-être tu devrais en acheter quelque chose"
 
 #: services.php:6
 msgid "Services - Flash Assistance"
@@ -74,6 +282,10 @@ msgstr "Services - Flash Assistance"
 #: services.php:76
 msgid "Personalise your Service !"
 msgstr "Personnalise ton Service !"
+
+#: services.php:85
+msgid "day"
+msgstr "jour"
 
 #: services.php:87
 msgid "Get for every 12 interventions 2 free. Only"
@@ -86,6 +298,26 @@ msgstr "Reservations"
 #: services.php:93
 msgid "Choose your Package"
 msgstr "Choisi ton Package"
+
+#: services.php:97
+msgid "Number of.."
+msgstr "Nombre de.."
+
+#: services.php:99
+msgid "Hour(s)"
+msgstr "Heure(s)"
+
+#: services.php:100
+msgid "Day(s)"
+msgstr "Jour(s)"
+
+#: services.php:101
+msgid "Month(s)"
+msgstr "Mois"
+
+#: services.php:102
+msgid "Year(s)"
+msgstr "Année(s)"
 
 #: services.php:111
 msgid "Each Monday"
@@ -176,12 +408,73 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 #: services.php:141
+msgid "Price"
+msgstr "Prix"
+
+#: services.php:141
 msgid "Estimated price if you all the checkboxes."
 msgstr "Prix estimé si vous cochez tous les cases."
 
-#: services.php:153
-msgid "List of all the Services we currently provide :"
-msgstr "Liste de tout les Services qu'on propose actuellement :"
+#: signup.php:102
+msgid "First name"
+msgstr "Prénom"
 
-#~ msgid "Flash Assistance"
-#~ msgstr "Flash Assistance"
+#: signup.php:108
+msgid "Last name"
+msgstr "Nom"
+
+#: signup.php:118
+msgid "Phone number"
+msgstr "Numéro de Téléphone"
+
+#: signup.php:128
+msgid "Retype Password"
+msgstr "Retaper Mot de Passe"
+
+#: signup.php:132
+msgid "Signup"
+msgstr "S'inscrire"
+
+#: subscription.php:25
+msgid "Subscriptions - Flash Assistance"
+msgstr "Abonnements - Flash Assistance"
+
+#: subscription.php:136
+msgid "Start Today"
+msgstr "Commence Aujourd'hui"
+
+#: updateSubscription.php:89
+msgid "Submit Changes"
+msgstr "Envoyer Changements"
+
+#: yourAccount.php:19
+msgid "Account - Flash Assistance"
+msgstr "Compte - Flash Assistance"
+
+#: yourAccount.php:34
+msgid "Edit Profile"
+msgstr "Editer Profil"
+
+#: yourAccount.php:41
+msgid "Nombre"
+msgstr "Prenom"
+
+#: yourAccount.php:59
+msgid "Confirm password"
+msgstr "Confirmer Mot de Passe"
+
+#: yourAccount.php:67
+msgid "Cancel"
+msgstr "Annuler"
+
+#: yourAccount.php:68
+msgid "Save Changes"
+msgstr "Sauvegarder Changements"
+
+#: yourAccount.php:75
+msgid "Upload a different photo"
+msgstr "Télécharger une photo différente"
+
+#: yourAccount.php:77
+msgid "Choose file"
+msgstr "Choisir fichier"
