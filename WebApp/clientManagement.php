@@ -1,5 +1,6 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
 ?>
 <html lang="fr">
 <head>
@@ -15,13 +16,12 @@ require_once "session.php";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
     <link rel="stylesheet" href="css/main.css">
-    <title>Client Management - Flash Assistance</title>
+    <title><?=_("Client Management - Flash Assistance")?></title>
     <script src="header.js"></script>
     <script src="footer.js"></script>
 </head>
 <body onload="checkFooter()">
 <?php
-require('DbManager.php');
 require "header.php";
 ?>
 <main>
@@ -35,18 +35,18 @@ require "header.php";
     ?>
 
     <div class="container">
-    <h2 style="padding-top: 25%">List of all Users:</h2>
-    <input class='form-control mb-4' id='tableSearch' type='text' placeholder='Type something to search list items'>
+    <h2 style="padding-top: 25%"><?=_("List of all Users:")?></h2>
+    <input class='form-control mb-4' id='tableSearch' type='text' placeholder='<?=_("Type something to search list items")?>'>
     <table class="table">
         <thead>
         <tr>
-            <th>ID</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Phone Number</th>
-            <th>Function</th>
-            <th>Localisation</th>
+            <th><?=_("ID")?></th>
+            <th><?=_("Firstname")?></th>
+            <th><?=_("Lastname")?></th>
+            <th><?=_("Email")?></th>
+            <th><?=_("Phone Number")?></th>
+            <th><?=_("Function")?></th>
+            <th><?=_("Localisation")?></th>
         </tr>
         </thead>
         <tbody id="myTable">

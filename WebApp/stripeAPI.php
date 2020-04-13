@@ -1,6 +1,5 @@
-
 <?php
-require('DbManager.php');
+require_once "session.php";
 ?>
 <html>
 <?php
@@ -27,16 +26,42 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 <link rel="stylesheet" href="css/stripe.css"/>
 <title>Flash Assistance</title>
 <script src="header.js" defer></script>
-<script src="footer.js"defer></script>
+<script src="footer.js" defer></script>
 <style>
 
 </style>
     <body onload="checkFooter()">
 <?php
 include('header.php');
+$DbManager = new DbManager();
+if(isset($_GET['express']) && $_GET['express'] == true){
+    $q = $DbManager->getDb()->prepare("SELECT * FROM orders WHERE status = 'express'");
+    $q->execute();
+    $res = $q->fetchAll();
+    $finalprice = $res[0]['price'];
+    $_SESSION['price'] = $finalprice;
+}else if(isset($_GET['sub'])){
+    $sub = $_GET['sub'];
+    $finalprice = $_SESSION['price'];
+}else{
+    $finalprice = $_SESSION['price'];
+}
 ?>
-<h5><?= $_GET['return'] ?? ''?></h5>
-    <form action="charge.php" method="post" id="payment-form">
+
+<h5><?php if(isset($_GET['return'])) {
+        echo $_GET['return'] . "<br><br>";
+        echo "<a href=\"services.php\" class=\"btn btn-dark rounded-pill py-2 btn-block\" style='width: 15%;background-color: blue;'>See more of our Services</a>";
+
+    }
+?></h5>
+<?php
+if(isset($_GET['express']) && $_GET['express'] == true){
+    echo "<form action='charge.php?express=true' method='post' id='payment-form'>";
+}else if(isset($_GET['sub'])){
+    echo "<form action='charge.php?sub=$sub' method='post' id='payment-form'>";
+}else{
+    echo "<form action='charge.php' method='post' id='payment-form'>";
+}?>
         <div style="text-align: center;">
             <label for="card-element">Credit or debit card</label>
             <div style="width: 70%;margin-top: 3%;margin-bottom: 3%" id="card-element">
@@ -51,7 +76,7 @@ include('header.php');
     <!-- JQUERY File -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Stripe JS -->
-    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://js.stripe.com/v3/">    </script>
     <!-- Your JS File -->
     <script src="charge.js"></script>
 

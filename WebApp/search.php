@@ -1,6 +1,6 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
+require_once "localization.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@ require('DbManager.php');
 
     if($res['function'] === "admin" ){
         ?>
-    <h1 style="text-align: center">History of all purchases:</h1>
+    <h1 style="text-align: center"><?= _("History of all purchases:")?></h1>
     <div>
         <?php
         $req = $DbManager->getDb()->query('SELECT dateLog,idService FROM log');
@@ -52,7 +52,7 @@ require('DbManager.php');
         }
       }else{
         ?>
-        <h1 style="text-align: center">History of <your></your> purchases:</h1>
+        <h1 style="text-align: center"><?=_("History of your purchases:")?></h1>
         <div>
             <?php
       $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
@@ -68,7 +68,9 @@ require('DbManager.php');
          }
      }
       else{
-          echo "<p style='text-align: center'>You didn't buy anything yet. <a href='services.php'>You should buy something </a></p>";
+          $firstP = _("You haven't bought anything yet");
+          $secondP = _("Perhaps you should buy something");
+          echo "<p style='text-align: center'>$firstP<a href='services.php'> $secondP;) </a></p>";
       }
     }
   ?>

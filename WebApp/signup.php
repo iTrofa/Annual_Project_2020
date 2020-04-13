@@ -8,7 +8,39 @@ if (session_status() === PHP_SESSION_NONE)
     }
 }
 
+if (isset($_POST['english'])) {
+    $_SESSION['lang'] = "en_US";
+} else if (isset($_POST['french'])) {
+    $_SESSION['lang'] = "fr_FR";
+}
+
+
 require_once 'SignupValidator.php';
+error_reporting(E_ALL | E_STRICT);
+
+// define constants
+define('PROJECT_DIR', realpath('./'));
+define('LOCALE_DIR', PROJECT_DIR .'/Lang/locale');
+define('DEFAULT_LOCALE', 'en_US');
+
+require_once('Lang/gettext.inc');
+
+$supported_locales = array('en_US', 'fr_FR');
+$encoding = 'UTF-8';
+
+$locale = (isset($_SESSION['lang']))? $_SESSION['lang'] : DEFAULT_LOCALE;
+
+// gettext setup
+T_setlocale(LC_MESSAGES, $locale);
+// Set the text domain as 'messages'
+$domain = 'main';
+bindtextdomain($domain, LOCALE_DIR);
+// bind_textdomain_codeset is supported only in PHP 4.2.0+
+if (function_exists('bind_textdomain_codeset'))
+    bind_textdomain_codeset($domain, $encoding);
+textdomain($domain);
+
+header("Content-type: text/html; charset=$encoding");
 
 if (!empty($_POST))
 {
@@ -54,43 +86,50 @@ if (!empty($_POST))
      <link rel="stylesheet" href="css/login.css" class="cp-pen-styles">
  </head>
 <body>
+<form method="post">
+    <div style="margin-left: 7%">
+        <input type="submit" name="english" style="display: inline-block; width: 15%" value="<?=_('Click here for English')?>"><img src="images/Countries/usa.png" style="width: 7%; height: 10%"><br>
+        <input type="submit" name="french" style="display: inline-block; width: 15%" value="<?=_('Click here for French')?>"><img src="images/Countries/france.png" style="width: 7%; height: 10%">
+    </div>
+</form>
+
  <h3><?php echo $_SESSION['valid']['request']  ?? '';
                   echo $_SESSION['error']['request'] ?? '';
                   if(isset($_SESSION['valid']['request']))
                   unset($_SESSION['valid'], $_SESSION['error'])?></h3>
         <div class="signup">
             <form action="" method="post">
-                <label>First name
+                <label><?= _("First name")?>
                     <input  type="text" name="firstName" value="<?= $_SESSION['valid']['firstName'] ?? ''
                     ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['firstName'] ?? '' ?></span>
                 <br>
-                <label>Last name
+                <label><?= _('Last name')?>
                     <input  type="text" name="lastName" value="<?= $_SESSION['valid']['lastName'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['lastName'] ?? '' ?></span>
                 <br>
-                <label>Email
+                <label><?= _("Email")?>
                     <input  type="text" name="email" value="<?= $_SESSION['valid']['email'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['email'] ?? '' ?></span>
                 <br>
-                <label>Phone number
+                <label><?= _("Phone number")?>
                     <input  type="text" name="phone" value="<?= $_SESSION['valid']['phone'] ?? '' ?>" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['phone'] ?? '' ?></span>
                 <br>
-                <label> Password
+                <label> <?= _("Password")?>
                     <input  type="password" name="password" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
                 <br>
-                <label> Retype Password
+                <label> <?= _("Retype Password")?>
                     <br>
                     <input  type="password" name="rePassword" required>
                 </label><br>
-                <button type="submit" id="btn" class="btn btn-primary btn-block btn-large">Signup</button>
+                <button type="submit" id="btn" class="btn btn-primary btn-block btn-large"><?=_("Signup")?></button>
                 <br>
             </form>
         </div>

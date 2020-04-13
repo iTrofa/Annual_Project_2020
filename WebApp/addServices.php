@@ -1,6 +1,6 @@
 <?php
-require('DbManager.php');
-
+require_once "session.php";
+require_once "localization.php";
 require_once 'AddServiceValidator.php';
 
 if (!empty($_POST))
@@ -13,7 +13,7 @@ if (!empty($_POST))
 }
 ?>
 <head>
-    <title>Services - Flash Assistance</title>
+    <title>Add Services - Flash Assistance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -43,10 +43,6 @@ if (!empty($_POST))
 
 include('header.php');
 echo "<br><br><br><br>";
-if (session_status() === PHP_SESSION_NONE)
-{
-    session_start();
-}
 //List of Workers
 $q = "SELECT * FROM service";
 $DbManager = new  DbManager();
@@ -62,20 +58,20 @@ $category = $q->fetchall();
 ?>
 <div class="container" id="mainContainer" style="display: block;">
     <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%"
-           value="Check List"><br><br>
+           value="<?=_('Check List')?>"><br><br>
     <input type="button" name="display"  class="btn-large btn-primary btn" onclick="displayCategory(this)" style="color: black;width:
-    15%" value="Add Category">
+    15%" value="<?=_('Add Category')?>">
     <br>
     <br>
         <form id="formCategory" style="display:none;">
             <span id="replyCategory"></span><br>
-            <label>Category Name
-            <input type="text"  placeholder="category name" name="categoryName" required><br><br>
+            <label><?=_('Category Name')?>
+            <input type="text"  placeholder="<?=_('category name')?>" name="categoryName" required><br><br>
             </label><br>
-            <input type="button" class="btn-large btn-primary btn" name="submit" value="Add Category" style="color: black;width: 15%"
+            <input type="button" class="btn-large btn-primary btn" name="submit" value="<?=_('Add category')?>" style="color: black;width: 15%"
                    onclick="addCategory()">
         </form>
-    <h2 style="text-align: center">Add a Service :</h2>
+    <h2 style="text-align: center"><?=_('Add a Service :')?></h2>
     <br>
 
     <form style="text-align: center" method="post" enctype="multipart/form-data">
@@ -83,12 +79,12 @@ $category = $q->fetchall();
             echo $_SESSION['error']['request'] ?? '';
             if(isset($_SESSION['valid']['request']))
                 unset($_SESSION['valid'], $_SESSION['error'])?></h4>
-        <label>Service Category
+        <label><?=_('Service Category')?>
             <br>
             <span class="error"><?= $_SESSION['error']['category'] ?? '' ?></span>
             <br>
             <select style="width: 100%" id="existingCat" name="category" required>
-                <option value="">select category</option>
+                <option value=""><?=_('select category')?></option>
                 <?php
                 foreach ($category as $cat):
                     ?>
@@ -97,53 +93,53 @@ $category = $q->fetchall();
             </select>
         </label>
         <br>
-        <label>Service Name
+        <label><?= _('Service Name')?>
             <br>
             <span class="error"><?= $_SESSION['error']['serviceName'] ?? '' ?></span>
             <br>
             <input width="100%" type="text" value="<?= $_SESSION['valid']['serviceName'] ?? '' ?>" name="serviceName"
-                   placeholder="Exemple: Child Care" required>
+                   placeholder="<?=_('Exemple: Child Care')?>" required>
         </label>
         <br>
-        <label>Service Description
+        <label><?= _("Service Description")?>
             <br>
             <span class="error"><?= $_SESSION['error']['serviceDescription'] ?? '' ?></span>
             <br>
             <textarea name="serviceDescription" required><?= $_SESSION['valid']['serviceDescription'] ?? '' ?></textarea>
         </label>
         <br>
-        <label>Service Image
+        <label><?=_("Service Image")?>
             <br>
             <span class="error"><?= $_SESSION['error']['image'] ?? '' ?></span>
             <br>
             <input type="file" name="image" required>
         </label>
         <br>
-        <label>Service Price
+        <label><?= _('Service Price')?>
             <br>            <span class="error"><?= $_SESSION['error']['price'] ?? '' ?></span>
             <br>
             <input width="100%" type="number"  step="0.01" value="<?= $_SESSION['valid']['price'] ?? '' ?>" name="price"
-                   placeholder="Price per hour in €">
+                   placeholder="<?=_('Price per hour in €')?>">
         </label>
         <br>
-        <label>Demo
+        <label><?= _("Demo")?>
             <br>
             <input type="checkbox" name="demo" style="width: 1%" class="form-check-input">
         </label>
         <br> <br>
-        <input type="submit" name="submitService" class="btn-large btn-primary btn" value="Add Service">
+        <input type="submit" name="submitService" class="btn-large btn-primary btn" value="<?=_('Add Service')?>">
     </form>
     <br><br><br>
 </div>
 <input type="hidden" id="newServ">
 <div class="container" style="display:none;" id="hiddenContainer">
     <br>
-    <h2>List of all the Services we currently provide :</h2>
+    <h2><?=_("List of all the Services we currently provide :")?></h2>
     <br>
     <input class='form-control mb-4' id='serviceSearch' type='text'
-           placeholder='Type something to search list items'>
+           placeholder='<?=_("Type something to search list items")?>'>
     <input type="button" class="btn-large btn-primary btn" onclick="hideServices()" style="color: black;width: 15%"
-           value="Add a Service">
+           value="<?=_('Add a Service')?>">
     <br><br>
     <div class="row">
         <?php

@@ -1,7 +1,8 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
 ?>
-<html lang="fr">
+<html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/logo_dark.png"/>
@@ -21,7 +22,7 @@ require_once "session.php";
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
-    <title>Subscriptions - Flash Assistance</title>
+    <title><?= _("Subscriptions - Flash Assistance")?></title>
     <script src="header.js"></script>
     <script src="footer.js"></script>
 </head>
@@ -33,114 +34,111 @@ include('header.php');
 <br>
 <div class="container" style="margin-top: 7%;">
     <section class="price-comparison">
-    <div class="price-column">
-      <div class="price-header">
-        <div class="price">
-          <div class="dollar-sign">$</div>
-          10
-          <div class="per-month">/mo</div>
-        </div>
-        <div class="plan-name">Basic</div>
-      </div>
-      <div class="divider"></div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature A
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature B
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature C
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature D
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature E
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature F
-      </div>
-      <button class="cta">Start Today</button>
-    </div>
-    <div class="price-column popular">
-      <div class="most-popular">Most Popular</div>
-      <div class="price-header">
-        <div class="price">
-          <div class="dollar-sign">$</div>
-          20
-          <div class="per-month">/mo</div>
-        </div>
-        <div class="plan-name">Professional</div>
-      </div>
-      <div class="divider"></div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature A
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature B
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature C
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature D
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature E
-      </div>
-      <div class="feature inactive">
-        <img src="images/x-square.svg">
-        Feature F
-      </div>
-      <button class="cta">Start Today</button>
-    </div>
-    <div class="price-column">
-      <div class="price-header">
-        <div class="price">
-          <div class="dollar-sign">$</div>
-          50
-          <div class="per-month">/mo</div>
-        </div>
-        <div class="plan-name">Enterprise</div>
-      </div>
-      <div class="divider"></div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature A
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature B
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature C
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature D
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature E
-      </div>
-      <div class="feature">
-        <img src="images/check-circle.svg">
-        Feature F
-      </div>
-      <button class="cta">Start Today</button>
+    <?php
+    $DbManager = new DbManager();
+    $q = $DbManager->getDb()->prepare("SELECT * FROM subscription ORDER BY subscription.subPrice ASC");
+    $q->execute();
+    $res = $q->fetchAll();
+    for($i=0;$i<count($res);$i++){
+        if($res[$i]['nameSub'] != "Professional"){
+        echo "<div class='price-column'>";
+            }else{
+        echo "<div class='price-column popular'>";
+            }
+    ?>
+            <div class="price-header">
+                <div class="price">
+                    <div class="dollar-sign">$</div>
+                            <?=$res[$i]['subPrice']?>
+                    <div class="per-month">/mo</div>
+                </div>
+                <div class="plan-name"><?=$res[$i]['nameSub']?></div>
+                </div>
+                <div class="divider"></div>
+        <?php
+        if(empty($res[$i]['featureA']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureA'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureA'];
+            echo "</div>";
+        }
+
+         if(empty($res[$i]['featureB']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureB'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureB'];
+            echo "</div>";
+        }
+          if(empty($res[$i]['featureC']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureC'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureC'];
+            echo "</div>";
+        }
+           if(empty($res[$i]['featureD']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureD'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureD'];
+            echo "</div>";
+        }
+            if(empty($res[$i]['featureE']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureE'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureE'];
+            echo "</div>";
+        }
+             if(empty($res[$i]['featureF']))
+        {
+            echo "<div class='feature inactive'>";
+                    echo "<img src='images/x-square.svg'>";
+                        echo $res[(count($res)-1)]['featureF'];
+            echo "</div>";
+        }else {
+            echo "<div class='feature'>";
+                echo "<img src='images/check-circle.svg'>";
+                    echo $res[$i]['featureF'];
+            echo "</div>";
+        }
+
+            $idSub = $res[$i]['idSub'];
+            echo "<form method='get' action='paymentSub.php'>";
+            echo "<input name='idSub' type='hidden' value='$idSub'>";
+            $startToday = _("Start Today");
+            echo "<button class='cta'>$startToday</button>";
+            echo "</form>";
+
+        echo "</div>";
+    } ?>
     </div>
   </section>
 </div>

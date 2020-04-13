@@ -1,4 +1,6 @@
 <?php
+require 'DbManager.php';
+$DbManager = new DbManager();
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -8,9 +10,40 @@ if (session_status() === PHP_SESSION_NONE)
         exit;
     }
 }
+if (isset($_POST['english'])) {
+    $_SESSION['lang'] = "en_US";
+} else if (isset($_POST['french'])) {
+    $_SESSION['lang'] = "fr_FR";
+}
 
-require 'DbManager.php';
 require_once 'LoginValidator.php';
+
+
+error_reporting(E_ALL | E_STRICT);
+
+// define constants
+define('PROJECT_DIR', realpath('./'));
+define('LOCALE_DIR', PROJECT_DIR .'/Lang/locale');
+define('DEFAULT_LOCALE', 'en_US');
+
+require_once('Lang/gettext.inc');
+
+$supported_locales = array('en_US', 'fr_FR');
+$encoding = 'UTF-8';
+
+$locale = (isset($_SESSION['lang']))? $_SESSION['lang'] : DEFAULT_LOCALE;
+
+// gettext setup
+T_setlocale(LC_MESSAGES, $locale);
+// Set the text domain as 'messages'
+$domain = 'main';
+bindtextdomain($domain, LOCALE_DIR);
+// bind_textdomain_codeset is supported only in PHP 4.2.0+
+if (function_exists('bind_textdomain_codeset'))
+    bind_textdomain_codeset($domain, $encoding);
+textdomain($domain);
+
+header("Content-type: text/html; charset=$encoding");
 
 $return['error'] = '';
 $return['valid'] = '';
@@ -21,21 +54,12 @@ if (!empty($_POST))
 }
 ?>
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
           id="bootstrap-css">
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" defer></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
-    <!------ Include the above in your HEAD tag ---------->
-    <!--
-    <script src='http://production-assets.codepen.io/assets/editor/live/console_runner-079c09a0e3b9ff743e39ee2d5637b9216b3545af0de366d4b9aad9dc87e26bfd.js'
-            defer></script>
-    <script src='http://production-assets.codepen.io/assets/editor/live/events_runner-73716630c22bbc8cff4bd0f07b135f00a0bdc5d14629260c3ec49e5606f98fdd.js'
-            defer></script>
-    <script src='http://production-assets.codepen.io/assets/editor/live/css_live_reload_init-2c0dc5167d60a5af3ee189d570b1835129687ea2a61bee3513dee3a50c115a77.js'
-            defer></script> -->
     <meta charset='UTF-8'>
     <meta name="robots" content="noindex">
     <link rel="shortcut icon" type="image/x-icon" href="images/logo_dark.png"/>
@@ -51,23 +75,30 @@ if (!empty($_POST))
     <script src='http://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'
             defer>
     </script>
-
 </head>
 <body>
+<header>
+    <form method="post">
+        <div style="margin-left: 7%">
+            <input type="submit" name="english" style="display: inline-block; width: 15%" value="<?=_('Click here for English')?>"><img src="images/Countries/usa.png" style="width: 7%; height: 10%"><br>
+            <input type="submit" name="french" style="display: inline-block; width: 15%" value="<?=_('Click here for French')?>"><img src="images/Countries/france.png" style="width: 7%; height: 10%">
+        </div>
+    </form>
+</header>
     <div class="login">
-        <h1>Login</h1>
+        <h1><?= _('Login')?></h1>
         <span class="valid"> <?= $return['valid']?? '' ?> </span>
         <span class="error"> <?= $return['error'] ?? '' ?> </span>
         <form method="post">
-            <label>Email:
-                <input type="email" name="email" placeholder="Email" required>
+            <label><?= _('Email:')?>
+                <input type="email" name="email" placeholder="<?=_('Email')?>" required>
             </label>
-            <label>Password:
-                <input type="password" name="password" placeholder="Password" required>
+            <label><?= _('Password:')?>
+                <input type="password" name="password" placeholder="<?=_('Password')?>" required>
             </label>
-            <button type="submit" id="btn" class="btn btn-primary btn-block btn-large">Let me in.</button>
+            <button type="submit" id="btn" class="btn btn-primary btn-block btn-large"><?= _('Let me in.')?></button>
             <br>
-            <a href="signup.php" style="color: midnightblue; text-transform: none"><h4>Sign Up</h4>
+            <a href="signup.php" style="color: midnightblue; text-transform: none"><h4><?=_('Sign Up')?></h4>
             </a>
             <?php
             $return['error'] = $return['error'] ?? '';
