@@ -1,0 +1,187 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Annual Project 2020\n"
+"POT-Creation-Date: 2020-04-13 11:10+0200\n"
+"PO-Revision-Date: 2020-04-13 11:10+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"X-Poedit-Basepath: ../../../..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: _\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: header.php:17
+msgid "Account"
+msgstr "Compte"
+
+#: header.php:20
+msgid "Your Account"
+msgstr "Votre Compte"
+
+#: header.php:21
+msgid "Add a Service"
+msgstr "Ajouter un Service"
+
+#: header.php:22
+msgid "Add Demo WebGL"
+msgstr "Ajoute Demo WebGL"
+
+#: header.php:23
+msgid "Client Management"
+msgstr "Gestion des clients"
+
+#: header.php:24
+msgid "Update Subscription"
+msgstr "Mettre à jour Abonnements"
+
+#: header.php:25
+msgid "Log Out"
+msgstr "Se déconnecter"
+
+#: header.php:37
+msgid "Services"
+msgstr "Services"
+
+#: header.php:40
+msgid "Subscriptions"
+msgstr "Abonnements"
+
+#: header.php:43
+msgid "History"
+msgstr "Historique"
+
+#: header.php:61
+msgid "Check Your Cart"
+msgstr "Regardez votre panier"
+
+#: main.php:47
+msgid "Welcome to Flash Assistance"
+msgstr "Bienvenue sur Flash Assistance"
+
+#: main.php:106
+msgid "Enjoy all your favorite services for to half the price"
+msgstr "Profite de tout tes services favoris pour 50% du prix"
+
+#: services.php:6
+msgid "Services - Flash Assistance"
+msgstr "Services - Flash Assistance"
+
+#: services.php:76
+msgid "Personalise your Service !"
+msgstr "Personnalise ton Service !"
+
+#: services.php:87
+msgid "Get for every 12 interventions 2 free. Only"
+msgstr "Obtient pour toutes les 12 interventions 2 gratuites. Seulement"
+
+#: services.php:91
+msgid "Reservations"
+msgstr "Reservations"
+
+#: services.php:93
+msgid "Choose your Package"
+msgstr "Choisi ton Package"
+
+#: services.php:111
+msgid "Each Monday"
+msgstr "Chaque Lundi"
+
+#: services.php:112
+msgid "Each Tuesday"
+msgstr "Chaque Mardi"
+
+#: services.php:113
+msgid "Each Wednesday"
+msgstr "Chaque Mercredi"
+
+#: services.php:114
+msgid "Each Thursday"
+msgstr "Chaque Jeudi"
+
+#: services.php:115
+msgid "Each Friday"
+msgstr "Chaque Vendredi"
+
+#: services.php:116
+msgid "Each Saturday"
+msgstr "Chaque Samedi"
+
+#: services.php:117
+msgid "Each Sunday"
+msgstr "Chaque Dimanche"
+
+#: services.php:120
+msgid "All the Mondays of the Month"
+msgstr "Tout les Lundis du Mois"
+
+#: services.php:121
+msgid "All the Tuesdays of the Month"
+msgstr "Tout les Mardis du Mois"
+
+#: services.php:122
+msgid "All the Wednesdays of the Month"
+msgstr "Tout les Mercredi du Mois"
+
+#: services.php:123
+msgid "All the Thursdays of the Month"
+msgstr "Tout les Jeudis du Mois"
+
+#: services.php:124
+msgid "All the Fridays of the Month"
+msgstr "Tout les Vendredis du Mois"
+
+#: services.php:125
+msgid "All the Saturdays of the Month"
+msgstr "Tout les Samedis du Mois"
+
+#: services.php:126
+msgid "All the Sundays of the Month"
+msgstr "Tout les Dimanches du Mois"
+
+#: services.php:129
+msgid "All the first Mondays of each Month"
+msgstr "Tout les premiers Lundis de chaque Mois"
+
+#: services.php:130
+msgid "All the first Tuesdays of each Month"
+msgstr "Tout les premiers Mardis de chaque Mois"
+
+#: services.php:131
+msgid "All the first Wednesdays of each Month"
+msgstr "Tout les premiers Mercredis de chaque Mois"
+
+#: services.php:132
+msgid "All the first Thursdays of each Month"
+msgstr "Tout les premiers Jeudis de chaque Mois"
+
+#: services.php:133
+msgid "All the first Fridays of each Month"
+msgstr "Tout les premiers Vendredis de chaque Mois"
+
+#: services.php:134
+msgid "All the first Saturdays of each Month"
+msgstr "Tout les premiers Samedis de chaque Mois"
+
+#: services.php:135
+msgid "All the first Sundays of each Month"
+msgstr "Tout les premiers Dimanches de chaque Mois"
+
+#: services.php:137
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: services.php:141
+msgid "Estimated price if you all the checkboxes."
+msgstr "Prix estimé si vous cochez tous les cases."
+
+#: services.php:153
+msgid "List of all the Services we currently provide :"
+msgstr "Liste de tout les Services qu'on propose actuellement :"
+
+#~ msgid "Flash Assistance"
+#~ msgstr "Flash Assistance"
