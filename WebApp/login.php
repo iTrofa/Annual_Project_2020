@@ -1,4 +1,6 @@
 <?php
+require 'DbManager.php';
+$DbManager = new DbManager();
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -7,9 +9,9 @@ if (session_status() === PHP_SESSION_NONE)
         header('Location: main.php');
         exit;
     }
+
 }
 
-require 'DbManager.php';
 require_once 'LoginValidator.php';
 
 $return['error'] = '';

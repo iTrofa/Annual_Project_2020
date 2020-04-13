@@ -1,6 +1,5 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
 ?>
 <html>
 <link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>

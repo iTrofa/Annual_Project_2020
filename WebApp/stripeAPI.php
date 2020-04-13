@@ -1,6 +1,5 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
 ?>
 <html>
 <?php
@@ -34,8 +33,19 @@ echo "<link rel='stylesheet' href='css/services.css'>";
     <body onload="checkFooter()">
 <?php
 include('header.php');
-$finalprice = $_SESSION['price'];
-
+$DbManager = new DbManager();
+if(isset($_GET['express']) && $_GET['express'] == true){
+    $q = $DbManager->getDb()->prepare("SELECT * FROM orders WHERE status = 'express'");
+    $q->execute();
+    $res = $q->fetchAll();
+    $finalprice = $res[0]['price'];
+    $_SESSION['price'] = $finalprice;
+}else if(isset($_GET['sub'])){
+    $sub = $_GET['sub'];
+    $finalprice = $_SESSION['price'];
+}else{
+    $finalprice = $_SESSION['price'];
+}
 ?>
 
 <h5><?php if(isset($_GET['return'])) {
@@ -44,7 +54,14 @@ $finalprice = $_SESSION['price'];
 
     }
 ?></h5>
-    <form action="charge.php" method="post" id="payment-form">
+<?php
+if(isset($_GET['express']) && $_GET['express'] == true){
+    echo "<form action='charge.php?express=true' method='post' id='payment-form'>";
+}else if(isset($_GET['sub'])){
+    echo "<form action='charge.php?sub=$sub' method='post' id='payment-form'>";
+}else{
+    echo "<form action='charge.php' method='post' id='payment-form'>";
+}?>
         <div style="text-align: center;">
             <label for="card-element">Credit or debit card</label>
             <div style="width: 70%;margin-top: 3%;margin-bottom: 3%" id="card-element">

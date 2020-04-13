@@ -1,9 +1,9 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
+require_once "localization.php";
 ?>
 <head>
-    <title>Services - Flash Assistance</title>
+    <title><?= _("Services - Flash Assistance")?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -73,7 +73,7 @@ if (!empty($_GET['services'])) {
     $chosenServicefinal = str_replace(' ', '', $chosenServicefinal);
     ?>
     <br><br><br><br>
-    <h2 class="fontPlaynoDisplay">Personalise your Service !</h2>
+    <h2 class="fontPlaynoDisplay"><?= _("Personalise your Service !")?></h2>
     <!--    <div class="image" style="background-image: url('<?php /*echo $image */
     ?>'); background-repeat: no-repeat; width: 100%; height: 100%;"></div>
 -->
@@ -84,13 +84,13 @@ if (!empty($_GET['services'])) {
 
     <p class='fontPlay'><?= $chosenServicePrice ?>€/day </p>
     <br><br>
-    <p class='fontPlaySmall'>Get for every 12 interventions 2 free. Only <?= $chosenServicePrice * 10 ?>€ </p>
+    <p class='fontPlaySmall'><?= _("Get for every 12 interventions 2 free. Only") . $chosenServicePrice * 10 ?>€ </p>
     <br>
     </div>
     <div class="container container2">
-        <h1>Reservations</h1>
+        <h1><?= _("Reservations")?></h1>
         <br>
-        <h3>Choose your Package</h3>
+        <h3><?= _("Choose your Package")?></h3>
 
         <form action='payment.php?services=<?=$_GET['services']?>' method="post" onchange='updatePrice()' id='reservation'>
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
@@ -108,37 +108,37 @@ if (!empty($_GET['services'])) {
                 <input class="inputSmaller" id="hourInput" type="date" name="hourInput"><br><br>
             </div>
             <div id="dayForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' onchange="updatePrice()" name='Monday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Monday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Tuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Tuesday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Wednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Wednesday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Thursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Thursday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Friday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Friday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Saturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Saturday</p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Sunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspEach Sunday</p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Monday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Monday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Tuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Tuesday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Wednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Wednesday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Thursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Thursday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Friday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Friday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Saturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Saturday")?></p><br>
+                <input class='inputSmaller' onchange="updatePrice()" name='Sunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Sunday")?></p><br>
             </div>
             <div id="monthForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' name='monthMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Mondays of the Month</p><br>
-                <input class='inputSmaller' name='monthTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Tuesdays of the Month</p><br>
-                <input class='inputSmaller' name='monthWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Wednesdays of the Month</p><br>
-                <input class='inputSmaller' name='monthThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Thursdays of the Month</p><br>
-                <input class='inputSmaller' name='monthFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Fridays of the Month</p><br>
-                <input class='inputSmaller' name='monthSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Saturdays of the Month</p><br>
-                <input class='inputSmaller' name='monthSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the Sundays of the Month</p><br>
+                <input class='inputSmaller' name='monthMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Mondays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Tuesdays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Wednesdays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Thursdays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Fridays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Saturdays of the Month")?></p><br>
+                <input class='inputSmaller' name='monthSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Sundays of the Month")?></p><br>
             </div>
             <div id="yearForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Mondays of each Month</p><br>
-                <input class='inputSmaller' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Tuesdays of each Month</p><br>
-                <input class='inputSmaller' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Wednesdays of each Month</p><br>
-                <input class='inputSmaller' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Thursdays of each Month</p><br>
-                <input class='inputSmaller' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Fridays of each Month</p><br>
-                <input class='inputSmaller' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Saturdays of each Month</p><br>
-                <input class='inputSmaller' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbspAll the first Sundays of each Month</p><br>
+                <input class='inputSmaller' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Mondays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Tuesdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Wednesdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Thursdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Fridays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Saturdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Sundays of each Month")?></p><br>
             </div>
-            <button type="submit" class="btn btn-primary btn-block2 btn-large">Confirm</button>
+            <button type="submit" class="btn btn-primary btn-block2 btn-large"><?= _("Confirm")?></button>
         </form>
         <div class="card col-lg-6" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">
             <div class="card-header">
-                Price <span title="Estimated price if you all the checkboxes.">*</span>
+                Price <span title="<?= _('Estimated price if you all the checkboxes.')?>">*</span>
             </div>
             <ul class="list-group list-group-flush">
                 <li class='list-group-item'> <?= $chosenService ?></li>
@@ -150,7 +150,7 @@ if (!empty($_GET['services'])) {
 } else {
     ?>
     <div class="container">
-        <h2>List of all the Services we currently provide :</h2>
+        <h2><?= _("List of all the Services we currently provide :")?></h2>
         <br>
         <input class='form-control mb-4' id='serviceSearch' type='text'
                placeholder='Type something to search list items'>
@@ -190,7 +190,6 @@ if (!empty($_GET['services'])) {
 
 </body>
 <?php
-
 include 'footer.php';
 ?>
 

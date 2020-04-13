@@ -27,9 +27,23 @@ $charge = Charge::create(array(
     "customer" => $customer->id
 ));
 $DbManager = new DbManager();
-$q =  $DbManager->getDb()->prepare("UPDATE Orders SET status = 'payed' WHERE status = 'active'");
-$q->execute();
-
+if(isset($_GET['express']) && $_GET['express'] == true ){
+    $q = $DbManager->getDb()->prepare("UPDATE Orders SET status = 'payed' WHERE status = 'express'");
+    $q->execute();
+}else if(isset($_GET['sub'])){
+    $old_date = date('Y-m-d');
+    $next_due_date = date('Y-m-d', strtotime($old_date. ' +30 days'));
+    echo $next_due_date;
+    $q = $DbManager->getDb()->prepare("UPDATE Person SET subscription = ?, endSub = ? WHERE idPerson = ?");
+    $q->execute([
+        $_GET['sub'],
+        $next_due_date,
+        $_SESSION['id']
+    ]);
+}else{
+    $q = $DbManager->getDb()->prepare("UPDATE Orders SET status = 'payed' WHERE status = 'active'");
+    $q->execute();
+}
 // You can charge the customer later by using the customer id.
 header('Location: stripeAPI.php?return=your%20payment%20was%20processed%20successfully.');
 exit();

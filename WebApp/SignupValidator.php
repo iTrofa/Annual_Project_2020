@@ -1,11 +1,9 @@
 <?php
 ini_set('error_log',1);
 ini_set('display_errors',1);
-require_once 'DbManager.php';
-if (session_status() === PHP_SESSION_NONE)
-{
-    session_start();
-}
+
+require_once "session.php";
+
 class SignupValidator
 {
     private array $data;

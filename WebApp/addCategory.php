@@ -1,5 +1,5 @@
 <?php
-require_once 'DbManager.php';
+require_once 'session.php';
 if (!empty($_POST)){
     $db = new DbManager();
     if (empty($_POST['categoryName']))

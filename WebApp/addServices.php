@@ -1,6 +1,5 @@
 <?php
-require('DbManager.php');
-
+require_once "session.php";
 require_once 'AddServiceValidator.php';
 
 if (!empty($_POST))
@@ -43,10 +42,6 @@ if (!empty($_POST))
 
 include('header.php');
 echo "<br><br><br><br>";
-if (session_status() === PHP_SESSION_NONE)
-{
-    session_start();
-}
 //List of Workers
 $q = "SELECT * FROM service";
 $DbManager = new  DbManager();

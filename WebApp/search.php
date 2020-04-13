@@ -1,6 +1,5 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">

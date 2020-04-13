@@ -1,6 +1,5 @@
 <?php
 require_once "session.php";
-require('DbManager.php');
 if(isset($_GET['services']))
     $service = $_GET['services'];
 
@@ -182,7 +181,26 @@ if(isset($_POST['userOption'])) {
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
                         <h5 class="font-weight-bold"><?=$finalprice."€"?></h5>
                     </li>
-                </ul><a href="stripeAPI.php" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                    <?php
+                    switch ($_POST['userOption']) {
+                        case "Hour(s)":
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            break;
+
+                        case "Day(s)":
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            break;
+
+                        case "Month(s)":
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            break;
+
+                        case "Year(s)":
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            break;
+
+                    }
+                    ?>
             </div>
         </div>
     </div>

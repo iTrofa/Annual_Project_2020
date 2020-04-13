@@ -1,6 +1,6 @@
 <?php
 require_once "session.php";
-require_once "DbManager.php";
+require_once "localization.php";
 $DbManager = new DbManager();
 ?>
     <header id="header">
@@ -13,18 +13,15 @@ $DbManager = new DbManager();
             <div class="collapse navbar-collapse" id="navbarColor02">
                 <ul class="navbar-nav mr-auto">
                     <div class="dropdown">
-                        <button style="background-color: orange" class="btn btn_header dropdown-toggle" type="button" data-toggle="dropdown">Account
+                        <button style="background-color: orange" class="btn btn_header dropdown-toggle" type="button" data-toggle="dropdown"><?= _("Account")?>
                             <span class="caret"></span></button>
                         <ul class="dropdown-menu" style="background-color: orange">
-                            <li><a class="nav-link" href="yourAccount.php">Your Account</a></li>
-                            <li><a class="nav-link" href="addServices.php">Add a Service</a></li>
-                            <li><a class="nav-link" href="stripeAPI.php">STRIPE API TEST</a></li>
-                            <li><a class="nav-link" href="addWebGL.php">Add Demo WebGL</a></li>
-                            <li><a class="nav-link" href="clientManagement.php">Client Management</a></li>
-                            <li><a class="nav-link" href="updateSubscription.php">Add Subscription</a></li>
-                            <li><a class="nav-link" href="Ordonnance.php">Ordonnance test</a></li>
-                            <li><a class="nav-link" href="logout.php">Log Out</a></li>
-                            <!--<li><a class="nav-link" href="#"></a></li>-->
+                            <li><a class="nav-link" href="yourAccount.php"><?= _("Your Account")?></a></li>
+                            <li><a class="nav-link" href="addServices.php"><?= _("Add a Service")?></a></li>
+                            <li><a class="nav-link" href="addWebGL.php"><?= _("Add Demo WebGL")?></a></li>
+                            <li><a class="nav-link" href="clientManagement.php"><?= _("Client Management")?></a></li>
+                            <li><a class="nav-link" href="updateSubscription.php"><?= _("Update Subscription")?></a></li>
+                            <li><a class="nav-link" href="logout.php"><?= _("Log Out")?></a></li>
                         </ul>
 
 
@@ -36,13 +33,13 @@ $DbManager = new DbManager();
                     </li>-->
                     </div>
                     <li class="nav-item">
-                        <a class="nav-link" href="services.php">Services</a>
+                        <a class="nav-link" href="services.php"><?= _("Services")?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="subscription.php">Subscriptions</a>
+                        <a class="nav-link" href="subscription.php"> <?= _("Subscriptions")?> </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search.php">History</a>
+                        <a class="nav-link" href="search.php"> <?= _("History")?> </a>
                     </li>
                 </ul>
             <form class="form-inline">
@@ -60,7 +57,7 @@ $DbManager = new DbManager();
                    }
                     if(count($res) > 0) {?>
                         <ul class="navbar-nav mr-auto" >
-                            <li class="nav-item"><a class="nav-link" style="color: red; font-weight: bold" href = "<?=$link?>" >Check Your Cart</a >
+                            <li class="nav-item"><a class="nav-link" style="color: red; font-weight: bold" href = "<?=$link?>" ><?= _("Check Your Cart")?></a >
                             </li >
                         </ul >
                    <?php } ?>
