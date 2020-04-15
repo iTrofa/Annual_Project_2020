@@ -19,25 +19,25 @@ class DbManager
     public function __construct()
     {
         $dotenv = new Dotenv();
-        $dotenv->load(__DIR__ . '/.env');
+        $dotenv->load(__DIR__ . '/../.env');
 
-        try {
-
-           $this->db = new PDO(($_ENV['DSN']), $_ENV['DBUSER'], $_ENV['DBPASSWORD']);
-           $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-           $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-
-        } catch (PDOException $e) {
-            // En cas d'erreur, on affiche un message et on arrête tout
-            die('Erreur : ' . $e->getMessage());
-        }
+       $this->db = new PDO(($_ENV['DSN']), $_ENV['DBUSER'], $_ENV['DBPASSWORD']);
+       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+       $this->db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
     }
 
+    public function query( string  $query, ?array $params = null):?PDOStatement{
+        if ($params){
+            $q = $this->getDb()->prepare($query);
+            $q->execute($params);
+            return $q;
+        }
+        return $this->getDb()->query($query);
+    }
     
-    public static function v4()
+    public static function v4(): ?string
     {
-        try {
             return sprintf('%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
 
                 // 32 bits for "time_low"
@@ -58,8 +58,6 @@ class DbManager
                 // 48 bits for "node"
                 random_int(0, 0xffff), random_int(0, 0xffff), random_int(0, 0xffff)
             );
-        } catch (Exception $e) {
-            die($e);
-        }
+
     }
 }
