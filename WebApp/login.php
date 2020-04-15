@@ -1,6 +1,6 @@
 <?php
-require 'DbManager.php';
-$DbManager = new DbManager();
+require_once 'autoload.php';
+$DbManager = App::getDb();
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -12,7 +12,6 @@ if (session_status() === PHP_SESSION_NONE)
 
 }
 
-require_once 'LoginValidator.php';
 
 $return['error'] = '';
 $return['valid'] = '';
@@ -74,8 +73,8 @@ if (!empty($_POST))
             <?php
             $return['error'] = $return['error'] ?? '';
             $return['valid'] = $return['valid'] ?? '';
-            if ($return['valid'] != ""){
-                header("Location: main.php");
+            if ($return['valid'] !== ''){
+                header('Location: main.php');
                 exit;
             }
             ?>

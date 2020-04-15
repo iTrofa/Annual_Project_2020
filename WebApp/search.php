@@ -1,5 +1,5 @@
 <?php
-require_once "session.php";
+require_once 'session.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,19 +26,18 @@ require_once "session.php";
       require_once 'header.php';
      ?>
     <?php
-    $DbManager = new DbManager();
-    $req =  $DbManager->getDb()->prepare('SELECT function FROM person WHERE idPerson = ?');
-    $req->execute(array($_SESSION['id']));
+    $DbManager = App::getDb();
+    $req =  $DbManager->query('SELECT function FROM person WHERE idPerson = ?',[$_SESSION['id']]);
 
     // lancement de la requête
     $res = $req->fetch();
 
-    if($res['function'] === "admin" ){
+    if($res['function'] === 'admin'){
         ?>
     <h1 style="text-align: center">History of all purchases:</h1>
     <div>
         <?php
-        $req = $DbManager->getDb()->query('SELECT dateLog,idService FROM log');
+        $req = $DbManager->query('SELECT dateLog,idService FROM log');
         $res = $req->fetchAll();
         $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
         foreach ($res as $param)
@@ -54,8 +53,7 @@ require_once "session.php";
         <h1 style="text-align: center">History of <your></your> purchases:</h1>
         <div>
             <?php
-      $req = $DbManager->getDb()->prepare('SELECT idService,dateLog FROM log WHERE idPerson = ?');
-      $req->execute(array($_SESSION['id']));
+      $req = $DbManager->query('SELECT idService,dateLog FROM log WHERE idPerson = ?', [$_SESSION['id']]);
       $res = $req->fetchAll();
             $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
             if(!empty($res)) {
@@ -74,6 +72,6 @@ require_once "session.php";
     </div>
   </body>
   <?php 
-    include('footer.php');
+    include'footer.php';
   ?>
 </html>

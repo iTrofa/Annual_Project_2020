@@ -21,16 +21,15 @@ require_once "session.php";
 </head>
 <body onload="checkFooter()">
 <?php
-require('DbManager.php');
+
 require "header.php";
 ?>
 <main>
     <?php
     //List of Workers
-    $DbManager = new  DbManager();
     $q = "SELECT * FROM person";
-    $req = $DbManager->getDb()->query($q);
-    $req->execute();
+    $req = $DbManager->query($q);
+
     $results = $req->fetchAll();
     ?>
 

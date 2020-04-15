@@ -1,7 +1,7 @@
 <?php
 require_once "session.php";
 require_once "localization.php";
-$DbManager = new DbManager();
+$DbManager = App::getDb();
 ?>
     <header id="header">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
@@ -44,13 +44,13 @@ $DbManager = new DbManager();
                 </ul>
             <form class="form-inline">
                 <?php
-                   $q = $DbManager->getDb()->prepare("SELECT idOrders FROM orders WHERE status = 'active' && idPerson = ?");
-                   $q->execute([
+                   $q = $DbManager->query("SELECT idOrders FROM orders WHERE status = 'active' && idPerson = ?",
+                       [
                        $_SESSION['id']
                     ]);
                    $res = $q->fetchAll();
                    $link = "paymentCart.php?";
-                   for($i = 0; $i< count($res); $i++){
+                   for($i = 0, $iMax = count($res); $i< $iMax; $i++){
                        if($i > 0)
                            $link = $link . "&";
                        $link = $link . "cart". $i . "=" . $res[$i]['idOrders'];

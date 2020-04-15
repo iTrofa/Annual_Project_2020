@@ -1,5 +1,5 @@
 <?php
-require_once 'DbManager.php';
+require 'autoload.php';
 
 class ImageValidator
 {
@@ -14,7 +14,7 @@ class ImageValidator
 
     public function __construct(array $file, string $basePath)
     {
-        $this->db = new DbManager();
+        $this->db = App::getDb();
         $this->data = $file;
         $this->ext =  pathinfo ($_FILES['image']['name'],PATHINFO_EXTENSION);
         $this->basePath = $basePath;
@@ -81,15 +81,13 @@ class ImageValidator
     {
         if ($deleteQuery!==null)
         {
-            $q = $this->db->getDb()->prepare($deleteQuery);
-            $q->execute([$_SESSION['id']]);
+            $q = $this->db->query($deleteQuery,[$_SESSION['id']]);
             $oldPath = $q->fetch();
             unlink($oldPath['profilePic']);
         }
-        if ($deleteQuery!==null)
+        if ($updateQuery!==null)
         {
-            $q = $this->db->getDb()->prepare($updateQuery);
-            $q->execute([$this->fullpath, $_SESSION['id']]);
+            $q = $this->db->query($updateQuery,[$this->fullpath, $_SESSION['id']]);
         }
     }
 

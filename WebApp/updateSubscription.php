@@ -1,29 +1,31 @@
 <?php
-require_once "session.php";
-$DbManager = new DbManager();
+require_once 'session.php';
+$DbManager = App::getDb();
 
 if (isset($_POST) && !empty($_POST)) {
-    if ($_POST['subcat'] == "Basic") {
-        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Basic'");
-        $q->bindParam(":featureA", $_POST['featureA']);
-        $q->bindParam(":featureB", $_POST['featureB']);
-        $q->execute();
-    } else if ($_POST['subcat'] == "Professional") {
-        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD WHERE nameSub = 'Professional'");
-        $q->bindParam(":featureA", $_POST['featureA']);
-        $q->bindParam(":featureB", $_POST['featureB']);
-        $q->bindParam(":featureC", $_POST['featureC']);
-        $q->bindParam(":featureD", $_POST['featureD']);
-        $q->execute();
-    } else if ($_POST['subcat'] == "Enterprise"){
-        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD, featureE = :featureE, featureF = :featureF WHERE nameSub = 'Enterprise'");
-        $q->execute([
-            ":featureA" => $_POST["featureA"],
-            ":featureB" => $_POST["featureB"],
-            ":featureC" => $_POST["featureC"],
-            ":featureD" => $_POST["featureD"],
-            ":featureE" => $_POST["featureE"],
-            ":featureF" => $_POST["featureF"]
+    if ($_POST['subcat'] === 'Basic') {
+        $q = $DbManager->query("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Basic'",
+        [':featureA'=> $_POST['featureA'],
+        ':featureB' => $_POST['featureB']]);
+    } else if ($_POST['subcat'] === 'Professional') {
+        $q = $DbManager->query("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD WHERE nameSub = 'Professional'",
+        [
+        ':featureA' => $_POST['featureA'],
+        ':featureB' => $_POST['featureB'],
+        ':featureC' => $_POST['featureC'],
+        ':featureD' => $_POST['featureD']
+        ]);
+    } else if ($_POST['subcat'] === 'Enterprise'){
+        $q = $DbManager->query("UPDATE subscription SET featureA = :featureA, featureB = :featureB, 
+                        featureC = :featureC, featureD = :featureD, featureE = :featureE, featureF = :featureF 
+                        WHERE nameSub = 'Enterprise'",
+            [
+            ':featureA' => $_POST['featureA'],
+            ':featureB' => $_POST['featureB'],
+            ':featureC' => $_POST['featureC'],
+            ':featureD' => $_POST['featureD'],
+            ':featureE' => $_POST['featureE'],
+            ':featureF' => $_POST['featureF']
         ]);
     }
 }
@@ -55,7 +57,7 @@ if (isset($_POST) && !empty($_POST)) {
 </head>
 <body onload="checkFooter()">
 <?php
-require_once "header.php";
+require_once 'header.php';
 ?>
 <main>
     <form method="post" class="form-group" style="text-align: center;margin-top: 3%">
@@ -89,6 +91,6 @@ require_once "header.php";
     </form>
 </main>
 <?php
-require_once "footer.php";
+require_once 'footer.php';
 ?>
 </body>

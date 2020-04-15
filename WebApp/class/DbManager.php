@@ -27,13 +27,16 @@ class DbManager
 
     }
 
-    public function query( string  $query, ?array $params = null):?PDOStatement{
+    public function query( string  $query, ?array $params = null):PDOStatement{
         if ($params){
             $q = $this->getDb()->prepare($query);
             $q->execute($params);
-            return $q;
         }
-        return $this->getDb()->query($query);
+        else
+        {
+            $q = $this->getDb()->query($query);
+        }
+        return $q;
     }
     
     public static function v4(): ?string

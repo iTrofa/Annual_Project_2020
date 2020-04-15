@@ -1,9 +1,8 @@
 <?php
 require_once "session.php";
 
-$q = $DbManager->getDb()->prepare("SELECT * from service WHERE idService = :idService");
-$q->bindParam(':idService', $_GET['service']);
-$q->execute();
+$q = $DbManager->query("SELECT * from service WHERE idService = :idService",
+    [':idService'=> $_GET['service']]);
 $chosenService = $q->fetchAll();
 
 function getDates($duration, $option)
@@ -11,7 +10,7 @@ function getDates($duration, $option)
     if (date('N', time()) == $option) {
         $j = 0;
     } else {
-        for ($i = 1; $i < 8; $i += 1) {
+        for ($i = 1; $i < 8; ++$i) {
             if (date('N', time() + ($i * 24 * 60 * 60)) == $option) {
                 $j = $i;
                 break;
@@ -20,17 +19,17 @@ function getDates($duration, $option)
     }
     $count = 0;
     for ($i = $j; $i < $duration; $i += 7) {
-        $count += 1;
+        ++$count;
     }
     return $count;
 }
 
 switch ($_GET['package']){
     case "Hour(s)":
-        $uuid = $DbManager::v4();
+            $uuid = DbManager::v4();
         $price = $_GET['hour'] * $chosenService[0]['price'] * 1/8;
-        $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
-        $q->execute([
+        $DbManager->query("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)",
+            [
             $uuid,
             substr($_GET['package'], 0, -3),
             $price,
@@ -38,16 +37,16 @@ switch ($_GET['package']){
             $_SESSION['id'],
             $_GET['service']
         ]);
-        $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-        $q->execute([
-            $DbManager::v4(),
+        $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+            [
+            DbManager::v4(),
             $uuid,
             "date",
             $_GET['date']
         ]);
         break;
     case "Day(s)":
-        $uuid = $DbManager::v4();
+        $uuid = DbManager::v4();
         $week1 = $_GET['date1'];
         $week2 = $_GET['date2'];
         $week3 = $_GET['date3'];
@@ -61,85 +60,85 @@ switch ($_GET['package']){
         }else{
             $price = $_GET['day'] * $_GET['hour'] * $chosenService[0]['price'] * 1/8;
         }
-        if($week1 == "on") {
+        if($week1 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+             $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "week1",
                 $week1
             ]);
         }
-        if($week2 == "on") {
+        if($week2 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+            [
+                DbManager::v4(),
                 $uuid,
                 "week2",
                 $week2
             ]);
         }
-        if ($week3 == "on") {
+        if ($week3 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+            [
+                DbManager::v4(),
                 $uuid,
                 "week3",
                 $week3
             ]);
         }
-        if($week4 == "on") {
+        if($week4 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "week4",
                 $week4
             ]);
         }
-        if($week5 == "on") {
+        if($week5 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "week5",
                 $week5
             ]);
         }
-        if($week6 == "on") {
+        if($week6 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "week6",
                 $week6
             ]);
         }
-        if($week7 == "on") {
+        if($week7 === "on") {
             if($_GET['day'] <= 7) {
-                $options += 1;
+                ++$options;
             }
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                dbManager::v4(),
                 $uuid,
                 "week7",
                 $week7
@@ -148,8 +147,8 @@ switch ($_GET['package']){
         if($_GET['day'] <= 7) {
             $price *= $options;
         }
-        $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
-        $q->execute([
+        $q = $DbManager->query("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)",
+            [
             $uuid,
             substr($_GET['package'], 0, -3),
             $price,
@@ -159,7 +158,7 @@ switch ($_GET['package']){
         ]);
         break;
     case "Month(s)":
-        $uuid = $DbManager::v4();
+        $uuid = DbManager::v4();
 
         $month1 = $_GET['date1'];
         $month2 = $_GET['date2'];
@@ -172,79 +171,79 @@ switch ($_GET['package']){
         $price = $_GET['hour'] * $chosenService[0]['price'] * 1 / 8;
         $options = 0;
 
-        if($month1 == "on") {
+        if($month1 === "on") {
             $options += getDates(31*$_GET['day'], 1);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "month1",
                 $month1
             ]);
         }
-        if($month2 == "on") {
+        if($month2 === "on") {
             $options += getDates(31*$_GET['day'], 2);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "month2",
                 $month2
             ]);
         }
-        if($month3 == "on") {
+        if($month3 === "on") {
             $options += getDates(31*$_GET['day'], 3);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+            [
+                DbManager::v4(),
                 $uuid,
                 "month3",
                 $month3
             ]);
         }
-        if($month4 == "on") {
+        if($month4 === "on") {
             $options += getDates(31*$_GET['day'], 4);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+            [
+                DbManager::v4(),
                 $uuid,
                 "month4",
                 $month4
             ]);
         }
-        if($month5 == "on") {
+        if($month5 === "on") {
             $options += getDates(31*$_GET['day'], 5);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "month5",
                 $month5
             ]);
         }
-        if($month6 == "on") {
+        if($month6 === "on") {
             $options += getDates(31*$_GET['day'], 6);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+             $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "month6",
                 $month6
             ]);
         }
-        if($month7 == "on") {
+        if($month7 === "on") {
             $options += getDates(31*$_GET['day'], 7);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+             $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "month7",
                 $month7
             ]);
         }
 
-        $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
-        $q->execute([
+        $DbManager->getDb()->query("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)",
+            [
             $uuid,
             substr($_GET['package'], 0, -3),
             $price,
@@ -269,71 +268,70 @@ switch ($_GET['package']){
         $price = $_GET['hour'] * $chosenService[0]['price'] * 1 / 8;
         $options = 0;
 
-        if($year1 == "on") {
+        if($year1 === "on") {
             $options += getDates(31*12*$_GET['day'], 1);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year1",
                 $year1
             ]);
         }
-        if($year2 == "on") {
+        if($year2 === "on") {
             $options += getDates(31*12*$_GET['day'], 2);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",[
+                DbManager::v4(),
                 $uuid,
                 "year2",
                 $year2
             ]);
         }
-        if($year3 == "on") {
+        if($year3 === "on") {
             $options += getDates(31*12*$_GET['day'], 3);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year3",
                 $year3
             ]);
         }
-        if($year4 == "on") {
+        if($year4 === "on") {
             $options += getDates(31*12*$_GET['day'], 4);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year4",
                 $year4
             ]);
         }
-        if($year5 == "on") {
+        if($year5 === "on") {
             $options += getDates(31*12*$_GET['day'], 5);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year5",
                 $year5
             ]);
         }
-        if($year6 == "on") {
+        if($year6 === "on") {
             $options += getDates(31*12*$_GET['day'], 6);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year6",
                 $year6
             ]);
         }
-        if($year7 == "on") {
+        if($year7 === "on") {
             $options += getDates(31*12*$_GET['day'], 7);
-            $q = $DbManager->getDb()->prepare("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)");
-            $q->execute([
-                $DbManager::v4(),
+            $q = $DbManager->query("INSERT INTO orderoptions(idOrderOption, idOrders, typeOptions, options) VALUES (?, ?, ?, ?)",
+                [
+                DbManager::v4(),
                 $uuid,
                 "year7",
                 $year7
@@ -342,8 +340,8 @@ switch ($_GET['package']){
 
         $price*=$options;
 
-        $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
-        $q->execute([
+        $q = $DbManager->query("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)",
+            [
             $uuid,
             substr($_GET['package'], 0, -3),
             $price,

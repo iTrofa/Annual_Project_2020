@@ -30,17 +30,17 @@ include('header.php');
 <br><br><br><br>
 <?php
 //List of Workers
-$DbManager = new  DbManager();
-$q = "SELECT * FROM person";
-$req = $DbManager->getDb()->query($q);
-$req->execute();
+$DbManager = App::getDb();
+$q = 'SELECT * FROM person';
+$req = $DbManager->query($q);
+
 
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
 }
-$q = $DbManager->getDb()->prepare("SELECT * FROM service");
-$q->execute();
+$q = $DbManager->query('SELECT * FROM service');
+
 $service = $q->fetchAll();
 ?>
     <h1 id="welcomeInput"><?= _("Welcome to Flash Assistance") . " " . $_SESSION['firstName']?></h1><br><br>
@@ -56,7 +56,7 @@ $firstSerName = $service[0]['name'];
         <ol class="carousel-indicators">
             <?php
             echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\"0\" class=\"active\"></li>";
-            for($i=1; $i<count($service);$i++){
+            for($i=1, $iMax = count($service); $i< $iMax; $i++){
             echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\".$i.\" class=\"\"></li>";
             }
             ?>
@@ -70,7 +70,7 @@ $firstSerName = $service[0]['name'];
                     echo "<p class=\"carousel-label-color\">$firstDesc</p>";
                 echo "</div>";
             echo "</div>";
-            for ($i = 1; $i<count($service);$i++){
+            for ($i = 1, $iMax = count($service); $i< $iMax; $i++){
                 $image = $service[$i]['image'];
                 $desc = $service[$i]['description'];
                 $SerName = $service[$i]['name'];
@@ -102,7 +102,7 @@ $firstSerName = $service[0]['name'];
       <img src="images/childcare.jpg" style="width: 59%;display: inline-block;">
     </div>
     <div class="col-sm-3">
-        <h5 style="margin-top: 15%"><?= _("Enjoy all your favorite services for to half the price")?></h5>
+        <h5 style="margin-top: 15%"><?= _('Enjoy all your favorite services for to half the price')?></h5>
         <a href="subscription.php"><input type="button" value="Get your Subscription" class="btn-primary btn-large btn"/></a>
     </div>
 </div>

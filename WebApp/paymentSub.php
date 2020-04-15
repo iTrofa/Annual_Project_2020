@@ -27,24 +27,20 @@ require_once "session.php";
 <body onload="checkFooter()">
 <?php
 include("header.php");
-$DbManager = new DbManager();
-$q = $DbManager->getDb()->prepare("SELECT * FROM subscription WHERE idSub = ?");
-$q->execute([
+$DbManager = App::getDb();
+$q = $DbManager->query("SELECT * FROM subscription WHERE idSub = ?",[
     $_GET['idSub']
 ]);
 $res = $q->fetchAll();
-
-
-
 ?>
 <main>
 
-    <h3 style="margin-left: 10%;margin-top: 3%; color: midnightblue"><?= $res[0]['nameSub'] . " Subscription :"?></h3>
+    <h3 style="margin-left: 10%;margin-top: 3%; color: midnightblue"><?= $res[0]['nameSub'] . ' Subscription :' ?></h3>
     <ul>
         <?php
 
 
-        $finalprice = 0;
+
         $finalprice = $res[0]['subPrice'];
         $finalprice2 = $finalprice + $finalprice * 0.21;
         $_SESSION['price'] = $finalprice2;
@@ -57,10 +53,10 @@ $res = $q->fetchAll();
             <div class="p-4">
                 <p class="font-italic mb-4">Tax costs are calculated based on values you have entered and each service.</p>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$finalprice."€"?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$finalprice*0.21."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$finalprice. '€' ?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$finalprice*0.21. '€' ?></strong></li>
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold"><?=$finalprice+$finalprice*0.21."€"?></h5>
+                        <h5 class="font-weight-bold"><?=$finalprice+$finalprice*0.21. '€' ?></h5>
                     </li>
                 </ul><a href="stripeAPI.php?sub=<?=$_GET['idSub']?>" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
             </div>
@@ -69,7 +65,7 @@ $res = $q->fetchAll();
     <br><br>
 </main>
 <?php
-include("footer.php");
+include('footer.php');
 ?>
 </body>
 </html>

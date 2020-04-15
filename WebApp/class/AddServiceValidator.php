@@ -1,7 +1,4 @@
 <?php
-require_once 'ImageValidator.php';
-ini_set('error_log',1);
-ini_set('display_errors',1);
 require_once 'session.php';
 
 class AddServiceValidator
@@ -25,7 +22,7 @@ class AddServiceValidator
         $this->postData = $post;
         $this->valid = [];
         $this->error = [];
-        $this->db = new DbManager();
+        $this->db = App::getDb();
         $this->validateImage = new ImageValidator($file,'images/services/');
     }
 
@@ -123,8 +120,7 @@ class AddServiceValidator
 
     private function uniqueServiceName(): void
     {
-        $q = $this->db->getDb()->prepare('select name from service where name= ?');
-        $q->execute([ucfirst($this->postData['serviceName'])]);
+        $q = $this->db->query('select name from service where name= ?',[ucfirst($this->postData['serviceName'])]);
         $res = $q->fetch();
         if (empty($res))
         {
@@ -167,8 +163,7 @@ class AddServiceValidator
 
     private function checkCategory():void {
         $this->postData['category'] = ucfirst(strtolower($this->postData['category']));
-        $q = $this->db->getDb()->prepare('select idCategory from categoryservice where idCategory = ?');
-        $q->execute([$this->postData['category']]);
+        $q = $this->db->query('select idCategory from categoryservice where idCategory = ?',[$this->postData['category']]);
         $res = $q->fetch();
         if (!empty($res)){
             $this->addDataService();
@@ -188,22 +183,20 @@ class AddServiceValidator
     private function addDataService(): void
     {
         $demo = isset($this->postData['demo'])?true:false;
-        $q = $this->db->getDb()->prepare('INSERT INTO service (idService,idCategory,name, price, image, demo,description)
-             VALUES (:idService,:category,:service,:price,:image,:demo,:description)');
-        $res = $q->execute
-        (
+        $q = $this->db->query('INSERT INTO service (idService,category,name, price, image, demo,description)
+             VALUES (:idService,:idCategory,:service,:price,:image,:demo,:description)',
             [
                 ':idService'=> DbManager::v4(),
-                ':category' => $this->postData['category'],
+                ':idCategory' => $this->postData['category'],
                 ':service' => $this->postData['serviceName'],
                 ':price' => $this->postData['price'],
                 ':image' => $this->validateImage->getFullpath(),
                 ':demo' => $demo,
-                ':description' =>$this->postData['description']
+                ':description' =>$this->postData['serviceDescription']
             ]
         );
 
-        if($res)
+        if($q)
         {
             $this->valid['request'] = 'Service Successfully Added';
             return;

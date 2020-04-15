@@ -1,4 +1,5 @@
 <?php
+require_once 'autoload.php';
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -8,7 +9,6 @@ if (session_status() === PHP_SESSION_NONE)
     }
 }
 
-require_once 'SignupValidator.php';
 
 if (!empty($_POST))
 {
@@ -37,7 +37,7 @@ if (!empty($_POST))
     <link rel="mask-icon"  href="http://production-assets.codepen
           .io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
           color="#111"/>
-    <link rel="canonical" href="https://codepen.io/frytyler/pen/EGdtg"/>
+    <link rel="canoniAacal" href="https://codepen.io/frytyler/pen/EGdtg"/>
 
     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js' defer></script>

@@ -39,14 +39,14 @@ require_once "localization.php";
 <?php
 include('header.php'); ?>
 <?php
-if(isset($_GET['AddtoCart']) && $_GET['AddtoCart'] == "success"){
+if(isset($_GET['AddtoCart']) && $_GET['AddtoCart'] === "success"){
     echo "<h3 style='color: red;margin-left: 5%'>Successfully Added to cart</h3>";
 }
 //List of Workers
-$DbManager = new DbManager();
-$q = "SELECT * FROM service";
-$req = $DbManager->getDb()->query($q);
-$req->execute();
+$DbManager = App::getDb();
+$q = 'SELECT * FROM service';
+$req = $DbManager->query($q);
+
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
@@ -55,12 +55,11 @@ if (!empty($_GET['services'])) {
     ?>
     <div class='container'>
     <?php
-    $q = $DbManager->getDb()->prepare("SELECT * FROM service where idService =:id");
-    $q->bindParam(':id', $_GET['services']);
-    $q->execute();
+    $q = $DbManager->query('SELECT * FROM service where idService =:id',
+        [':id'=> $_GET['services']]);
 
     $results = [];
-    while ($user = $q->fetch()) {
+    while ($user = $q->fetch()){
         $results[] = $user;
 
     }
@@ -73,7 +72,7 @@ if (!empty($_GET['services'])) {
     $chosenServicefinal = str_replace(' ', '', $chosenServicefinal);
     ?>
     <br><br><br><br>
-    <h2 class="fontPlaynoDisplay"><?= _("Personalise your Service !")?></h2>
+    <h2 class="fontPlaynoDisplay"><?= _('Personalise your Service !')?></h2>
     <!--    <div class="image" style="background-image: url('<?php /*echo $image */
     ?>'); background-repeat: no-repeat; width: 100%; height: 100%;"></div>
 -->

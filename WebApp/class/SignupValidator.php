@@ -1,8 +1,6 @@
 <?php
-ini_set('error_log',1);
-ini_set('display_errors',1);
 
-require_once "session.php";
+require 'autoload.php';
 
 class SignupValidator
 {
@@ -85,8 +83,8 @@ class SignupValidator
     private function validateEmail(): void
     {
         $email =strtolower($this->data['email']);
-        $q = $this->dbManager->getDb()->$this->dbManager->getDb()->prepare('SELECT email from person where email =:email') ;
-        $q->execute([':email' => $email]);
+        $q = $this->dbManager->query('SELECT email from person where email =:email',
+            [':email' => $email]);
         $res = $q->fetch();
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
@@ -146,10 +144,8 @@ class SignupValidator
 	    private function addDatabase(): void
 	    {
 		$uuid = DbManager::v4();
-            $q = $this->dbManager->prepare('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
-             VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)');
-            $res = $q->execute
-            (
+            $q = $this->dbManager->query('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
+             VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)',
                 [
                     ':firstName' => ucfirst($this->data['firstName']),
                     ':lastName' => ucfirst($this->data['lastName']),
@@ -157,12 +153,12 @@ class SignupValidator
                     ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
                     ':password' => password_hash($this->data['password'], PASSWORD_ARGON2ID, ['cost' => 14]),
                     ':idPerson' => $uuid
-                ]
-            );
-		    if($res)
+                ]);
+		    if($q)
 		    {
 		        $this->valid['request'] = 'you are now registered';
 		        $_SESSION['id'] =$uuid;
+                $_SESSION['firstName'] =  ucfirst($this->data['firstName']);
 		        return;
 		    }
 		    $this->error['request'] = 'there is a technical problem try later';
