@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Annual Project 2020\n"
-"POT-Creation-Date: 2020-04-13 18:30+0200\n"
-"PO-Revision-Date: 2020-04-13 18:34+0200\n"
+"POT-Creation-Date: 2020-04-18 15:58+0200\n"
+"PO-Revision-Date: 2020-04-18 15:59+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -51,167 +51,167 @@ msgstr "Mot de passe trop petit"
 msgid "you are now registered"
 msgstr "Vous êtes bien inscris"
 
-#: addServices.php:61
+#: addServices.php:71
 msgid "Check List"
 msgstr "Vérifier Liste"
 
-#: addServices.php:63
+#: addServices.php:73
 msgid "Add Category"
 msgstr "Ajouter Catégorie"
 
-#: addServices.php:68
+#: addServices.php:78
 msgid "Category Name"
 msgstr "Nom de la Catégorie"
 
-#: addServices.php:69
+#: addServices.php:79
 msgid "category name"
 msgstr "nom de la catégorie"
 
-#: addServices.php:71
+#: addServices.php:81
 msgid "Add category"
 msgstr "Ajouter Catégorie"
 
-#: addServices.php:74
+#: addServices.php:84
 msgid "Add a Service :"
 msgstr "Ajouter un Service :"
 
-#: addServices.php:82
+#: addServices.php:92
 msgid "Service Category"
 msgstr "Catégorie de Service"
 
-#: addServices.php:87
+#: addServices.php:97
 msgid "select category"
 msgstr "sélectionner catégorie"
 
-#: addServices.php:96
+#: addServices.php:106
 msgid "Service Name"
 msgstr "Nom du Service"
 
-#: addServices.php:101
+#: addServices.php:111
 msgid "Exemple: Child Care"
 msgstr "Exemple: Garde d'Enfants"
 
-#: addServices.php:104
+#: addServices.php:114
 msgid "Service Description"
 msgstr "Description du Service"
 
-#: addServices.php:111
+#: addServices.php:121
 msgid "Service Image"
 msgstr "Image du Service"
 
-#: addServices.php:118
+#: addServices.php:128
 msgid "Service Price"
 msgstr "Prix du Service"
 
-#: addServices.php:122
+#: addServices.php:132
 msgid "Price per hour in €"
 msgstr "Prix par heure en €"
 
-#: addServices.php:125
+#: addServices.php:135
 msgid "Demo"
 msgstr "Demo"
 
-#: addServices.php:130
+#: addServices.php:140
 msgid "Add Service"
 msgstr "Ajouter un Service"
 
-#: addServices.php:137 services.php:153
+#: addServices.php:147 services.php:153
 msgid "List of all the Services we currently provide :"
 msgstr "Liste de tout les Services qu'on propose actuellement :"
 
-#: addServices.php:140 clientManagement.php:39 services.php:156
+#: addServices.php:150 clientManagement.php:104 services.php:156
 msgid "Type something to search list items"
 msgstr "Ecris quelque chose pour chercher des items"
 
-#: addServices.php:142 header.php:20
+#: addServices.php:152 header.php:30
 msgid "Add a Service"
 msgstr "Ajouter un Service"
 
-#: addWebGL.php:30
+#: addWebGL.php:40
 msgid "Demo Directory Name"
 msgstr "Nom du Dossier de la Demo"
 
-#: addWebGL.php:32
+#: addWebGL.php:42
 msgid "Demo Zip File (Only Zip Files Allowed)"
 msgstr "Fichier Zip de la Demo"
 
-#: addWebGL.php:34
+#: addWebGL.php:44
 msgid "Submit Demo"
 msgstr "Envoyer Demo"
 
-#: clientManagement.php:19
+#: clientManagement.php:57
 msgid "Client Management - Flash Assistance"
 msgstr "Gestion des Clients - Flash Assistance"
 
-#: clientManagement.php:38
+#: clientManagement.php:102
 msgid "List of all Users:"
 msgstr "Liste de tout les Utilisateurs:"
 
-#: clientManagement.php:43
+#: clientManagement.php:108
 msgid "ID"
 msgstr "Identifiant"
 
-#: clientManagement.php:44
+#: clientManagement.php:109
 msgid "Firstname"
 msgstr "Prénom"
 
-#: clientManagement.php:45
+#: clientManagement.php:110
 msgid "Lastname"
 msgstr "Nom"
 
-#: clientManagement.php:46 login.php:94 signup.php:113 yourAccount.php:47
+#: clientManagement.php:111 login.php:94 signup.php:113 yourAccount.php:47
 msgid "Email"
 msgstr "Email"
 
-#: clientManagement.php:47
+#: clientManagement.php:112
 msgid "Phone Number"
 msgstr "Numéro de Téléphone"
 
-#: clientManagement.php:48
+#: clientManagement.php:113
 msgid "Function"
 msgstr "Travail"
 
-#: clientManagement.php:49
+#: clientManagement.php:114
 msgid "Localisation"
 msgstr "Localisation"
 
-#: header.php:16
+#: header.php:23
 msgid "Account"
 msgstr "Compte"
 
-#: header.php:19
+#: header.php:26
 msgid "Your Account"
 msgstr "Votre Compte"
 
-#: header.php:21
+#: header.php:37
 msgid "Add Demo WebGL"
 msgstr "Ajouter Demo WebGL"
 
-#: header.php:22
+#: header.php:44
 msgid "Client Management"
 msgstr "Gestion des clients"
 
-#: header.php:23
+#: header.php:51
 msgid "Update Subscription"
 msgstr "Mettre à jour Abonnements"
 
-#: header.php:24
+#: header.php:56
 msgid "Log Out"
 msgstr "Se déconnecter"
 
-#: header.php:36
+#: header.php:62
 msgid "Services"
 msgstr "Services"
 
-#: header.php:39
+#: header.php:65
 msgid "Subscriptions"
 msgstr "Abonnements"
 
-#: header.php:42
+#: header.php:68
 msgid "History"
 msgstr "Historique"
 
-#: header.php:60
+#: header.php:87
 msgid "Check Your Cart"
 msgstr "Regardez votre panier"
 
@@ -251,13 +251,72 @@ msgstr "S'inscrire"
 msgid "Welcome to Flash Assistance"
 msgstr "Bienvenue sur Flash Assistance"
 
-#: main.php:108
+#: main.php:109
 msgid "Enjoy all your favorite services for to half the price"
 msgstr "Profite de tout tes services favoris pour 50% du prix"
 
-#: main.php:109
+#: main.php:110
 msgid "Get your Subscription"
 msgstr "Obtient ton Abonnement"
+
+#: payment.php:242
+msgid "Coupon code"
+msgstr "Code de réduction"
+
+#: payment.php:244 paymentCart.php:60
+msgid "If you have a subscription, please enter it in the box below"
+msgstr ""
+"Si t'as un abonnement, s'il vous plaît entre le dans la boîte en-dessous"
+
+#: payment.php:247 paymentCart.php:63
+msgid "Select your Subscription"
+msgstr "Sélectionne ton Abonnement"
+
+#: payment.php:250
+msgid "Apply coupon"
+msgstr "Utiliser réduction"
+
+#: payment.php:254
+msgid "Add to cart"
+msgstr "Ajouter au panier"
+
+#: payment.php:278 paymentCart.php:72 paymentSub.php:56
+msgid "Order summary"
+msgstr "Récapitulatif de la commande"
+
+#: payment.php:280 paymentCart.php:74
+msgid ""
+"Tax costs are calculated based on values you have entered and each service"
+msgstr ""
+"Les côuts des taxes sont calculés à partir des valeurs que vous avez rentré "
+"et chaque service"
+
+#: payment.php:282 paymentCart.php:76 paymentSub.php:60
+msgid "Order Subtotal"
+msgstr "Total hors-taxes"
+
+#: payment.php:283 paymentCart.php:77 paymentSub.php:61
+msgid "Tax"
+msgstr "Taxes"
+
+#: payment.php:284 paymentCart.php:78 paymentSub.php:62
+msgid "Total"
+msgstr "Total"
+
+#: payment.php:288
+msgid "Proceed to Checkout"
+msgstr "Procédez vers la caisse"
+
+#: paymentCart.php:81 paymentSub.php:65
+msgid "Proceed to checkout"
+msgstr "Procédez vers la caisse"
+
+#: paymentSub.php:58
+msgid ""
+"Tax costs are calculated based on values you have entered and each service."
+msgstr ""
+"Les côuts des taxes sont calculés à partir des valeurs que vous avez rentré "
+"et chaque service"
 
 #: search.php:39
 msgid "History of all purchases:"
@@ -302,22 +361,6 @@ msgstr "Choisi ton Package"
 #: services.php:97
 msgid "Number of.."
 msgstr "Nombre de.."
-
-#: services.php:99
-msgid "Hour(s)"
-msgstr "Heure(s)"
-
-#: services.php:100
-msgid "Day(s)"
-msgstr "Jour(s)"
-
-#: services.php:101
-msgid "Month(s)"
-msgstr "Mois"
-
-#: services.php:102
-msgid "Year(s)"
-msgstr "Année(s)"
 
 #: services.php:111
 msgid "Each Monday"
@@ -376,32 +419,32 @@ msgid "All the Sundays of the Month"
 msgstr "Tout les Dimanches du Mois"
 
 #: services.php:129
-msgid "All the first Mondays of each Month"
-msgstr "Tout les premiers Lundis de chaque Mois"
+msgid "All Mondays of each Month"
+msgstr "Tout les Lundis de chaque Mois"
 
 #: services.php:130
-msgid "All the first Tuesdays of each Month"
-msgstr "Tout les premiers Mardis de chaque Mois"
+msgid "All Tuesdays of each Month"
+msgstr "Tout les Mardis de chaque Mois"
 
 #: services.php:131
-msgid "All the first Wednesdays of each Month"
-msgstr "Tout les premiers Mercredis de chaque Mois"
+msgid "All Wednesdays of each Month"
+msgstr "Tout les Mercredis de chaque Mois"
 
 #: services.php:132
-msgid "All the first Thursdays of each Month"
-msgstr "Tout les premiers Jeudis de chaque Mois"
+msgid "All Thursdays of each Month"
+msgstr "Tout les Jeudis de chaque Mois"
 
 #: services.php:133
-msgid "All the first Fridays of each Month"
-msgstr "Tout les premiers Vendredis de chaque Mois"
+msgid "All Fridays of each Month"
+msgstr "Tout les Vendredis de chaque Mois"
 
 #: services.php:134
-msgid "All the first Saturdays of each Month"
-msgstr "Tout les premiers Samedis de chaque Mois"
+msgid "All Saturdays of each Month"
+msgstr "Tout les Samedis de chaque Mois"
 
 #: services.php:135
-msgid "All the first Sundays of each Month"
-msgstr "Tout les premiers Dimanches de chaque Mois"
+msgid "All Sundays of each Month"
+msgstr "Tout les Dimanches de chaque Mois"
 
 #: services.php:137
 msgid "Confirm"
@@ -443,7 +486,7 @@ msgstr "Abonnements - Flash Assistance"
 msgid "Start Today"
 msgstr "Commence Aujourd'hui"
 
-#: updateSubscription.php:89
+#: updateSubscription.php:98
 msgid "Submit Changes"
 msgstr "Envoyer Changements"
 
@@ -478,3 +521,15 @@ msgstr "Télécharger une photo différente"
 #: yourAccount.php:77
 msgid "Choose file"
 msgstr "Choisir fichier"
+
+#~ msgid "Hour(s)"
+#~ msgstr "Heure(s)"
+
+#~ msgid "Day(s)"
+#~ msgstr "Jour(s)"
+
+#~ msgid "Month(s)"
+#~ msgstr "Mois"
+
+#~ msgid "Year(s)"
+#~ msgstr "Année(s)"

@@ -6,6 +6,20 @@ $q->bindParam(':idService', $_GET['service']);
 $q->execute();
 $chosenService = $q->fetchAll();
 
+$q = $DbManager->getDb()->prepare("SELECT idOrders from Orders WHERE status = 'express'");
+$q->execute();
+$res = $q->fetchAll();
+
+$q = $DbManager->getDb()->prepare("DELETE FROM Orders WHERE idOrders = ?");
+$q->execute([
+   $res[0]['idOrders']
+]);
+$q = $DbManager->getDb()->prepare("DELETE FROM orderOptions WHERE idOrders = ?");
+$q->execute([
+    $res[0]['idOrders']
+]);
+
+
 function getDates($duration, $option)
 {
     if (date('N', time()) == $option) {
@@ -29,11 +43,12 @@ switch ($_GET['package']){
     case "Hour(s)":
         $uuid = $DbManager::v4();
         $price = $_GET['hour'] * $chosenService[0]['price'] * 1/8;
+        $finalPrice = $price + $price * 0.21;
         $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
         $q->execute([
             $uuid,
             substr($_GET['package'], 0, -3),
-            $price,
+            $finalPrice,
             "express",
             $_SESSION['id'],
             $_GET['service']
@@ -148,11 +163,12 @@ switch ($_GET['package']){
         if($_GET['day'] <= 7) {
             $price *= $options;
         }
+        $finalPrice = $price + $price * 0.21;
         $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
         $q->execute([
             $uuid,
             substr($_GET['package'], 0, -3),
-            $price,
+            $finalPrice,
             "express",
             $_SESSION['id'],
             $_GET['service']
@@ -242,12 +258,14 @@ switch ($_GET['package']){
                 $month7
             ]);
         }
+        $price*=$options;
+        $finalPrice = $price + $price * 0.21;
 
         $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
         $q->execute([
             $uuid,
             substr($_GET['package'], 0, -3),
-            $price,
+            $finalPrice,
             "express",
             $_SESSION['id'],
             $_GET['service']
@@ -341,12 +359,13 @@ switch ($_GET['package']){
         }
 
         $price*=$options;
+        $finalPrice = $price + $price * 0.21;
 
         $q = $DbManager->getDb()->prepare("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)");
         $q->execute([
             $uuid,
             substr($_GET['package'], 0, -3),
-            $price,
+            $finalPrice,
             "express",
             $_SESSION['id'],
             $_GET['service']

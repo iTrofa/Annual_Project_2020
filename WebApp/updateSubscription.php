@@ -1,22 +1,63 @@
 <?php
 require_once "session.php";
 require_once "localization.php";
-$DbManager = new DbManager();
+
+$q = $DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
+$q->execute([
+    $_SESSION['id']
+]);
+$res = $q->fetchAll();
+if (!$res[0]['admin']) {
+    header('Location: main.php');
+    exit;
+}
 
 if (isset($_POST) && !empty($_POST)) {
-    if ($_POST['subcat'] == "Basic") {
+    if ($_POST['subcat'] == 'Basic') {
         $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Basic'");
         $q->bindParam(":featureA", $_POST['featureA']);
         $q->bindParam(":featureB", $_POST['featureB']);
         $q->execute();
-    } else if ($_POST['subcat'] == "Professional") {
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Professional'");
+        $q->bindParam(":featureA", $_POST['featureA']);
+        $q->bindParam(":featureB", $_POST['featureB']);
+        $q->execute();
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Enterprise'");
+        $q->execute([
+            ":featureA" => $_POST["featureA"],
+            ":featureB" => $_POST["featureB"]
+        ]);
+    }
+    if ($_POST['subcat'] == 'Professional') {
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Basic'");
+        $q->bindParam(":featureA", $_POST['featureA']);
+        $q->bindParam(":featureB", $_POST['featureB']);
+        $q->execute();
         $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD WHERE nameSub = 'Professional'");
         $q->bindParam(":featureA", $_POST['featureA']);
         $q->bindParam(":featureB", $_POST['featureB']);
         $q->bindParam(":featureC", $_POST['featureC']);
         $q->bindParam(":featureD", $_POST['featureD']);
         $q->execute();
-    } else if ($_POST['subcat'] == "Enterprise"){
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD WHERE nameSub = 'Enterprise'");
+        $q->execute([
+            ":featureA" => $_POST["featureA"],
+            ":featureB" => $_POST["featureB"],
+            ":featureC" => $_POST["featureC"],
+            ":featureD" => $_POST["featureD"]
+        ]);
+    }
+    if ($_POST['subcat'] == 'Enterprise') {
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB WHERE nameSub = 'Basic'");
+        $q->bindParam(":featureA", $_POST['featureA']);
+        $q->bindParam(":featureB", $_POST['featureB']);
+        $q->execute();
+        $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD WHERE nameSub = 'Professional'");
+        $q->bindParam(":featureA", $_POST['featureA']);
+        $q->bindParam(":featureB", $_POST['featureB']);
+        $q->bindParam(":featureC", $_POST['featureC']);
+        $q->bindParam(":featureD", $_POST['featureD']);
+        $q->execute();
         $q = $DbManager->getDb()->prepare("UPDATE subscription SET featureA = :featureA, featureB = :featureB, featureC = :featureC, featureD = :featureD, featureE = :featureE, featureF = :featureF WHERE nameSub = 'Enterprise'");
         $q->execute([
             ":featureA" => $_POST["featureA"],
@@ -86,7 +127,8 @@ require_once "header.php";
             <label>Feature F</label><br>
             <input type="text" name="featureF" class="inputSmaller"><br>
         </div>
-        <input type="submit" style="margin-top: 1%;" class="btn-large btn-primary btn" value="<?=_('Submit Changes')?>">
+        <input type="submit" style="margin-top: 1%;" class="btn-large btn-primary btn"
+               value="<?= _('Submit Changes') ?>">
     </form>
 </main>
 <?php

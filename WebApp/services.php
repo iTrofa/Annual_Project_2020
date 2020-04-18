@@ -96,10 +96,10 @@ if (!empty($_GET['services'])) {
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
                    placeholder='<?= _("Number of..")?>'>
             <select name='userOption' onchange="myFunction()" id='userOption'>
-                <option><?= _("Hour(s)")?></option>
-                <option><?= _("Day(s)")?></option>
-                <option><?= _("Month(s)")?></option>
-                <option><?= _("Year(s)")?></option>
+                <option>Hour(s)</option>
+                <option>Day(s)</option>
+                <option>Month(s)</option>
+                <option>Year(s)</option>
             </select>
             <br>
             <input onchange="updatePrice()" name='noinput' min='1' max='8' type='hidden' id='noinput' placeholder='' class='input'>
@@ -126,13 +126,13 @@ if (!empty($_GET['services'])) {
                 <input class='inputSmaller' name='monthSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Sundays of the Month")?></p><br>
             </div>
             <div id="yearForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Mondays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Tuesdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Wednesdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Thursdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Fridays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Saturdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the first Sundays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Mondays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Tuesdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Wednesdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Thursdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Fridays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Saturdays of each Month")?></p><br>
+                <input class='inputSmaller' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Sundays of each Month")?></p><br>
             </div>
             <button type="submit" class="btn btn-primary btn-block2 btn-large"><?= _("Confirm")?></button>
         </form>

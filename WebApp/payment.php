@@ -24,6 +24,26 @@ if(!isValidUuid($service) && !isset($_GET['cart0'])) {
     header('Location: services.php');
     exit;
 }
+
+function getDates($duration, $option)
+{
+    if (date('N', time()) == $option) {
+        $j = 0;
+    } else {
+        for ($i = 1; $i < 8; $i += 1) {
+            if (date('N', time() + ($i * 24 * 60 * 60)) == $option) {
+                $j = $i;
+                break;
+            }
+        }
+    }
+    $count = 0;
+    for ($i = $j; $i < $duration; $i += 7) {
+        $count += 1;
+    }
+    return $count;
+}
+
 echo "<html>";
 echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>";
 echo "<link rel='stylesheet' href='css/services.css'>";
@@ -64,60 +84,148 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 if(isset($_POST['userOption'])) {
     switch ($_POST['userOption']) {
         case "Hour(s)":
-            $timevariable = 1 / 8;
             if(isset($_POST['hourInput']))
                 $date = $_POST['hourInput'];
+                $price = $_POST['reservationInput'] * $chosenService[0]['price'] * 1/8;
             break;
         case "Day(s)":
-            $timevariable = 1 / 8 * $_POST['noinput'];
-            if(isset($_POST['Monday']))
+            if($_POST['reservationInput'] <= 7) {
+                $price = $_POST['noinput'] * $chosenService[0]['price'] * 1 / 8;
+                $options = 0;
+            }else{
+                $price = $_POST['noinput'] * $_POST['reservationInput'] * $chosenService[0]['price'] * 1/8;
+            }
+            if(isset($_POST['Monday'])) {
                 $week1 = $_POST['Monday'];
-            if(isset($_POST['Tuesday']))
+                if($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }else $week1 = '';
+            if(isset($_POST['Tuesday'])) {
                 $week2 = $_POST['Tuesday'];
-            if(isset($_POST['Wednesday']))
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week2 = '';
+            if(isset($_POST['Wednesday'])) {
                 $week3 = $_POST['Wednesday'];
-            if(isset($_POST['Thursday']))
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week3 = '';
+            if(isset($_POST['Thursday'])) {
                 $week4 = $_POST['Thursday'];
-            if(isset($_POST['Friday']))
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week4 = '';
+            if(isset($_POST['Friday'])) {
                 $week5 = $_POST['Friday'];
-            if(isset($_POST['Saturday']))
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week5 = '';
+            if(isset($_POST['Saturday'])) {
                 $week6 = $_POST['Saturday'];
-            if(isset($_POST['Sunday']))
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week6 = '';
+            if(isset($_POST['Sunday'])) {
                 $week7 = $_POST['Sunday'];
+                if ($_POST['reservationInput'] <= 7) {
+                    $options += 1;
+                }
+            }
+            else $week7 = '';
+            if($_POST['reservationInput'] <= 7) {
+                $price *= $options;
+            }
             break;
         case "Month(s)":
-            if(isset($_POST['monthMonday']))
+            $price = $_POST['noinput'] * $chosenService[0]['price'] * 1 / 8;
+            $options = 0;
+            if(isset($_POST['monthMonday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 1);
                 $month1 = $_POST['monthMonday'];
-            if(isset($_POST['monthTuesday']))
+            }
+            else $month1 = '';
+            if(isset($_POST['monthTuesday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 2);
                 $month2 = $_POST['monthTuesday'];
-            if(isset($_POST['monthWednesday']))
+            }
+            else $month2 = '';
+            if(isset($_POST['monthWednesday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 3);
                 $month3 = $_POST['monthWednesday'];
-            if(isset($_POST['monthThursday']))
+            }
+            else $month3 = '';
+            if(isset($_POST['monthThursday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 4);
                 $month4 = $_POST['monthThursday'];
-            if(isset($_POST['monthFriday']))
+            }
+            else $month4 = '';
+            if(isset($_POST['monthFriday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 5);
                 $month5 = $_POST['monthFriday'];
-            if(isset($_POST['monthSaturday']))
+            }
+            else $month5 = '';
+            if(isset($_POST['monthSaturday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 6);
                 $month6 = $_POST['monthSaturday'];
-            if(isset($_POST['monthSunday']))
+            }
+            else $month6 = '';
+            if(isset($_POST['monthSunday'])) {
+                $options += getDates(31 * $_POST['reservationInput'], 7);
                 $month7 = $_POST['monthSunday'];
-            $timevariable = 31;
+            }
+            else $month7 = '';
+            $price *= $options;
             break;
         case "Year(s)":
-            if(isset($_POST['yearMonday']))
+            $price = $_POST['noinput'] * $chosenService[0]['price'] * 1 / 8;
+            $options = 0;
+            if(isset($_POST['yearMonday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 1);
                 $year1 = $_POST['yearMonday'];
-            if(isset($_POST['yearTuesday']))
+            }
+                else $year1 = '';
+            if(isset($_POST['yearTuesday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 2);
                 $year2 = $_POST['yearTuesday'];
-            if(isset($_POST['yearWednesday']))
+            }
+            else $year2 = '';
+            if(isset($_POST['yearWednesday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 3);
                 $year3 = $_POST['yearWednesday'];
-            if(isset($_POST['yearThursday']))
+            }
+            else $year3 = '';
+            if(isset($_POST['yearThursday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 4);
                 $year4 = $_POST['yearThursday'];
-            if(isset($_POST['yearFriday']))
+            }
+            else $year4 = '';
+            if(isset($_POST['yearFriday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 5);
                 $year5 = $_POST['yearFriday'];
-            if(isset($_POST['yearSaturday']))
+            }
+            else $year5 = '';
+            if(isset($_POST['yearSaturday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 6);
                 $year6 = $_POST['yearSaturday'];
-            if(isset($_POST['yearSunday']))
+            }
+            else $year6 = '';
+            if(isset($_POST['yearSunday'])) {
+                $options += getDates(31 * 12 * $_POST['reservationInput'], 7);
                 $year7 = $_POST['yearSunday'];
-            $timevariable = 31 * 12;
+            }
+            else $year7 = '';
+            $price *= $options;
             break;
     }
     $userOption = $_POST['userOption'];
@@ -125,78 +233,121 @@ if(isset($_POST['userOption'])) {
     $secondInput = $_POST['noinput'];
 }
     $DbPrice = $chosenService[0]['price'];
-    $price = $_POST['reservationInput'] * $timevariable;
-    $price *= $chosenService[0]['price'];
-    $finalprice = $price+$price*0.21;
-?>
+    $finalPrice = $price+$price*0.21;
+
+    $q = $DbManager->getDb()->prepare("SELECT subscription, nameSub FROM person LEFT JOIN subscription on person.subscription = subscription.idSub  WHERE idPerson = ?");
+    $q->execute([
+        $_SESSION['id']
+    ]);
+    $Sub = $q->fetchAll();
+    $nameSub = $Sub[0]['nameSub'];
+
+    ?>
 
     </div>
     <div class="row py-5 p-4 bg-white rounded shadow-sm" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"><?=_('Coupon code')?></div>
             <div class="p-4">
-                <p class="font-italic mb-4">If you have a subscription, please enter it in the box below</p>
+                <?php
+                if(isset($nameSub)){
+                    switch ($nameSub) {
+                        case "Basic":
+                            $nameSub = "Basic";
+                            $valueSub = 0.8;
+                            break;
+                        case "Professional":
+                            $nameSub = "Professional";
+                            $valueSub = 0.6;
+                            break;
+                        case "Enterprise" :
+                            $nameSub = "Enterprise";
+                            $valueSub = 0.4;
+                            break;
+                    }
+                    ?>
+                      <p class="font-italic mb-4"><?=_('You have the ' . $nameSub . " Subscription")?></p>
                 <div class="input-group mb-4 border rounded-pill p-2">
-                    <select type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-                        <option>----Select your Subscription----</option>
-                    </select>
+                    <input type="text" aria-describedby="button-addon3" class="form-control border-0" value="<?='The old price was '.$finalPrice.' now it\'s ' . $finalPrice * $valueSub?>">
                     <div class="input-group-append border-0">
-                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+                        <a href="subscription.php"><button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i><?=_('Look at our other Subscriptions')?></button></a>
                     </div>
                 </div>
                 <?php
+                    }else{
+                    ?>
+                <p class="font-italic mb-4"><?=_('If you have a subscription, please enter it in the box below')?></p>
+                <div class="input-group mb-4 border rounded-pill p-2">
+                    <input type="text" aria-describedby="button-addon3" class="form-control border-0">
+                    <div class="input-group-append border-0">
+                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i><?=_('Apply coupon')?></button>
+                    </div>
+                </div>
+                <?php
+                }
+                $addCart = _("Add to cart");
                 switch ($_POST['userOption']) {
                     case "Hour(s)":
-                        echo "<a href=\"cart.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Add to Cart</a>";
+                        echo "<a href=\"cart.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Day(s)":
-                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Add to Cart</a>";
+                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Month(s)":
-                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Add to Cart</a>";
+                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Year(s)":
-                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Add to Cart</a>";
+                            echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                 }
                 ?>
             </div>
-           <!-- <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-            <div class="p-4">
-                <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-                <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-            </div>-->
+
         </div>
         <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"><?=_('Order summary')?></div>
             <div class="p-4">
-                <p class="font-italic mb-4">Tax costs are calculated based on values you have entered and each service.</p>
+                <p class="font-italic mb-4"><?=_('Tax costs are calculated based on values you have entered and each service')?>.</p>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$price."€"?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$price*0.21."€"?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold"><?=$finalprice."€"?></h5>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Order Subtotal')?> </strong><strong><?=$price."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Tax')?></strong><strong><?=$price*0.21."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Total')?></strong>
+                        <?php
+                        if(isset($valueSub)){
+                        ?>
+                            <h5 style="text-decoration: line-through" class="font-weight-bold"><?=$finalPrice."€"?></h5>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('New Total')?></strong>
+
+                        <h5 class="font-weight-bold"><?=$finalPrice*$valueSub."€"?></h5>
+                        <?php
+                        }else{
+                        ?>
+                        <h5 class="font-weight-bold"><?=$finalPrice."€"?></h5>
+                        <?php
+                        }
+                        ?>
                     </li>
                     <?php
+                    $proceedCheck = _('Proceed to Checkout');
                     switch ($_POST['userOption']) {
                         case "Hour(s)":
-                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$proceedCheck</a>";
                             break;
 
                         case "Day(s)":
-                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$proceedCheck</a>";
                             break;
 
                         case "Month(s)":
-                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$proceedCheck</a>";
                             break;
 
                         case "Year(s)":
-                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">Proceed to Checkout</a>";
+                            echo "<a href=\"expressPay.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$proceedCheck</a>";
                             break;
 
                     }
