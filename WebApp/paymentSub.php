@@ -49,16 +49,16 @@ $res = $q->fetchAll();
     <div class="row py-5 p-4 bg-white rounded shadow-sm" style="margin-left: 0;margin-right: 0">
         </div>
         <div>
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"><?=_('Order summary')?> </div>
             <div class="p-4">
-                <p class="font-italic mb-4">Tax costs are calculated based on values you have entered and each service.</p>
+                <p class="font-italic mb-4"><?=_('Tax costs are calculated based on values you have entered and each service.')?></p>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$finalprice. '€' ?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$finalprice*0.21. '€' ?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold"><?=$finalprice+$finalprice*0.21. '€' ?></h5>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Order Subtotal')?> </strong><strong><?=$finalprice."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Tax')?></strong><strong><?=$finalprice*0.21."€"?></strong></li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted"><?=_('Total')?></strong>
+                        <h5 class="font-weight-bold"><?=$finalprice+$finalprice*0.21.'€'?></h5>
                     </li>
-                </ul><a href="stripeAPI.php?sub=<?=$_GET['idSub']?>" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                </ul><a href="stripeAPI.php?sub=<?=$_GET['idSub']?>" class="btn btn-dark rounded-pill py-2 btn-block"><?=_('Proceed to checkout')?></a>
             </div>
         </div>
     </div>

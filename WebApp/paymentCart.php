@@ -1,5 +1,12 @@
 <?php
 require_once "session.php";
+
+$q = $DbManager->getDb()->prepare("SELECT subscription, nameSub FROM person LEFT JOIN subscription on person.subscription = subscription.idSub  WHERE idPerson = ?");
+$q->execute([
+    $_SESSION['id']
+]);
+$Sub = $q->fetchAll();
+$nameSub = $Sub[0]['nameSub'];
 ?>
 <html>
 <head>
@@ -33,7 +40,6 @@ orders.idPerson = person.idPerson LEFT JOIN service ON orders.idService = servic
 $res = $q->fetchAll();
 
 
-
 ?>
 <main>
 
@@ -45,45 +51,97 @@ $res = $q->fetchAll();
             $id = $res[$i]['idOrders'];
             $service = $res[$i]['name'];
             $price = $res[$i]['price'];
-            echo "<li>$id = $service : $price</li>";
+            echo "<li>" . $service . " => " . $price . "€</li>";
             $finalprice += $price;
         }
-        $finalprice2 =$finalprice + $finalprice * 0.21;
+        $finalprice2 = $finalprice + $finalprice * 0.21;
         $_SESSION['price'] = $finalprice2;
-        var_dump($_SESSION);
         ?>
     </ul>
     <div class="row py-5 p-4 bg-white rounded shadow-sm" style="margin-left: 0;margin-right: 0">
         <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
             <div class="p-4">
-                <p class="font-italic mb-4">If you have a subscription, please enter it in the box below</p>
-                <div class="input-group mb-4 border rounded-pill p-2">
-                    <select type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-                        <option>----Select your Subscription----</option>
-                    </select>
-                    <div class="input-group-append border-0">
-                        <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
+
+                <?php
+                if (isset($nameSub)) {
+                    switch ($nameSub) {
+                        case "Basic":
+                            $nameSub = "Basic";
+                            $valueSub = 0.8;
+                            break;
+                        case "Professional":
+                            $nameSub = "Professional";
+                            $valueSub = 0.6;
+                            break;
+                        case "Enterprise" :
+                            $nameSub = "Enterprise";
+                            $valueSub = 0.4;
+                            break;
+                    }
+                    ?>
+                    <p class="font-italic mb-4"><?= _('You have the ' . $nameSub . " Subscription") ?></p>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input type="text" aria-describedby="button-addon3" class="form-control border-0"
+                               value="<?= 'The old price was ' . ($finalprice + $finalprice * 0.21) . ' now it\'s ' . ($finalprice + $finalprice * 0.21) * $valueSub ?>">
+                        <div class="input-group-append border-0">
+                            <a href="subscription.php">
+                                <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i
+                                            class="fa fa-gift mr-2"></i><?= _('Look at our other Subscriptions') ?>
+                                </button>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                    <?php
+                } else {
+                    ?>
+                    <p class="font-italic mb-4"><?= _('If you have a subscription, please enter it in the box below') ?></p>
+                    <div class="input-group mb-4 border rounded-pill p-2">
+                        <input type="text" aria-describedby="button-addon3" class="form-control border-0">
+                        <div class="input-group-append border-0">
+                            <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i
+                                        class="fa fa-gift mr-2"></i><?= _('Apply coupon') ?></button>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
-            <!-- <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-             <div class="p-4">
-                 <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-                 <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-             </div>-->
         </div>
         <div class="col-lg-6">
-            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"><?= _('Order summary') ?> </div>
             <div class="p-4">
-                <p class="font-italic mb-4">Tax costs are calculated based on values you have entered and each service.</p>
+                <p class="font-italic mb-4"><?= _('Tax costs are calculated based on values you have entered and each service') ?>
+                    .</p>
                 <ul class="list-unstyled mb-4">
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?=$finalprice."€"?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong><?=$finalprice*0.21."€"?></strong></li>
-                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                        <h5 class="font-weight-bold"><?=$finalprice+$finalprice*0.21."€"?></h5>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                class="text-muted"><?= _('Order Subtotal') ?> </strong><strong><?= $finalprice . "€" ?></strong>
                     </li>
-                </ul><a href="stripeAPI.php" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                class="text-muted"><?= _('Tax') ?></strong><strong><?= $finalprice * 0.21 . "€" ?></strong>
+                    </li>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                class="text-muted"><?= _('Total') ?></strong>
+                        <?php
+                        if (isset($valueSub)){
+                        ?>
+                        <h5 style="text-decoration: line-through"
+                            class="font-weight-bold"><?= $finalprice + $finalprice * 0.21 . "€" ?></h5>
+                    <li class="d-flex justify-content-between py-3 border-bottom"><strong
+                                class="text-muted"><?= _('New Total') ?></strong>
+
+                        <h5 class="font-weight-bold"><?= ($finalprice + $finalprice * 0.21) * $valueSub . "€" ?></h5>
+                        <?php
+                        } else {
+                            ?>
+                            <h5 class="font-weight-bold"><?= $finalprice + $finalprice * 0.21 . "€" ?></h5>
+                            <?php
+                        }
+                        ?>
+                    </li>
+                </ul>
+                <a href="stripeAPI.php"
+                   class="btn btn-dark rounded-pill py-2 btn-block"><?= _('Proceed to checkout') ?></a>
             </div>
         </div>
     </div>

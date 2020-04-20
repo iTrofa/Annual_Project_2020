@@ -1,5 +1,6 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
 ?>
 <html>
 <head>
@@ -21,7 +22,7 @@ require_once "session.php";
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
-    <title>Subscriptions - Flash Assistance</title>
+    <title><?= _("Subscriptions - Flash Assistance")?></title>
     <script src="header.js"></script>
     <script src="footer.js"></script>
 </head>
@@ -131,7 +132,8 @@ include('header.php');
             $idSub = $res[$i]['idSub'];
             echo "<form method='get' action='paymentSub.php'>";
             echo "<input name='idSub' type='hidden' value='$idSub'>";
-            echo "<button class='cta'>Start Today</button>";
+            $startToday = _("Start Today");
+            echo "<button class='cta'>$startToday</button>";
             echo "</form>";
 
         echo "</div>";

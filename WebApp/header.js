@@ -10,6 +10,15 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $("#tableSearch2").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable2 tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
 function myFunction(){
     const element = document.getElementById('userOption').value;
     if(element === 'Hour(s)'){

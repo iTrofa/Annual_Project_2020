@@ -7,8 +7,27 @@ use Stripe\Customer;
 use Stripe\Stripe;
 
 session_start();
-var_dump($_SESSION);
-$finalprice = $_SESSION['price'] * 100;
+$DbManager = new DbManager();
+$q = $DbManager->getDb()->prepare("SELECT subscription, nameSub FROM person LEFT JOIN subscription on person.subscription = subscription.idSub  WHERE idPerson = ?");
+$q->execute([
+    $_SESSION['id']
+]);
+$Sub = $q->fetchAll();
+$nameSub = $Sub[0]['nameSub'];
+switch ($nameSub){
+    case "Basic":
+        $valueSub = 0.8;
+        break;
+    case "Professional":
+        $valueSub = 0.6;
+        break;
+    case "Enterprise" :
+        $valueSub = 0.4;
+        break;
+}
+if(isset($valueSub)){
+    $finalprice =  $_SESSION['price'] * $valueSub * 100;
+}else $finalprice = $_SESSION['price'] * 100;
 require_once('vendor/autoload.php');
 Stripe::setApiKey('sk_test_LgZBATKRdH41pyA60Bi3yxT600KSnzL8bW');
 $token = $_POST['stripeToken'];
@@ -27,7 +46,7 @@ $charge = Charge::create(array(
     "customer" => $customer->id
 ));
 $DbManager = App::getDb();
-if(isset($_GET['express']) && $_GET['express'] === true ){
+if(isset($_GET['express']) && $_GET['express'] == true ){
     $q = $DbManager->query("UPDATE orders SET status = 'payed' WHERE status = 'express'");
 }else if(isset($_GET['sub'])){
     $old_date = date('Y-m-d');

@@ -244,6 +244,7 @@ switch ($_GET['package']){
                 $month7
             ]);
         }
+        $price *= $options;
 
         $DbManager->query("INSERT INTO orders(idOrders, type, price, status, idPerson, idService) VALUES(?, ?, ?, ?, ?, ?)",
         [

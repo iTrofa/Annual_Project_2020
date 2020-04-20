@@ -1,6 +1,9 @@
 <?php
 
+require_once('Lang/gettext.inc');
+
 require 'autoload.php';
+
 
 class SignupValidator
 {
@@ -32,7 +35,8 @@ class SignupValidator
         {
             if (empty($this->data[$field]))
             {
-                $this->addError("{$field} is empty", $field);
+                $empty = _('is empty');
+                $this->addError("{$field} $empty", $field);
             } else
             {
                 $this->addValid($field);
@@ -71,7 +75,9 @@ class SignupValidator
 
         if (!ctype_alpha($name))
         {
-            $this->addError("your {$field} can only contain letters", $field);
+            $your = _('your');
+            $letters = _('can only contain letters');
+            $this->addError("$your {$field} $letters", $field);
             $this->valid[$field] = '';
         } else
         {
@@ -88,8 +94,8 @@ class SignupValidator
         $res = $q->fetch();
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
-            $this->addError('the email must be valid                                                                                                         
-            ', 'email');
+            $mailErr = _('the email must be valid');
+            $this->addError($mailErr, 'email');
             $this->valid['email'] = '';
         } elseif($res === false)
         {
@@ -97,7 +103,8 @@ class SignupValidator
         }
         else
         {
-            $this->addError('the email is already register', 'email');
+            $mailReg = _('the email is already registered');
+            $this->addError($mailReg, 'email');
             $this->valid['email'] = '';
         }
     }
@@ -121,7 +128,8 @@ class SignupValidator
 
         if (!filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT))
         {
-            $this->addError('phone number is not valid', 'phone');
+            $phoneErr = _('phone number is not valid');
+            $this->addError($phoneErr, 'phone');
             $this->valid['phone'] = '';
 
         }
@@ -135,10 +143,13 @@ class SignupValidator
     {
         if ($this->data['password']!== $this->data['rePassword'])
         {
-            $this->addError('the passwords are different', 'password');
+            $passDif = _('the passwords are different');
+            $this->addError($passDif, 'password');
         }
-         elseif(strlen($this->data['password'])<6)
-            $this->addError('the password is too short','password');
+         elseif(strlen($this->data['password'])<6) {
+             $passShort = _('the password is too short');
+             $this->addError($passShort, 'password');
+         }
     }
 
 	    private function addDatabase(): void
@@ -156,11 +167,13 @@ class SignupValidator
                 ]);
 		    if($q)
 		    {
-		        $this->valid['request'] = 'you are now registered';
-		        $_SESSION['id'] =$uuid;
+		        $validReq = _('you are now registered');
+		        $this->valid['request'] = $validReq;
+		        $_SESSION['id'] = $uuid;
                 $_SESSION['firstName'] =  ucfirst($this->data['firstName']);
 		        return;
 		    }
-		    $this->error['request'] = 'there is a technical problem try later';
+		    $techErr = 'there is a technical problem try later';
+		    $this->error['request'] = $techErr;
 	    }
 }

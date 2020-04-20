@@ -1,5 +1,16 @@
 <?php
 require_once "session.php";
+require_once "localization.php";
+
+$q =$DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
+$q->execute([
+    $_SESSION['id']
+]);
+$res = $q->fetchAll();
+if(!$res[0]['admin']){
+    header('Location: main.php');
+    exit;
+}
 ?>
 <html>
 <head>
@@ -25,12 +36,12 @@ require_once "session.php";
     require_once "header.php";
     ?>
     <main>
-        <form method="post" enctype="multipart/form-data">
-            <label>Demo File Name</label><br><br>
+        <form method="post" enctype="multipart/form-data" style="text-align: center">
+            <label><?=_("Demo File Name")?></label><br><br>
             <input type="text" name="fileDir"><br><br>
-            <label> Demo Zip File (Only Zip Files Allowed)</label><br><br>
+            <label><?=_("Demo Zip File (Only Zip Files Allowed)")?></label><br><br>
             <input type="file" name="fileName"><br><br>
-            <input type="submit" name="fileSubmit" value="Submit Demo">
+            <input type="submit" name="fileSubmit" value="<?=_('Submit Demo')?>">
         </form>
     </main>
     <?php
@@ -40,10 +51,8 @@ require_once "session.php";
 </html>
 <?php
 // Get Project path
-define('_PATH', __DIR__);
-var_dump($_FILES);
-echo "<br>";
-var_dump($_POST);
+define('_PATH', dirname(__FILE__));
+
 // Zip file name
 if(!empty($_FILES) && !empty($_POST['fileDir'])){
     $filename = $_FILES["fileName"]["tmp_name"];
@@ -58,7 +67,8 @@ if(!empty($_FILES) && !empty($_POST['fileDir'])){
         // Extract file
         $zip->extractTo($path);
         $zip->close();
-        echo "ok";
+
+        echo 'Unzip!';
     } else {
         echo "the file can't be open or the name is not existing";
     }
