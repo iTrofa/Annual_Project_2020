@@ -38,7 +38,7 @@ include('header.php');
         <div class="col-lg-8 push-lg-4 personal-info">
             <form role="form">
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?=_("Nombre")?></label>
+                    <label class="col-lg-3 col-form-label form-control-label"><?=_("First Name")?></label>
                     <div class="col-lg-9">
                         <input class="form-control" type="text" value="" />
                     </div>
