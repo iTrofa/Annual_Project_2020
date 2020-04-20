@@ -43,7 +43,7 @@ class StreamReader {
   function length() {
     return false;
   }
-};
+}
 
 class StringReader {
   var $_pos;
@@ -78,7 +78,7 @@ class StringReader {
     return strlen($this->_str);
   }
 
-};
+}
 
 
 class FileReader {
@@ -138,7 +138,7 @@ class FileReader {
     fclose($this->_fd);
   }
 
-};
+}
 
 // Preloads entire file in memory first, then creates a StringReader
 // over it (it assumes knowledge of StringReader internals)
@@ -161,7 +161,7 @@ class CachedFileReader extends StringReader {
       return false;
     }
   }
-};
+}
 
 
 ?>

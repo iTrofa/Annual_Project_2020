@@ -1,6 +1,16 @@
 <?php
 require_once "session.php";
 require_once "localization.php";
+
+$q =$DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
+$q->execute([
+    $_SESSION['id']
+]);
+$res = $q->fetchAll();
+if(!$res[0]['admin']){
+    header('Location: main.php');
+    exit;
+}
 ?>
 <html>
 <head>
