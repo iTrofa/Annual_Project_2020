@@ -48,6 +48,13 @@ $res = $q->fetchAll();
                         <?php
                         if ($res[0]['admin']) {
                             ?>
+                            <li><a class="nav-link" href="partnerManagement.php"><?= _("Partner Management") ?></a></li>
+                            <?php
+                        }
+                        ?>
+                        <?php
+                        if ($res[0]['admin']) {
+                            ?>
                             <li><a class="nav-link" href="updateSubscription.php"><?= _("Update Subscription") ?></a>
                             </li>
                             <?php
