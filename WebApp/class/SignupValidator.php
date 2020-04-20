@@ -5,11 +5,8 @@ require_once('Lang/gettext.inc');
 require 'autoload.php';
 
 
-class SignupValidator
+class SignupValidator extends Form
 {
-    private array $data;
-    private array $error;
-    private array $valid;
     private array $fields =
         ['phone', 'email', 'firstName',
         'lastName','password','rePassword'];
@@ -19,9 +16,8 @@ class SignupValidator
      * SignupValidator constructor.
      * @param array $post
      */
-    public function __construct(array $post)
+    public function __construct(array $post,bool $update = false)
     {
-        global $db;
         $this->data = $post;
         $this->valid = [];
         $this->error = [];
@@ -63,28 +59,9 @@ class SignupValidator
             $_SESSION['error'] = $this->error;
             $_SESSION['valid'] = $this->valid;
 
-        return;
     }
 
-    /**
-     * @param $field
-     */
-    private function validateName($field): void
-    {
-        $name = $this->data[$field];
 
-        if (!ctype_alpha($name))
-        {
-            $your = _('your');
-            $letters = _('can only contain letters');
-            $this->addError("$your {$field} $letters", $field);
-            $this->valid[$field] = '';
-        } else
-        {
-            $this->addValid($field);
-        }
-
-    }
 
     private function validateEmail(): void
     {
@@ -109,19 +86,7 @@ class SignupValidator
         }
     }
 
-    /**
-     * @param string $errorString
-     * @param string $field
-     */
-    private function addError(string $errorString, string $field): void
-    {
-        $this->error[$field] = $errorString;
-    }
 
-    private function addValid(string $field): void
-    {
-        $this->valid[$field] = $this->data[$field];
-    }
 
     private function validatePhone(): void
     {
@@ -158,8 +123,8 @@ class SignupValidator
             $q = $this->dbManager->query('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
              VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)',
                 [
-                    ':firstName' => ucfirst($this->data['firstName']),
-                    ':lastName' => ucfirst($this->data['lastName']),
+                    ':firstName' => $this->data['firstName'],
+                    ':lastName' => $this->data['lastName'],
                     ':email' => strtolower($this->data['email']),
                     ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
                     ':password' => password_hash($this->data['password'], PASSWORD_ARGON2ID, ['cost' => 14]),
@@ -173,7 +138,7 @@ class SignupValidator
                 $_SESSION['firstName'] =  ucfirst($this->data['firstName']);
 		        return;
 		    }
-		    $techErr = 'there is a technical problem try later';
+		    $techErr = _('there is a technical problem try later');
 		    $this->error['request'] = $techErr;
 	    }
 }

@@ -17,8 +17,8 @@ require_once "localization.php";
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/stripe.css"/>
 <title><?= _("Account - Flash Assistance")?></title>
-<script src="header.js" defer></script>
-<script src="footer.js" defer></script>
+<script src="javascript/header.js" defer></script>
+<script src="javascript/footer.js" defer></script>
 <style>
 
 </style>
@@ -36,7 +36,7 @@ include('header.php');
             <br>
         </div>
         <div class="col-lg-8 push-lg-4 personal-info">
-            <form role="form">
+            <form method="post" role="form">
                 <div class="form-group row">
                     <label class="col-lg-3 col-form-label form-control-label"><?=_("First Name")?></label>
                     <div class="col-lg-9">

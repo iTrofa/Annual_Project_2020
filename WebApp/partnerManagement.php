@@ -49,8 +49,8 @@ if (isset($_POST['remove_job']) && isset($_POST['id_remove_job'])) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/main.css">
     <title>Partner Management - Flash Assistance</title>
-    <script src="header.js"></script>
-    <script src="footer.js"></script>
+    <script src="javascript/header.js"></script>
+    <script src="javascript/footer.js"></script>
 </head>
 <body onload="checkFooter()">
 <?php

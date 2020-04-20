@@ -28,8 +28,8 @@ $nameSub = $Sub[0]['nameSub'];
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/services.css">
     <title>Flash Assistance</title>
-    <script src="header.js" defer></script>
-    <script src="footer.js" defer></script>
+    <script src="javascript/header.js" defer></script>
+    <script src="javascript/footer.js" defer></script>
 </head>
 <body onload="checkFooter()">
 <?php
@@ -85,7 +85,7 @@ $res = $q->fetchAll();
                         <input type="text" aria-describedby="button-addon3" class="form-control border-0"
                                value="<?= 'The old price was ' . ($finalprice + $finalprice * 0.21) . ' now it\'s ' . ($finalprice + $finalprice * 0.21) * $valueSub ?>">
                         <div class="input-group-append border-0">
-                            <a href="subscription.php">
+                            <a href="../subscription.php">
                                 <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i
                                             class="fa fa-gift mr-2"></i><?= _('Look at our other Subscriptions') ?>
                                 </button>

@@ -25,8 +25,8 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 <link rel="stylesheet" href="css/main.css">
 <link rel="stylesheet" href="css/stripe.css"/>
 <title>Flash Assistance</title>
-<script src="header.js" defer></script>
-<script src="footer.js" defer></script>
+<script src="javascript/header.js" defer></script>
+<script src="javascript/footer.js" defer></script>
 <style>
 
 </style>
@@ -77,7 +77,7 @@ if(isset($_GET['express']) && $_GET['express'] === true){
     <!-- Stripe JS -->
     <script src="https://js.stripe.com/v3/">    </script>
     <!-- Your JS File -->
-    <script src="charge.js"></script>
+    <script src="javascript/charge.js"></script>
 
 <?php
 include ('footer.php');

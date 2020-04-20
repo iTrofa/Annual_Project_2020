@@ -38,7 +38,7 @@ class ImageValidator
         return 'ok';
     }
 
-    public function checkmimeType(): string
+    public function checkMimeType(): string
     {
         $mimetype = mime_content_type($this->data['image']['tmp_name']);
         if (!in_array($mimetype, $this->mimetype, true))
@@ -48,7 +48,7 @@ class ImageValidator
         return 'ok';
     }
 
-    public function checkCorresopdingmimtypeExt():string
+    public function checkCorrespondingMimetypeExt():string
     {
         if (strpos(mime_content_type($this->data['image']['tmp_name']),$this->ext) === false) {
                 return 'the type content doesn\'t correspond with the extensions';
@@ -61,14 +61,14 @@ class ImageValidator
     {
         if ($_FILES['image']['size'] > $this->maxsize)
         {
-            return 'fichier trop volumineux';
+            return 'the file is too big';
         }
         return 'ok';
     }
 
     public function generateUniqueName(): void
     {
-        $id = sha1(uniqid('ok', true));
+        $id = sha1(uniqid('', true));
         $name = $id . '.' . strtolower($this->ext);
         $this->fullpath = $this->basePath . $name;
     }

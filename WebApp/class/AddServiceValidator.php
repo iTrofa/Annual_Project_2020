@@ -1,9 +1,9 @@
 <?php
-require_once 'session.php';
+require_once '../session.php';
 
-class AddServiceValidator
+class AddServiceValidator extends Form
 {
-    private array $postData;
+    private array $data;
     private array $error;
     private array $valid;
     private array $fields =
@@ -19,7 +19,7 @@ class AddServiceValidator
      */
     public function __construct(array $post, array $file)
     {
-        $this->postData = $post;
+        $this->data = $post;
         $this->valid = [];
         $this->error = [];
         $this->db = App::getDb();
@@ -30,7 +30,7 @@ class AddServiceValidator
     {
         foreach ($this->fields as $field)
         {
-            if (empty($this->postData[$field]))
+            if (empty($this->data[$field]))
             {
                 $this->addError("{$field} is empty", $field);
             } else
@@ -91,7 +91,7 @@ class AddServiceValidator
             $_SESSION['valid'] = $this->valid;
             return false;
         }
-         $error = $this->validateImage->checkmimeType();
+         $error = $this->validateImage->checkMimeType();
         if ($error !== 'ok'){
             $this->addError($error, 'image');
             $_SESSION['error'] = $this->error;
@@ -107,7 +107,7 @@ class AddServiceValidator
         }
         $this->validateImage->generateUniqueName();
 
-        $error = $this->validateImage->checkCorresopdingmimtypeExt();
+        $error = $this->validateImage->checkCorrespondingMimetypeExt();
         if ($error !== 'ok'){
             $this->addError($error, 'image');
             $_SESSION['error'] = $this->error;
@@ -120,7 +120,7 @@ class AddServiceValidator
 
     private function uniqueServiceName(): void
     {
-        $q = $this->db->query('select name from service where name= ?',[ucfirst($this->postData['serviceName'])]);
+        $q = $this->db->query('select name from service where name= ?',[$this->data['serviceName']]);
         $res = $q->fetch();
         if (empty($res))
         {
@@ -130,51 +130,22 @@ class AddServiceValidator
         $this->addError('the service already exist','serviceName');
     }
 
-    /**
-     * @param $field
-     */
-    private function validateName(string $field): void
-    {
-        $this->postData[$field] = ucfirst($this->postData[$field]);
-        $data =  $this->postData[$field];
-        $data = str_replace(' ','',$data);
-        if (!ctype_alpha($data))
-        {
-            $this->addError("your {$field} can only contain letters", $field);
-            $this->valid[$field] = '';
-            return;
-        }
-            $this->addValid($field);
-    }
 
-    /**
-     * @param string $errorString
-     * @param string $field
-     */
-    private function addError(string $errorString, string $field): void
-    {
-        $this->error[$field] = $errorString;
-    }
-
-    private function addValid(string $field): void
-    {
-        $this->valid[$field] = $this->postData[$field];
-    }
 
     private function checkCategory():void {
-        $this->postData['category'] = ucfirst(strtolower($this->postData['category']));
-        $q = $this->db->query('select idCategory from categoryservice where idCategory = ?',[$this->postData['category']]);
+        $this->data['category'] = ucfirst(strtolower($this->data['category']));
+        $q = $this->db->query('select idCategory from categoryservice where idCategory = ?',[$this->data['category']]);
         $res = $q->fetch();
         if (!empty($res)){
             $this->addDataService();
             return;
         }
-            $this->addError("this category doesn't exist {$this->postData['category']}", 'category');
+            $this->addError("this category doesn't exist {$this->data['category']}", 'category');
 
     }
     private function checkPrice():void
     {
-        if (is_numeric($this->postData['price']) && $this->postData['price'] > 0){
+        if (is_numeric($this->data['price']) && $this->data['price'] > 0){
             $this->addValid('price');
             return;
         }
@@ -182,17 +153,17 @@ class AddServiceValidator
     }
     private function addDataService(): void
     {
-        $demo = isset($this->postData['demo'])?true:false;
+        $demo = isset($this->data['demo']);
         $q = $this->db->query('INSERT INTO service (idService,category,name, price, image, demo,description)
              VALUES (:idService,:idCategory,:service,:price,:image,:demo,:description)',
             [
                 ':idService'=> DbManager::v4(),
-                ':idCategory' => $this->postData['category'],
-                ':service' => $this->postData['serviceName'],
-                ':price' => $this->postData['price'],
+                ':idCategory' => $this->data['category'],
+                ':service' => $this->data['serviceName'],
+                ':price' => $this->data['price'],
                 ':image' => $this->validateImage->getFullpath(),
                 ':demo' => $demo,
-                ':description' =>$this->postData['serviceDescription']
+                ':description' =>$this->data['serviceDescription']
             ]
         );
 
@@ -207,7 +178,7 @@ class AddServiceValidator
 
     private function validateLength($field):void
     {
-        if (strlen($this->postData[$field])>150){
+        if (strlen($this->data[$field])>150){
                 $this->addError("the {$field} too long",$field);
             return;
         }
