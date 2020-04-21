@@ -60,15 +60,15 @@ if (isset($_POST['remove_admin'])) {
 </head>
 <body onload="checkFooter()">
 <?php
+
 require "header.php";
 ?>
 <main>
     <?php
     //List of Workers
-    $DbManager = new  DbManager();
     $q = "SELECT * FROM person";
-    $req = $DbManager->getDb()->query($q);
-    $req->execute();
+    $req = $DbManager->query($q);
+
     $results = $req->fetchAll();
     ?>
 

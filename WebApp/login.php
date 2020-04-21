@@ -1,6 +1,6 @@
 <?php
-require 'DbManager.php';
-$DbManager = new DbManager();
+require_once 'autoload.php';
+$DbManager = App::getDb();
 if (session_status() === PHP_SESSION_NONE)
 {
     session_start();
@@ -16,7 +16,6 @@ if (isset($_POST['english'])) {
     $_SESSION['lang'] = "fr_FR";
 }
 
-require_once 'LoginValidator.php';
 
 
 error_reporting(E_ALL | E_STRICT);
@@ -103,8 +102,8 @@ if (!empty($_POST))
             <?php
             $return['error'] = $return['error'] ?? '';
             $return['valid'] = $return['valid'] ?? '';
-            if ($return['valid'] != ""){
-                header("Location: main.php");
+            if ($return['valid'] !== ''){
+                header('Location: main.php');
                 exit;
             }
             ?>

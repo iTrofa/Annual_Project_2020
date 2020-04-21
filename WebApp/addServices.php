@@ -1,7 +1,6 @@
 <?php
 require_once "session.php";
-require_once "localization.php";
-require_once 'AddServiceValidator.php';
+
 
 $q =$DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
 $q->execute([
@@ -23,7 +22,7 @@ if (!empty($_POST))
 }
 ?>
 <head>
-    <title>Add Services - Flash Assistance</title>
+    <title>Services - Flash Assistance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -55,16 +54,16 @@ include('header.php');
 echo "<br><br><br><br>";
 //List of Workers
 $q = "SELECT * FROM service";
-$DbManager = new  DbManager();
-$req = $DbManager->getDb()->query($q);
+$db = App::getDb();
+$req = $db->query($q);
 
 $results = [];
 while ($user = $req->fetch())
 {
     $results[] = $user;
 }
-$q = $DbManager->getDb()->query("SELECT idCategory,nameCategory from categoryservice");
-$category = $q->fetchall();
+$q = $db->query("SELECT idCategory,nameCategory from categoryservice");
+$category = $q->fetchAll();
 ?>
 <div class="container" id="mainContainer" style="display: block;">
     <input type="button" class="btn-large btn-primary btn" onclick="back2back()" style="color: black;width: 15%"

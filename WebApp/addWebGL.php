@@ -37,7 +37,7 @@ if(!$res[0]['admin']){
     ?>
     <main>
         <form method="post" enctype="multipart/form-data" style="text-align: center">
-            <label><?=_("Demo Directory Name")?></label><br><br>
+            <label><?=_("Demo File Name")?></label><br><br>
             <input type="text" name="fileDir"><br><br>
             <label><?=_("Demo Zip File (Only Zip Files Allowed)")?></label><br><br>
             <input type="file" name="fileName"><br><br>
@@ -56,10 +56,10 @@ define('_PATH', dirname(__FILE__));
 // Zip file name
 if(!empty($_FILES) && !empty($_POST['fileDir'])){
     $filename = $_FILES["fileName"]["tmp_name"];
-    $zip = new ZipArchive;
+    $zip = new ZipArchive();
     $res = $zip->open($filename);
     echo $res;
-    if ($res === TRUE) {
+    if ($res === TRUE && $zip->locateName($_POST['fileDir']) !== false) {
 
         // Unzip path
         $path = _PATH . "/WebGL/". $_POST['fileDir']. "/";
@@ -70,6 +70,6 @@ if(!empty($_FILES) && !empty($_POST['fileDir'])){
 
         echo 'Unzip!';
     } else {
-        echo 'failed!';
+        echo "the file can't be open or the name is not existing";
     }
 }

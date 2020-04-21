@@ -11,5 +11,7 @@ C_APP_REGISTRATION/stdout.txt
 C_APP_REGISTRATION/stderr.txt
 C_APP_REGISTRATION/.idea/
 C_APP_REGISTRATION/qrcode.png
-JAVA/
+javafxapp/.idea/
+.idea/
 javafxapp/
+JAVA/

@@ -1,5 +1,5 @@
 <?php
-require_once "session.php";
+require_once 'session.php';
 require_once "localization.php";
 
 $q = $DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
@@ -132,6 +132,6 @@ require_once "header.php";
     </form>
 </main>
 <?php
-require_once "footer.php";
+require_once 'footer.php';
 ?>
 </body>

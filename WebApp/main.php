@@ -33,17 +33,17 @@ include('header.php');
 <br><br><br><br>
 <?php
 //List of Workers
-$DbManager = new  DbManager();
-$q = "SELECT * FROM person";
-$req = $DbManager->getDb()->query($q);
-$req->execute();
+$DbManager = App::getDb();
+$q = 'SELECT * FROM person';
+$req = $DbManager->query($q);
+
 
 $results = [];
 while ($user = $req->fetch()) {
     $results[] = $user;
 }
-$q = $DbManager->getDb()->prepare("SELECT * FROM service");
-$q->execute();
+$q = $DbManager->query('SELECT * FROM service');
+
 $service = $q->fetchAll();
 if(isset($_SESSION['firstName'])){?>
     <h1 id="welcomeInput"><?= _("Welcome to Flash Assistance") . " " . $_SESSION['firstName']?></h1><br><br>
@@ -60,7 +60,7 @@ $firstSerName = $service[0]['name'];
         <ol class="carousel-indicators">
             <?php
             echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\"0\" class=\"active\"></li>";
-            for($i=1; $i<count($service);$i++){
+            for($i=1, $iMax = count($service); $i< $iMax; $i++){
             echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\".$i.\" class=\"\"></li>";
             }
             ?>
@@ -74,7 +74,7 @@ $firstSerName = $service[0]['name'];
                     echo "<p class=\"carousel-label-color\">$firstDesc</p>";
                 echo "</div>";
             echo "</div>";
-            for ($i = 1; $i<count($service);$i++){
+            for ($i = 1, $iMax = count($service); $i< $iMax; $i++){
                 $image = $service[$i]['image'];
                 $desc = $service[$i]['description'];
                 $SerName = $service[$i]['name'];

@@ -2,10 +2,10 @@
 require_once "session.php";
 require_once "localization.php";
 
-$q = $DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
-$q->execute([
+$q = $DbManager->query("SELECT admin FROM Person Where idPerson = ?",
+    [
     $_SESSION['id']
-]);
+    ]);
 $res = $q->fetchAll();
 ?>
 <header id="header">
@@ -77,13 +77,13 @@ $res = $q->fetchAll();
             </ul>
             <form class="form-inline">
                 <?php
-                $q = $DbManager->getDb()->prepare("SELECT idOrders FROM orders WHERE status = 'active' && idPerson = ?");
-                $q->execute([
-                    $_SESSION['id']
-                ]);
+                $q = $DbManager->query("SELECT idOrders FROM orders WHERE status = 'active' && idPerson = ?",
+                    [
+                        $_SESSION['id']
+                    ]);
                 $res = $q->fetchAll();
                 $link = "paymentCart.php?";
-                for ($i = 0; $i < count($res); $i++) {
+                for($i = 0, $iMax = count($res); $i< $iMax; $i++){
                     if ($i > 0)
                         $link = $link . "&";
                     $link = $link . "cart" . $i . "=" . $res[$i]['idOrders'];

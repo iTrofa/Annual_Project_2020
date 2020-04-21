@@ -35,12 +35,11 @@ include('header.php');
 <div class="container" style="margin-top: 7%;">
     <section class="price-comparison">
     <?php
-    $DbManager = new DbManager();
-    $q = $DbManager->getDb()->prepare("SELECT * FROM subscription ORDER BY subscription.subPrice ASC");
-    $q->execute();
+    $DbManager = App::getDb();
+    $q = $DbManager->query('SELECT * FROM subscription ORDER BY subscription.subPrice ASC');
     $res = $q->fetchAll();
-    for($i=0;$i<count($res);$i++){
-        if($res[$i]['nameSub'] != "Professional"){
+    for($i=0, $iMax = count($res); $i< $iMax; $i++){
+        if($res[$i]['nameSub'] !== 'Professional'){
         echo "<div class='price-column'>";
             }else{
         echo "<div class='price-column popular'>";
@@ -144,7 +143,7 @@ include('header.php');
 </div>
 <br><br>
 <?php
-include("footer.php"); ?>
+include('footer.php'); ?>
 </body>
 </html>
 

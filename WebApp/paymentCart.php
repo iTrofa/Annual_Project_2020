@@ -34,9 +34,9 @@ $nameSub = $Sub[0]['nameSub'];
 <body onload="checkFooter()">
 <?php
 include("header.php");
-$DbManager = new DbManager();
-$q = $DbManager->getDb()->prepare("SELECT orders.idOrders, service.name, orders.price FROM orders LEFT JOIN Person ON orders.idPerson = person.idPerson LEFT JOIN service ON orders.idService = service.idService WHERE status = 'active'");
-$q->execute();
+$DbManager = App::getDb();
+$q = $DbManager->query("SELECT orders.idOrders, service.name, orders.price FROM orders LEFT JOIN Person ON 
+orders.idPerson = person.idPerson LEFT JOIN service ON orders.idService = service.idService WHERE status = 'active'");
 $res = $q->fetchAll();
 
 
@@ -47,7 +47,7 @@ $res = $q->fetchAll();
     <ul>
         <?php
         $finalprice = 0;
-        for ($i = 0; $i < count($res); $i++) {
+        for ($i = 0, $iMax = count($res); $i < $iMax; $i++) {
             $id = $res[$i]['idOrders'];
             $service = $res[$i]['name'];
             $price = $res[$i]['price'];
@@ -148,7 +148,7 @@ $res = $q->fetchAll();
     <br><br>
 </main>
 <?php
-include("footer.php");
+include('footer.php');
 ?>
 </body>
 </html>
