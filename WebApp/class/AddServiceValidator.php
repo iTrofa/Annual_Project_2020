@@ -12,19 +12,6 @@ class AddServiceValidator extends Form
     private ImageValidator $validateImage;
 
 
-    /**
-     * AddServiceValidator constructor.
-     * @param array $post $_POST data
-     * @param array $file $_FILES data
-     */
-    public function __construct(array $post, array $file)
-    {
-        $this->data = $post;
-        $this->valid = [];
-        $this->error = [];
-        $this->db = App::getDb();
-        $this->validateImage = new ImageValidator($file,'images/services/');
-    }
 
     public function validateInputs(): void
     {
@@ -74,47 +61,6 @@ class AddServiceValidator extends Form
 
         $_SESSION['error'] = $this->error;
         $_SESSION['valid'] = $this->valid;
-    }
-    private function checkImages():bool
-    {
-        $error = $this->validateImage->checkError();
-        if ($error !== 'ok'){
-            $this->addError($error, 'image');
-            $_SESSION['error'] = $this->error;
-            $_SESSION['valid'] = $this->valid;
-            return false;
-        }
-        $error = $this->validateImage->checkExt();
-        if ($error !== 'ok'){
-            $this->addError($error, 'image');
-            $_SESSION['error'] = $this->error;
-            $_SESSION['valid'] = $this->valid;
-            return false;
-        }
-         $error = $this->validateImage->checkMimeType();
-        if ($error !== 'ok'){
-            $this->addError($error, 'image');
-            $_SESSION['error'] = $this->error;
-            $_SESSION['valid'] = $this->valid;
-            return false;
-        }
-        $error = $this->validateImage->checkSize();
-        if ($error !== 'ok'){
-            $this->addError($error, 'image');
-            $_SESSION['error'] = $this->error;
-            $_SESSION['valid'] = $this->valid;
-            return false;
-        }
-        $this->validateImage->generateUniqueName();
-
-        $error = $this->validateImage->checkCorrespondingMimetypeExt();
-        if ($error !== 'ok'){
-            $this->addError($error, 'image');
-            $_SESSION['error'] = $this->error;
-            $_SESSION['valid'] = $this->valid;
-            return false;
-        }
-        return true;
     }
 
 

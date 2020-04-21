@@ -1,11 +1,26 @@
 <?php
 
+require_once '../autoload.php';
 
-class Form
+
+abstract class Form
 {
     protected array $error;
     protected array $valid;
     protected array $data;
+    protected DbManager $dbManager;
+    protected ImageValidator $validateImage;
+
+
+    public function __construct(array $post, array $file)
+    {
+        $this->data = $post;
+        $this->validateImage = new ImageValidator($file, 'images/services/');
+        $this->valid = [];
+        $this->error = [];
+        $this->dbManager = App::getDb();
+    }
+
     /**
      * @param string $errorString
      * @param string $field
@@ -36,6 +51,52 @@ class Form
         {
             $this->addValid($field);
         }
+    }
 
+    protected function checkImages(): bool
+    {
+        $error = $this->validateImage->checkError();
+        if ($error !== 'ok')
+        {
+            $this->addError($error, 'image');
+            $_SESSION['error'] = $this->error;
+            $_SESSION['valid'] = $this->valid;
+            return false;
+        }
+        $error = $this->validateImage->checkExt();
+        if ($error !== 'ok')
+        {
+            $this->addError($error, 'image');
+            $_SESSION['error'] = $this->error;
+            $_SESSION['valid'] = $this->valid;
+            return false;
+        }
+        $error = $this->validateImage->checkMimeType();
+        if ($error !== 'ok')
+        {
+            $this->addError($error, 'image');
+            $_SESSION['error'] = $this->error;
+            $_SESSION['valid'] = $this->valid;
+            return false;
+        }
+        $error = $this->validateImage->checkSize();
+        if ($error !== 'ok')
+        {
+            $this->addError($error, 'image');
+            $_SESSION['error'] = $this->error;
+            $_SESSION['valid'] = $this->valid;
+            return false;
+        }
+        $this->validateImage->generateUniqueName();
+
+        $error = $this->validateImage->checkCorrespondingMimetypeExt();
+        if ($error !== 'ok')
+        {
+            $this->addError($error, 'image');
+            $_SESSION['error'] = $this->error;
+            $_SESSION['valid'] = $this->valid;
+            return false;
+        }
+        return true;
     }
 }

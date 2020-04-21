@@ -12,13 +12,15 @@ class LoginValidator
         $this->db = App::getDb();
     }
 
-    public function checkPassword(): array
+    public function checkInputs(): array
     {
-        if (isset($this->data['email'], $this->data['password'])) {
+        if (isset($this->data['email'], $this->data['password']))
+        {
             $q = $this->db->query('SELECT firstName,email, password,idPerson from person where email= :email',
-                [':email'=>$this->data['email']]);
+                [':email' => $this->data['email']]);
             $res = $q->fetch();
-            if (password_verify($this->data['password'], $res['password'])) {
+            if (password_verify($this->data['password'], $res['password']))
+            {
                 $_SESSION['id'] = $res['idPerson'];
                 $_SESSION['email'] = $res['email'];
                 $_SESSION['firstName'] = $res['firstName'];
