@@ -2,11 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6170068c-dc65-4a5e-be9e-8b87e754c617" name="Default Changelist" comment="add gi">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/azureSettings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../C_APP_REGISTRATION/C_APP REGISTRATION.layout" beforeDir="false" afterPath="$PROJECT_DIR$/../C_APP_REGISTRATION/C_APP REGISTRATION.layout" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../C_APP_REGISTRATION/bin/Debug/C_APP REGISTRATION.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../C_APP_REGISTRATION/bin/Debug/C_APP REGISTRATION.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../C_APP_REGISTRATION/obj/Debug/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/../C_APP_REGISTRATION/obj/Debug/main.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebApp/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/../WebApp/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebApp/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/../WebApp/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebApp/payment.php" beforeDir="false" afterPath="$PROJECT_DIR$/../WebApp/payment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../WebApp/services.php" beforeDir="false" afterPath="$PROJECT_DIR$/../WebApp/services.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../annuel.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/../annuel.mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/composerJson.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/settings.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/settings.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/DbManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/DbManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/projetAnnuel/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +56,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/src/main/resources/db.properties" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="last_opened_file_path" value="C:/Program Files (x86)/javafx-sdk-11.0.2/jfoenix-9.0.8.jar!/" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.13368982" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -49,10 +67,11 @@
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="fr.projetAnnuel.Main" />
       <module name="javafxapp.main" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files (x86)\javafx-sdk-11.0.2\lib&quot; --add-modules=javafx.controls,javafx.fxml  " />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="fr.projetAnnuel.*" />
@@ -63,11 +82,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="javafxapp" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Gradle.javafxapp" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.javafxapp" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SQLPlugin.ProjectConfiguration">
+    <queries />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -85,6 +129,7 @@
       <workItem from="1585570547529" duration="9000" />
       <workItem from="1585570684126" duration="18000" />
       <workItem from="1585571289207" duration="711000" />
+      <workItem from="1585761495653" duration="1133000" />
     </task>
     <task id="LOCAL-00001" summary="add gitignore">
       <created>1585571973226</created>
@@ -104,6 +149,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="add gitignore" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="485" y="84" key="#Main" timestamp="1585761730852">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="485" y="84" key="#Main/0.0.1536.824@0.0.1536.824" timestamp="1585761730852" />
     <state x="555" y="177" width="800" height="684" key="#Plugins" timestamp="1585571477162">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -112,37 +161,50 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="277" y="214" width="1161" height="677" key="#Project_Structure/67.27.1853.1053@67.27.1853.1053" timestamp="1585139173802" />
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585762156812">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="68" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585762156812" />
     <state x="464" y="23" width="981" height="993" key="CommitChangelistDialog2" timestamp="1585572149125">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="464" y="23" width="981" height="993" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1585572149125" />
-    <state x="735" y="264" width="424" height="513" key="FileChooserDialogImpl" timestamp="1585570700081">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="715" y="129" key="DetectedRootsChooserDialog" timestamp="1585762106267">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="715" y="129" key="DetectedRootsChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1585762106267" />
+    <state x="588" y="211" width="590" height="410" key="FileChooserDialogImpl" timestamp="1585762304026">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="588" y="211" width="590" height="410" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585762304026" />
     <state x="735" y="264" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1585570700081" />
     <state x="776" y="296" width="424" height="513" key="FileChooserDialogImpl/67.27.1853.1053@67.27.1853.1053" timestamp="1585139934563" />
     <state x="726" y="472" key="GitCloneDialog" timestamp="1585168741374">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="726" y="472" key="GitCloneDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1585168741374" />
-    <state width="1872" height="294" key="GridCell.Tab.0.bottom" timestamp="1585572159555">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1585762630409">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585762630409" />
     <state width="1872" height="294" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1585572159555" />
     <state width="1807" height="308" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1585169099309" />
-    <state width="1872" height="294" key="GridCell.Tab.0.center" timestamp="1585572159553">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1585762630409">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585762630409" />
     <state width="1872" height="294" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1585572159553" />
     <state width="1807" height="308" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1585169099308" />
-    <state width="1872" height="294" key="GridCell.Tab.0.left" timestamp="1585572159552">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1585762630409">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585762630409" />
     <state width="1872" height="294" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1585572159552" />
     <state width="1807" height="308" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1585169099308" />
-    <state width="1872" height="294" key="GridCell.Tab.0.right" timestamp="1585572159554">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1585762630409">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585762630409" />
     <state width="1872" height="294" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1585572159554" />
     <state width="1807" height="308" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1585169099309" />
     <state width="1807" height="318" key="GridCell.Tab.1.bottom" timestamp="1585141850304">
@@ -161,14 +223,23 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1807" height="318" key="GridCell.Tab.1.right/67.27.1853.1053@67.27.1853.1053" timestamp="1585141850304" />
-    <state x="456" y="151" width="1007" height="737" key="SettingsEditor" timestamp="1585571507242">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="441" y="0" width="1007" height="737" key="SettingsEditor" timestamp="1585762314404">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="441" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1585762314404" />
     <state x="456" y="151" width="1007" height="737" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1585571507242" />
     <state width="498" height="447" key="SwitcherDM" timestamp="1585571728645">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="498" height="447" key="SwitcherDM/0.0.1920.1032@0.0.1920.1032" timestamp="1585571728645" />
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog" timestamp="1585761495915">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="465" y="238" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585761495915" />
+    <state x="425" y="187" key="run.anything.popup" timestamp="1585761682430">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1585761682430" />
     <state x="623" y="227" width="672" height="678" key="search.everywhere.popup" timestamp="1585572163875">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
