@@ -30,6 +30,7 @@ require_once "localization.php";
 if (!empty($_POST))
 {
     $validator = new SignupValidator($_POST, $_FILES, true);
+    $validator->validateEmptyInputsUpdate();
 } else
 {
     $res = $DbManager->query('select firstName, lastName, email, phoneNumber,localisation,profilePic ');
