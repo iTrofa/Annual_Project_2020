@@ -23,8 +23,8 @@ require_once "localization.php";
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
     <title><?= _("Subscriptions - Flash Assistance")?></title>
-    <script src="header.js"></script>
-    <script src="footer.js"></script>
+    <script src="javascript/header.js"></script>
+    <script src="javascript/footer.js"></script>
 </head>
 <body onload="checkFooter()">
 <?php
@@ -130,7 +130,7 @@ include('header.php');
         }
 
             $idSub = $res[$i]['idSub'];
-            echo "<form method='get' action='paymentSub.php'>";
+            echo "<form method='get' action='payment/paymentSub.php'>";
             echo "<input name='idSub' type='hidden' value='$idSub'>";
             $startToday = _("Start Today");
             echo "<button class='cta'>$startToday</button>";

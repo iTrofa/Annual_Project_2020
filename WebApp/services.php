@@ -22,8 +22,8 @@ require_once "localization.php";
     <link rel="stylesheet" href="css/main.css">
     <link rel='stylesheet' href='css/services.css'>
     <link rel="icon" href="images/logo_dark.png">
-    <script src="header.js"></script>
-    <script src="footer.js"></script>
+    <script src="javascript/header.js"></script>
+    <script src="javascript/footer.js"></script>
     <script>
         $(document).ready(function () {
             $("#serviceSearch").on("keyup", function () {

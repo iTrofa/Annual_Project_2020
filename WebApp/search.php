@@ -19,8 +19,8 @@ require_once "localization.php";
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
       <link rel="stylesheet" href="css/main.css">
       <title>Services History</title>
-      <script src="header.js"></script>
-      <script src="footer.js"></script>
+      <script src="javascript/header.js"></script>
+      <script src="javascript/footer.js"></script>
   </head>
   <body onload="checkFooter()">
     <?php

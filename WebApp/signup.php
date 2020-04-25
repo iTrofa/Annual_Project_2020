@@ -17,7 +17,6 @@ if (isset($_POST['english'])) {
 
 
 require_once 'SignupValidator.php';
-error_reporting(E_ALL | E_STRICT);
 
 // define constants
 define('PROJECT_DIR', realpath('./'));
@@ -29,7 +28,7 @@ require_once('Lang/gettext.inc');
 $supported_locales = array('en_US', 'fr_FR');
 $encoding = 'UTF-8';
 
-$locale = (isset($_SESSION['lang']))? $_SESSION['lang'] : DEFAULT_LOCALE;
+$locale = $_SESSION['lang'] ?? DEFAULT_LOCALE;
 
 // gettext setup
 T_setlocale(LC_MESSAGES, $locale);
@@ -121,16 +120,20 @@ if (!empty($_POST))
                 </label>
                 <span class="error"><?= $_SESSION['error']['phone'] ?? '' ?></span>
                 <br>
-                <label> <?= _("Password")?>
-                    <input  type="password" name="password" required>
+                <label> <?= _("Password") ?>
+                    <input type="password" name="password" required>
                 </label>
                 <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
                 <br>
-                <label> <?= _("Retype Password")?>
+                <label> <?= _("Retype Password") ?>
                     <br>
-                    <input  type="password" name="rePassword" required>
+                    <input type="password" name="rePassword" required>
                 </label><br>
-                <button type="submit" id="btn" class="btn btn-primary btn-block btn-large"><?=_("Signup")?></button>
+                <label> <?= _("address") ?>
+                    <br>
+                    <input type="text" name="localisation" required>
+                </label><br>
+                <button type="submit" id="btn" class="btn btn-primary btn-block btn-large"><?= _("Signup") ?></button>
                 <br>
             </form>
         </div>

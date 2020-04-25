@@ -49,7 +49,7 @@ $return['valid'] = '';
 if (!empty($_POST))
 {
     $validator = new LoginValidator($_POST);
-    $return = $validator->checkPassword();
+    $return = $validator->checkInputs();
 }
 ?>
 <!DOCTYPE html>

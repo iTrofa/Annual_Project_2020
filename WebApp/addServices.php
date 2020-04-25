@@ -42,9 +42,9 @@ if (!empty($_POST))
     <link rel="stylesheet" href="css/main.css">
     <link rel='stylesheet' href='css/services.css'>
     <link rel="icon" href="images/logo_dark.png">
-    <script src="addServices.js"></script>
-    <script src="category.js"></script>
-    <script src="footer.js" defer></script>
+    <script src="javascript/addServices.js"></script>
+    <script src="javascript/category.js"></script>
+    <script src="javascript/footer.js" defer></script>
 </head>
 <body onload='checkFooter()'>
 

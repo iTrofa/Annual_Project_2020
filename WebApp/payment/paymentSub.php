@@ -21,8 +21,8 @@ require_once "session.php";
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/services.css">
     <title>Flash Assistance</title>
-    <script src="header.js" defer></script>
-    <script src="footer.js" defer></script>
+    <script src="javascript/header.js" defer></script>
+    <script src="javascript/footer.js" defer></script>
 </head>
 <body onload="checkFooter()">
 <?php

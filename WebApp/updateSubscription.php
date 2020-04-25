@@ -91,9 +91,9 @@ if (isset($_POST) && !empty($_POST)) {
     <link rel="stylesheet" href="css/services.css">
     <link href="https://fonts.googleapis.com/css?family=Lato|Poppins&display=swap" rel="stylesheet">
     <title>Add Subscriptions - Flash Assistance</title>
-    <script src="header.js"></script>
-    <script src="addSub.js"></script>
-    <script src="footer.js"></script>
+    <script src="javascript/header.js"></script>
+    <script src="javascript/addSub.js"></script>
+    <script src="javascript/footer.js"></script>
 </head>
 <body onload="checkFooter()">
 <?php

@@ -1,5 +1,5 @@
 <?php
-require 'autoload.php';
+require_once 'autoload.php';
 
 $DbManager = App::getDb();
 if (session_status() === PHP_SESSION_NONE) {

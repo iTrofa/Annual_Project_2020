@@ -45,7 +45,7 @@ function getDates($duration, $option)
 
 echo "<html>";
 echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&display=swap' rel='stylesheet'>";
-echo "<link rel='stylesheet' href='css/services.css'>";
+echo "<link rel='stylesheet' href='../css/services.css'>";
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" href="images/logo_dark.png"/>
@@ -64,8 +64,8 @@ echo "<link rel='stylesheet' href='css/services.css'>";
         crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/main.css">
 <title>Flash Assistance</title>
-<script src="header.js" defer></script>
-<script src="footer.js" defer></script>
+<script src="javascript/header.js" defer></script>
+<script src="javascript/footer.js" defer></script>
 <style>
     /* input:invalid {
          border: solid red 3px;
@@ -269,7 +269,7 @@ include('header.php');
                     <div class="input-group mb-4 border rounded-pill p-2">
                         <input type="text" aria-describedby="button-addon3" class="form-control border-0" value="<?='The old price was '.$finalPrice.' now it\'s ' . $finalPrice * $valueSub?>">
                         <div class="input-group-append border-0">
-                            <a href="subscription.php"><button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i><?=_('Look at our other Subscriptions')?></button></a>
+                            <a href="../subscription.php"><button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i><?=_('Look at our other Subscriptions')?></button></a>
                         </div>
                     </div>
                     <?php
