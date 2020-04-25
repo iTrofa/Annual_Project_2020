@@ -19,6 +19,24 @@ $(document).ready(function(){
     });
 });
 
+$(document).ready(function(){
+    $("#tableSearch3").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable3 tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
+$(document).ready(function(){
+    $("#tableSearch4").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable4 tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
 function myFunction(){
     const element = document.getElementById('userOption').value;
     if(element === 'Hour(s)'){

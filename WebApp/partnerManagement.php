@@ -58,15 +58,12 @@ require_once "header.php";
 ?>
 <main>
     <?php
-    $q = $DbManager->getDb()->prepare("SELECT * FROM person INNER JOIN orders on orders.affected != person.idPerson WHERE function != ''");
-    $q->execute();
-    $res = $q->fetchAll();
 
     $q = $DbManager->getDb()->prepare("SELECT idOrders, idPerson, service.name FROM orders LEFT JOIN service on orders.idService = service.idService WHERE affected is NULL && status='payed'");
     $q->execute();
     $affected = $q->fetchAll();
 
-    $q = $DbManager->getDb()->prepare("SELECT * FROM person INNER JOIN orders on orders.affected = person.idPerson");
+    $q = $DbManager->getDb()->prepare("SELECT person.idPerson, person.firstName, person.lastName, person.email, person.phoneNumber, person.function, person.localisation FROM person INNER JOIN orders on orders.affected = person.idPerson");
     $q->execute();
     $ActiveWorkers = $q->fetchAll();
 
@@ -74,6 +71,15 @@ require_once "header.php";
     $q->execute();
     $Activated = $q->fetchAll();
 
+    if(count($ActiveWorkers)>0) {
+        $q = $DbManager->getDb()->prepare("SELECT person.idPerson, person.firstName, person.lastName, person.email, person.phoneNumber, person.function, person.localisation FROM person INNER JOIN orders on orders.affected != person.idPerson WHERE function != ''");
+        $q->execute();
+        $res = $q->fetchAll();
+    }else{
+        $q = $DbManager->getDb()->prepare("SELECT person.idPerson, person.firstName, person.lastName, person.email, person.phoneNumber, person.function, person.localisation FROM person LEFT JOIN orders on orders.affected != person.idPerson WHERE function != ''");
+        $q->execute();
+        $res = $q->fetchAll();
+    }
     ?>
     <div class="container">
         <?php
@@ -182,7 +188,7 @@ require_once "header.php";
         </table>
 
         <h2 style="padding-top: 5%"><?= _("List of all Active Workers:") ?></h2>
-        <input class='form-control mb-4' id='tableSearch2' type='text'
+        <input class='form-control mb-4' id='tableSearch3' type='text'
                placeholder='<?= _("Type something to search list items") ?>'>
         <table class="table">
             <thead>
@@ -196,7 +202,7 @@ require_once "header.php";
                 <th><?= _("Localisation") ?></th>
             </tr>
             </thead>
-            <tbody id="myTable2">
+            <tbody id="myTable3">
             <?php
 
             for ($i = 0; $i < count($ActiveWorkers); $i++) {
@@ -224,7 +230,7 @@ require_once "header.php";
         </table>
 
         <h2 style="padding-top: 5%"><?= _("List of all Active Jobs:") ?></h2>
-        <input class='form-control mb-4' id='tableSearch2' type='text'
+        <input class='form-control mb-4' id='tableSearch4' type='text'
                placeholder='<?= _("Type something to search list items") ?>'>
         <table class="table">
             <thead>
@@ -235,7 +241,7 @@ require_once "header.php";
                 <th><?=_("Worker ID")?></th>
             </tr>
             </thead>
-            <tbody id="myTable2">
+            <tbody id="myTable4">
             <?php
 
             for ($i = 0; $i < count($Activated); $i++) {
