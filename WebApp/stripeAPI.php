@@ -34,7 +34,7 @@ echo "<link rel='stylesheet' href='css/services.css'>";
 <?php
 include('header.php');
 $DbManager = App::getDb();
-if(isset($_GET['express']) && $_GET['express'] === true){
+if(isset($_GET['express']) && $_GET['express'] == true){
     $q = $DbManager->query("SELECT * FROM orders WHERE status = 'express'");
     $res = $q->fetchAll();
     $finalprice = $res[0]['price'];
@@ -54,7 +54,7 @@ if(isset($_GET['express']) && $_GET['express'] === true){
     }
 ?></h5>
 <?php
-if(isset($_GET['express']) && $_GET['express'] === true){
+if(isset($_GET['express']) && $_GET['express'] == true){
     echo "<form action='charge.php?express=true' method='post' id='payment-form'>";
 }else if(isset($_GET['sub'])){
     echo "<form action='charge.php?sub=$sub' method='post' id='payment-form'>";
