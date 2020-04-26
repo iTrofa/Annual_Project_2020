@@ -2,7 +2,7 @@
 require_once "session.php";
 
 
-$q =$DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
+$q = $DbManager->getDb()->prepare("SELECT admin FROM person Where idPerson = ?");
 $q->execute([
     $_SESSION['id']
 ]);

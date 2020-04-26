@@ -1,16 +1,16 @@
 <?php
 require_once 'lib/pdf-invoice/src/InvoicePrinter.php';
+
 use Konekt\PdfInvoice\InvoicePrinter;
 
 session_start();
 
 $db = new DbManager();
-$q = $db->getDb()->prepare("SELECT idOrders,service.name,service.description,service.price,firstName,lastName,localisation from orders join person on orders.idPerson = person.idPerson join
+$q = $db->query("SELECT idOrders,service.name,service.description,service.price,firstName,lastName,localisation from orders join person on orders.idPerson = person.idPerson join
     service on orders.idService = service.idService
     where
       status ='active' and
-      orders.idPerson = ?");
-$q->execute([$_SESSION['id']]);
+      orders.idPerson = ?", [$_SESSION['id']]);
 $datas = $q->fetchAll();
 
 /* Adding Items in table */
@@ -20,7 +20,8 @@ $date = new DateTime('now');
 $date = $date->format('d-m-Y');
 
 
-$q = $db->getDb()->prepare('update orders set status = ? , dateOrder = STR_TO_DATE(?, "%d-%m-%Y") where idOrders = ? ');
+$q = $db->query('update orders set status = ? , dateOrder = STR_TO_DATE(?, "%d-%m-%Y") where idOrders = ? ',
+    [$datas[0]['idOrders']]);
 
 foreach ($datas as $service)
 {
@@ -30,7 +31,7 @@ foreach ($datas as $service)
     $invoice->setLogo("images/logo.png");
     $invoice->setColor("#AA3939");
     $invoice->setType("Sale Invoice");
-    $invoice->setReference("INV-55033645");
+    $invoice->setReference("INV-" . random_bytes(8));
 
 
     $invoice->setDate(date(' D d M,Y',time()));

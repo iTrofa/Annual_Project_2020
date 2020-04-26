@@ -67,6 +67,7 @@ if(isset($_GET['express']) && $_GET['express'] == true ){
 }else{
     $q = $DbManager->query("UPDATE orders SET status = 'payed' WHERE status = 'active'");
 }
+require_once '../pdf-invoice/invoice.php';
 // You can charge the customer later by using the customer id.
-header('Location: stripeAPI.php?return=your%20payment%20was%20processed%20successfully.');
+header('Location: ../main.php?return=your%20payment%20was%20processed%20successfully.');
 exit();

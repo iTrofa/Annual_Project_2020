@@ -6,10 +6,10 @@ class SignupValidator extends Form
 {
     private array $fields =
         ['phone', 'email', 'firstName',
-            'lastName', 'password', 'rePassword', 'location'];
+            'lastName', 'password', 'rePassword', 'localisation'];
     private array $fieldsUpdate =
         ['phone', 'email', 'firstName',
-            'lastName', 'location'];
+            'lastName', 'localisation'];
     private bool $update;
 
 
@@ -19,9 +19,9 @@ class SignupValidator extends Form
      * @param array $file $_FILES
      * @param bool $update true if it's for update profile else just signup
      */
-    public function __construct(array $post, array $file = null, bool $update = false)
+    public function __construct(array $post, ?array $file = null, bool $update = false)
     {
-        parent::__construct($post, $file);
+        parent::__construct($post, $file, 'images/profilePic/');
         $this->update = $update;
     }
 
@@ -38,11 +38,14 @@ class SignupValidator extends Form
                 $this->addValid($field);
             }
         }
-        if ($this->checkImages() === false)
+        if ($this->validateImage !== null)
         {
-            $_SESSION['valid'] = $this->valid;
-            $_SESSION['error'] = $this->error;
-            return;
+            if ($this->checkImages() === false)
+            {
+                $_SESSION['valid'] = $this->valid;
+                $_SESSION['error'] = $this->error;
+                return;
+            }
         }
         if (!empty($this->error))
         {
@@ -79,11 +82,15 @@ class SignupValidator extends Form
                 $this->addValid($field);
             }
         }
-        if ($this->checkImages() === false)
+        if ($this->validateImage)
         {
-            $_SESSION['valid'] = $this->valid;
-            $_SESSION['error'] = $this->error;
-            return;
+            if ($this->checkImages() === false)
+            {
+                $_SESSION['valid'] = $this->valid;
+                $_SESSION['error'] = $this->error;
+                return;
+            }
+            $this->validateImage->updateImage(true);
         }
         if (!empty($this->error))
         {
@@ -104,29 +111,38 @@ class SignupValidator extends Form
             return;
         }
         $this->updateDatabase();
+        $_SESSION['error'] = $this->error;
+        $_SESSION['valid'] = $this->valid;
     }
 
 
-    private function validateEmail(): void
+    private function validateEmail(bool $unique = false): void
     {
         $email = strtolower($this->data['email']);
-        $q = $this->dbManager->query('SELECT email from person where email =:email',
-            [':email' => $email]);
-        $res = $q->fetch();
+        if ($unique)
+        {
+
+            $q = $this->dbManager->query('SELECT email from person where email =:email',
+                [':email' => $email]);
+            $res = $q->fetch();
+            if ($res === false)
+            {
+                $this->addValid('email');
+                return;
+            }
+            $mailReg = _('the email is already registered');
+            $this->addError($mailReg, 'email');
+            $this->valid['email'] = '';
+            return;
+        }
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
             $mailErr = _('the email must be valid');
             $this->addError($mailErr, 'email');
             $this->valid['email'] = '';
-        } elseif($res === false)
+        } else
         {
             $this->addValid('email');
-        }
-        else
-        {
-            $mailReg = _('the email is already registered');
-            $this->addError($mailReg, 'email');
-            $this->valid['email'] = '';
         }
     }
 
@@ -166,38 +182,82 @@ class SignupValidator extends Form
 
     private function updateDatabase(): void
     {
-        $q = $this->dbManager->query('UPDATE SET firstName=:firstName, lastName =:lastName,email = :email,
-         :phoneNumber from person where idPerson = :idPerson', [
-            ':firstName' => $this->data['firstName'],
-            ':lastName' => $this->data['lastName'],
-            ':email' => strtolower($this->data['email']),
-            ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
-            ':password' => $this->data['password'],
-            ':idPerson' => $_SESSION['id']
-        ]);
+        if (!empty($this->data['password']))
+        {
+            $q = $this->dbManager->query('UPDATE person 
+                    SET     
+                        firstName=:firstName,
+                        lastName =:lastName,
+                        email = :email,
+                        phoneNumber = :phoneNumber,
+                        localisation = :localisation 
+                        where idPerson = :idPerson',
+                [
+                    ':firstName' => $this->data['firstName'],
+                    ':lastName' => $this->data['lastName'],
+                    ':email' => strtolower($this->data['email']),
+                    ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
+                    ':localisation' => $this->data['localisation'],
+                    ':password' => $this->data['password'],
+                    ':idPerson' => $_SESSION['id']
+                ]);
+            if ($q)
+            {
+                $_SESSION['firstName'] = ucfirst($this->data['firstName']);
+                return;
+            }
+            $techErr = _('there is a technical problem try later');
+            $this->error['request'] = $techErr;
+        } else
+        {
+            $q = $this->dbManager->query('UPDATE person
+                            SET 
+                                firstName=:firstName,
+                                lastName =:lastName,
+                                email = :email,
+                                phoneNumber =:phoneNumber,
+                                localisation = :localisation 
+                                where idPerson = :idPerson',
+                [
+                    ':firstName' => $this->data['firstName'],
+                    ':lastName' => $this->data['lastName'],
+                    ':email' => strtolower($this->data['email']),
+                    ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
+                    ':localisation' => $this->data['localisation'],
+                    ':idPerson' => $_SESSION['id']
+                ]);
+            if ($q)
+            {
+                $_SESSION['firstName'] = ucfirst($this->data['firstName']);
+                return;
+            }
+            $techErr = _('there is a technical problem try later');
+            $this->error['request'] = $techErr;
+        }
     }
 
     private function addDatabase(): void
     {
         $uuid = DbManager::v4();
-        $q = $this->dbManager->query('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson)
-             VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson)',
+        $q = $this->dbManager->query('INSERT INTO person (firstName, lastName, email, phoneNumber, password, idPerson,localisation)
+             VALUES (:firstName,:lastName,:email,:phoneNumber,:password,:idPerson,:localisation)',
             [
                 ':firstName' => $this->data['firstName'],
                 ':lastName' => $this->data['lastName'],
                 ':email' => strtolower($this->data['email']),
                 ':phoneNumber' => filter_var($this->data['phone'], FILTER_SANITIZE_NUMBER_INT),
                 ':password' => $this->data['password'],
-                ':idPerson' => $uuid
+                ':idPerson' => $uuid,
+                ':localisation' => $this->data['localisation']
             ]);
-		    if($q)
-		    {
-		        $validReq = _('you are now registered');
-		        $this->valid['request'] = $validReq;
-		        $_SESSION['id'] = $uuid;
-                $_SESSION['firstName'] =  ucfirst($this->data['firstName']);
-		        return;
-		    }
+        if ($q)
+        {
+            $validReq = _('you are now registered');
+            $this->valid['request'] = $validReq;
+            $_SESSION['id'] = $uuid;
+            $_SESSION['firstName'] = ucfirst($this->data['firstName']);
+            return;
+        }
 		    $techErr = _('there is a technical problem try later');
 		    $this->error['request'] = $techErr;
 	    }

@@ -53,7 +53,7 @@ public class Controller {
         if (!textName.getText().equals("")) {
             Hashtable<Integer, String> params = new Hashtable<>();
             params.put(1, textName.getText());
-            if (boxCols.getValue() != null)
+            if (boxCols.getValue() != null) 
                 res = dbManager.prepare(String.format("select firstName,lastName,email from person where %s = ?",
                         boxCols.getValue()),
                         params);

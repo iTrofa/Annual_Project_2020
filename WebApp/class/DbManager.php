@@ -28,12 +28,12 @@ class DbManager
 
     public function query( string  $query, ?array $params = null):PDOStatement{
         if ($params){
-            $q = $this->getDb()->prepare($query);
+            $q = $this->db->prepare($query);
             $q->execute($params);
         }
         else
         {
-            $q = $this->getDb()->query($query);
+            $q = $this->db->query($query);
         }
         return $q;
     }

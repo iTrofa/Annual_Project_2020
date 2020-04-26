@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Annual Project 2020\n"
-"POT-Creation-Date: 2020-04-20 15:45+0200\n"
-"PO-Revision-Date: 2020-04-20 15:45+0200\n"
+"POT-Creation-Date: 2020-04-26 15:46+0200\n"
+"PO-Revision-Date: 2020-04-26 15:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -14,6 +14,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Poedit-KeywordsList: _\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: pdf-invoice\n"
+"X-Poedit-SearchPathExcluded-1: WebGL\n"
+"X-Poedit-SearchPathExcluded-2: vendor\n"
 
 #: addServices.php:70
 msgid "Check List"
@@ -83,9 +86,9 @@ msgstr "Ajouter un Service"
 msgid "List of all the Services we currently provide :"
 msgstr "Liste de tout les Services qu'on propose actuellement :"
 
-#: addServices.php:149 clientManagement.php:104 partnerManagement.php:112
-#: partnerManagement.php:153 partnerManagement.php:186
-#: partnerManagement.php:228 services.php:155
+#: addServices.php:149 clientManagement.php:104 partnerManagement.php:118
+#: partnerManagement.php:159 partnerManagement.php:192
+#: partnerManagement.php:234 services.php:155
 msgid "Type something to search list items"
 msgstr "Ecris quelque chose pour chercher des items"
 
@@ -107,43 +110,47 @@ msgstr "Fichier Zip de la Demo"
 msgid "Submit Demo"
 msgstr "Envoyer Demo"
 
-#: class/SignupValidator.php:38
-msgid "is empty"
-msgstr "est vide"
-
-#: class/SignupValidator.php:78
+#: class/Form.php:52
 msgid "your"
 msgstr "votre"
 
-#: class/SignupValidator.php:79
+#: class/Form.php:53
 msgid "can only contain letters"
 msgstr "peut contenir seulement des lettres"
 
-#: class/SignupValidator.php:97
+#: class/SignupValidator.php:34 class/SignupValidator.php:78
+msgid "is empty"
+msgstr "est vide"
+
+#: class/SignupValidator.php:124
 #, fuzzy
 #| msgid "the email must ve valid"
 msgid "the email must be valid"
 msgstr "L'email doit être valide"
 
-#: class/SignupValidator.php:106
+#: class/SignupValidator.php:133
 msgid "the email is already registered"
 msgstr "L'email est déjà utilisé par un autre compte"
 
-#: class/SignupValidator.php:131
+#: class/SignupValidator.php:146
 msgid "phone number is not valid"
 msgstr "Le numéro de téléphone n'est pas valide"
 
-#: class/SignupValidator.php:146
+#: class/SignupValidator.php:161
 msgid "the passwords are different"
 msgstr "Les mots de passes sont pas les mêmes"
 
-#: class/SignupValidator.php:150
+#: class/SignupValidator.php:165
 msgid "the password is too short"
 msgstr "Mot de passe trop petit"
 
-#: class/SignupValidator.php:170
+#: class/SignupValidator.php:203
 msgid "you are now registered"
 msgstr "Vous êtes bien inscris"
+
+#: class/SignupValidator.php:209
+msgid "there is a technical problem try later"
+msgstr ""
 
 #: clientManagement.php:57
 msgid "Client Management - Flash Assistance"
@@ -153,32 +160,32 @@ msgstr "Gestion des Clients - Flash Assistance"
 msgid "List of all Users:"
 msgstr "Liste de tout les Utilisateurs:"
 
-#: clientManagement.php:108 partnerManagement.php:116 partnerManagement.php:190
+#: clientManagement.php:108 partnerManagement.php:122 partnerManagement.php:196
 msgid "ID"
 msgstr "Identifiant"
 
-#: clientManagement.php:109 partnerManagement.php:117 partnerManagement.php:191
+#: clientManagement.php:109 partnerManagement.php:123 partnerManagement.php:197
 msgid "Firstname"
 msgstr "Prénom"
 
-#: clientManagement.php:110 partnerManagement.php:118 partnerManagement.php:192
+#: clientManagement.php:110 partnerManagement.php:124 partnerManagement.php:198
 msgid "Lastname"
 msgstr "Nom"
 
-#: clientManagement.php:111 login.php:93 partnerManagement.php:119
-#: partnerManagement.php:193 signup.php:114 yourAccount.php:47
+#: clientManagement.php:111 login.php:93 partnerManagement.php:125
+#: partnerManagement.php:199 signup.php:110 yourAccount.php:102
 msgid "Email"
 msgstr "Email"
 
-#: clientManagement.php:112 partnerManagement.php:120 partnerManagement.php:194
+#: clientManagement.php:112 partnerManagement.php:126 partnerManagement.php:200
 msgid "Phone Number"
 msgstr "Numéro de Téléphone"
 
-#: clientManagement.php:113 partnerManagement.php:121 partnerManagement.php:195
+#: clientManagement.php:113 partnerManagement.php:127 partnerManagement.php:201
 msgid "Function"
 msgstr "Travail"
 
-#: clientManagement.php:114 partnerManagement.php:122 partnerManagement.php:196
+#: clientManagement.php:114 partnerManagement.php:128 partnerManagement.php:202
 msgid "Localisation"
 msgstr "Localisation"
 
@@ -226,11 +233,11 @@ msgstr "Historique"
 msgid "Check Your Cart"
 msgstr "Regardez votre panier"
 
-#: login.php:82 signup.php:92
+#: login.php:82 signup.php:88
 msgid "Click here for English"
 msgstr "Appuie ici pour de l'Anglais"
 
-#: login.php:83 signup.php:93
+#: login.php:83 signup.php:89
 msgid "Click here for French"
 msgstr "Appuie ici pour du Français"
 
@@ -246,7 +253,7 @@ msgstr "Email:"
 msgid "Password:"
 msgstr "Mot de Passe:"
 
-#: login.php:96 signup.php:124 yourAccount.php:53
+#: login.php:96 signup.php:120 yourAccount.php:117
 msgid "Password"
 msgstr "Mot de Passe"
 
@@ -270,107 +277,111 @@ msgstr "Profite de tout tes services favoris pour 50% du prix"
 msgid "Get your Subscription"
 msgstr "Obtient ton Abonnement"
 
-#: partnerManagement.php:110
+#: partnerManagement.php:116
 msgid "List of all Available Workers:"
 msgstr "Liste de tout les Prestataires:"
 
-#: partnerManagement.php:151
+#: partnerManagement.php:157
 #, fuzzy
 #| msgid "List of all Available Workers:"
 msgid "List of all Available Jobs:"
 msgstr "Liste de tout les Prestataires:"
 
-#: partnerManagement.php:157 partnerManagement.php:232
+#: partnerManagement.php:163 partnerManagement.php:238
 msgid "Order ID"
-msgstr ""
+msgstr "ID de l'achat"
 
-#: partnerManagement.php:158 partnerManagement.php:233
+#: partnerManagement.php:164 partnerManagement.php:239
 msgid "Client ID"
 msgstr "ID du Client"
 
-#: partnerManagement.php:159 partnerManagement.php:234
+#: partnerManagement.php:165 partnerManagement.php:240
 #, fuzzy
 #| msgid "Services"
 msgid "Service Requested"
 msgstr "Services"
 
-#: partnerManagement.php:184
+#: partnerManagement.php:190
 #, fuzzy
 #| msgid "List of all Available Workers:"
 msgid "List of all Active Workers:"
 msgstr "Liste de tout les Prestataires:"
 
-#: partnerManagement.php:226
+#: partnerManagement.php:232
 #, fuzzy
 #| msgid "List of all Users:"
 msgid "List of all Active Jobs:"
 msgstr "Liste de tout les Utilisateurs:"
 
-#: partnerManagement.php:235
+#: partnerManagement.php:241
 msgid "Worker ID"
-msgstr ""
+msgstr "ID de l'employé"
 
-#: payment.php:249
+#: payment/payment.php:249
 msgid "Coupon code"
 msgstr "Code de réduction"
 
-#: payment.php:268 paymentCart.php:83
+#: payment/payment.php:268 payment/paymentCart.php:83
 msgid "You have the "
-msgstr "Tu as le"
+msgstr "Tu as le "
 
-#: payment.php:272 paymentCart.php:90
+#: payment/payment.php:272 payment/paymentCart.php:90
 msgid "Look at our other Subscriptions"
 msgstr "Regarde tout nos autres Abonnements"
 
-#: payment.php:278 paymentCart.php:98
+#: payment/payment.php:278 payment/paymentCart.php:98
 msgid "If you have a subscription, please enter it in the box below"
 msgstr ""
 "Si t'as un abonnement, s'il vous plaît entre le dans la boîte en-dessous"
 
-#: payment.php:282 paymentCart.php:103
+#: payment/payment.php:282 payment/paymentCart.php:103
 msgid "Apply coupon"
 msgstr "Utiliser réduction"
 
-#: payment.php:287
+#: payment/payment.php:287
 msgid "Add to cart"
 msgstr "Ajouter au panier"
 
-#: payment.php:311 paymentCart.php:112 paymentSub.php:52
+#: payment/payment.php:311 payment/paymentCart.php:112
+#: payment/paymentSub.php:52
 msgid "Order summary"
 msgstr "Récapitulatif de la commande"
 
-#: payment.php:313 paymentCart.php:114
+#: payment/payment.php:313 payment/paymentCart.php:114
 msgid ""
 "Tax costs are calculated based on values you have entered and each service"
 msgstr ""
 "Les côuts des taxes sont calculés à partir des valeurs que vous avez rentré "
 "et chaque service"
 
-#: payment.php:315 paymentCart.php:118 paymentSub.php:56
+#: payment/payment.php:315 payment/paymentCart.php:118
+#: payment/paymentSub.php:56
 msgid "Order Subtotal"
 msgstr "Total hors-taxes"
 
-#: payment.php:316 paymentCart.php:121 paymentSub.php:57
+#: payment/payment.php:316 payment/paymentCart.php:121
+#: payment/paymentSub.php:57
 msgid "Tax"
 msgstr "Taxes"
 
-#: payment.php:317 paymentCart.php:124 paymentSub.php:58
+#: payment/payment.php:317 payment/paymentCart.php:124
+#: payment/paymentSub.php:58
 msgid "Total"
 msgstr "Total"
 
-#: payment.php:322 paymentCart.php:131
+#: payment/payment.php:322 payment/paymentCart.php:131
 msgid "New Total"
 msgstr "Nouveau Total"
 
-#: payment.php:334
+#: payment/payment.php:334
 msgid "Proceed to Checkout"
 msgstr "Procédez vers la caisse"
 
-#: paymentCart.php:144 paymentSub.php:61
+#: payment/paymentCart.php:144 payment/paymentSub.php:61
 msgid "Proceed to checkout"
 msgstr "Procédez vers la caisse"
 
-#: paymentSub.php:54
+#: payment/paymentSub.php:54
 msgid ""
 "Tax costs are calculated based on values you have entered and each service."
 msgstr ""
@@ -517,21 +528,25 @@ msgstr "Prix"
 msgid "Estimated price if you all the checkboxes."
 msgstr "Prix estimé si vous cochez tous les cases."
 
-#: signup.php:103
+#: signup.php:99
 msgid "First name"
 msgstr "Prénom"
 
-#: signup.php:109
+#: signup.php:105
 msgid "Last name"
 msgstr "Nom"
 
-#: signup.php:119
+#: signup.php:115
 msgid "Phone number"
 msgstr "Numéro de Téléphone"
 
-#: signup.php:129
+#: signup.php:125
 msgid "Retype Password"
 msgstr "Retaper Mot de Passe"
+
+#: signup.php:129 yourAccount.php:89 yourAccount.php:146
+msgid "address"
+msgstr "adresse"
 
 #: signup.php:133
 msgid "Signup"
@@ -549,40 +564,49 @@ msgstr "Commence Aujourd'hui"
 msgid "Submit Changes"
 msgstr "Envoyer Changements"
 
-#: yourAccount.php:19
+#: yourAccount.php:25
 msgid "Account - Flash Assistance"
 msgstr "Compte - Flash Assistance"
 
-#: yourAccount.php:34
+#: yourAccount.php:52
 msgid "Edit Profile"
 msgstr "Editer Profil"
 
-#: yourAccount.php:41
+#: yourAccount.php:64
 #, fuzzy
 #| msgid "First name"
 msgid "First Name"
 msgstr "Prénom"
 
-#: yourAccount.php:59
+#: yourAccount.php:77
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Nom"
+
+#: yourAccount.php:124
 msgid "Confirm password"
 msgstr "Confirmer Mot de Passe"
 
-#: yourAccount.php:67
+#: yourAccount.php:132
+#, fuzzy
+#| msgid "Phone number"
+msgid "Telephone number"
+msgstr "Numéro de Téléphone"
+
+#: yourAccount.php:156
 msgid "Cancel"
 msgstr "Annuler"
 
-#: yourAccount.php:68
+#: yourAccount.php:157
 msgid "Save Changes"
 msgstr "Sauvegarder Changements"
 
-#: yourAccount.php:75
-msgid "Upload a different photo"
-msgstr "Télécharger une photo différente"
+#~ msgid "Upload a different photo"
+#~ msgstr "Télécharger une photo différente"
 
-#: yourAccount.php:77
-msgid "Choose file"
-msgstr "Choisir fichier"
-
+#~ msgid "Choose file"
+#~ msgstr "Choisir fichier"
 
 #~ msgid "Nombre"
 #~ msgstr "Prenom"

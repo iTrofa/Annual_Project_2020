@@ -25,19 +25,14 @@ require_once "localization.php";
 <title><?= _("Account - Flash Assistance") ?></title>
 <script src="javascript/header.js" defer></script>
 <script src="javascript/footer.js" defer></script>
+<script src="javascript/profilePic.js" defer></script>
 
 <?php
-if (!empty($_POST))
-{
-    $validator = new SignupValidator($_POST, $_FILES, true);
-    $validator->validateEmptyInputsUpdate();
-} else
-{
-    $res = $DbManager->query('select firstName, lastName, email, phoneNumber,localisation,profilePic FROM person WHERE idPerson = ?',
-    [
-        $_SESSION['id']
-    ]);
-}
+
+$res = $DbManager->query('select firstName, lastName, email, phoneNumber,localisation,profilePic FROM person WHERE idPerson = ?', [$_SESSION['id']]);
+$_SESSION['res'] = $res->fetch();
+$_SESSION['profilePic'] = $_SESSION['res']['profilePic'];
+
 ?>
 
 <body onload="checkFooter()">
@@ -46,6 +41,11 @@ include('header.php');
 ?>
 <main>
     <br>
+    <h3><?php echo $_SESSION['valid']['request'] ?? '';
+        echo $_SESSION['error']['request'] ?? '';
+        if (isset($_SESSION['valid']['request']))
+            unset($_SESSION['res']);
+        unset($_SESSION['valid'], $_SESSION['error']) ?></h3>
     <div class="container">
         <!-- edit form column -->
         <div class="col-lg-12 text-lg-center">
@@ -54,116 +54,99 @@ include('header.php');
             <br>
         </div>
         <div class="col-lg-8 push-lg-4 personal-info">
-            <form method="post" role="form">
+            <form method="post" action="checkYourAccount.php" role="form" enctype="multipart/form-data">
                 <div class="form-group row">
-                    <div class="col-lg-9">
-                        <img src="<?= $res['profilePic'] ?>" alt="image not found" id="profilePic">
+                    <div id="input" class="col-lg-9">
+                        <img src="<?= $_SESSION['profilePic'] ?>" alt="image not found" id="profilePic">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?= _("First Name") ?>
-                        <div class="col-lg-9">
-                            <?php if ($res) : ?>
-                                <input class="form-control" name="firstName" type="text"
-                                       value="<?= $res['firstName'] ?>">
-                            <?php else: ?>
-                                <input class="form-control" name="firstName" type="text"
-                                       value="<?= $_SESSION['firstName'] ?? '' ?>">
-                            <?php endif; ?>
-                        </div>
+                    <label><?= _("First Name") ?>
+                        <span class="error"><?= $_SESSION['error']['firstName'] ?? '' ?></span>
+                        <?php if (isset($_SESSION['res'])) : ?>
+                            <input class="form-control" name="firstName" type="text"
+                                   value="<?= $_SESSION['res']['firstName'] ?>">
+                        <?php else: ?>
+                            <input class="form-control" name="firstName" type="text"
+                                   value="<?= $_SESSION['valid']['firstName'] ?? '' ?>">
+                        <?php endif; ?>
                     </label>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?= _("Last Name") ?>
-                        <div class="col-lg-9">
-                            <?php if ($res) : ?>
-                                <input class="form-control" name="lastName" type="text" value="<?= $res['lastName'] ?>">
-                            <?php else: ?>
-                                <input class="form-control" name="lastName" type="text"
-                                       value="<?= $_SESSION['lastName'] ?? '' ?>">
-                            <?php endif; ?>
-                        </div>
+                    <label><?= _("Last Name") ?>
+                        <span class="error"><?= $_SESSION['error']['lastName'] ?? '' ?></span>
+                        <?php if (isset($_SESSION['res'])) : ?>
+                            <input class="form-control" name="lastName" type="text"
+                                   value="<?= $_SESSION['res']['lastName'] ?>">
+                        <?php else: ?>
+                            <input class="form-control" name="lastName" type="text"
+                                   value="<?= $_SESSION['valid']['lastName'] ?? '' ?>">
+                        <?php endif; ?>
                     </label>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?= _("address") ?>
-                        <div class="col-lg-9">
-                            <?php if ($res) : ?>
-                                <input class="form-control" name="localisation" type="text"
-                                       value="<?= $res['localisation'] ?>">
-                            <?php else: ?>
-                                <input class="form-control" name="localisation" type="text"
-                                       value="<?= $_SESSION['localisation'] ?? '' ?>">
-                            <?php endif; ?>
-                        </div>
+                    <label><?= _("address") ?>
+                        <?php if (isset($_SESSION['res'])) : ?>
+                            <span class="error"><?= $_SESSION['error']['localisation'] ?? '' ?></span>
+                            <input class="form-control" name="localisation" type="text"
+                                   value="<?= $_SESSION['res']['localisation'] ?>">
+                        <?php else: ?>
+                            <input class="form-control" name="localisation" type="text"
+                                   value="<?= $_SESSION['valid']['localisation'] ?? '' ?>">
+                        <?php endif; ?>
                     </label>
                 </div>
                 <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?= _("Email") ?>
-                        <div class="col-lg-9">
-                            <?php if ($res) : ?>
-                                <input class="form-control" type="email" value="<?= $res['email'] ?>">
-                            <?php else: ?>
-                                <input class="form-control" name="email" type="email"
-                                       value="<?= $_SESSION['email'] ?? '' ?>">
-                            <?php
-                            endif;
-                            ?>
-                        </div>
+                    <label><?= _("Email") ?>
+                        <span class="error"><?= $_SESSION['error']['email'] ?? '' ?></span>
+                        <?php if (isset($_SESSION['res'])) : ?>
+                            <input class="form-control" name="email" type="email"
+                                   value="<?= $_SESSION['res']['email'] ?>">
+                        <?php else: ?>
+                            <input class="form-control" name="email" type="email"
+                                   value="<?= $_SESSION['valid']['email'] ?? '' ?>">
+                        <?php
+                        endif;
+                        ?>
                     </label>
                 </div>
                 <div class="form-group row">
-                    <div class="col-lg-9">
-                        <label class="col-lg-3 col-form-label form-control-label"><?= _("Password") ?>
-
-                            <input class="form-control" name="password" type="password"
+                    <label><?= _("Password") ?>
+                        <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
+                        <input class="form-control" style="margin-right: 10px" name="password" type="password"
+                               value="">
+                    </label>
+                    <div class="form-group row">
+                        <label>
+                            <pre style="margin: 0px">   <?= _("Confirm password") ?> </pre>
+                            <input class="form-control" style="margin-left: 30px" name="rePassword" type="password"
                                    value="">
                         </label>
                     </div>
                     <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label"><?= _("Confirm password") ?>
-                            <div class="col-lg-9">
-                                <input class="form-control" name="rePassword" type="password"
-                                       value="">
-                            </div>
-                        </label>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label"><?= _("Telephone number") ?>
-                            <div class="col-lg-9"
+                        <label><?= _("Telephone number") ?>
                             <label>
-                                <?php if ($res): ?>
+                                <?php if (isset($_SESSION['res'])): ?>
                                     <input class="form-control" name="phone" type="tel"
-                                           value="<?= $res['phoneNumber'] ?>">
+                                           value="<?= $_SESSION['res']['phoneNumber'] ?>">
                                 <?php else: ?>
                                     <input class="form-control" name="phone" type="tel"
-                                           value="<?= $_SESSION['phoneNumber'] ?? '' ?>">
+                                           value="<?= $_SESSION['valid']['phoneNumber'] ?? '' ?>">
                                 <?php endif; ?>
                             </label>
+                            <br>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-lg-3 col-form-label form-control-label"><?= _("address") ?>
-                        <div class="col-lg-9">
-                            <input class="form-control" name="localisation" type="text"
-                                   value="">
-                        </div>
-                    </label>
-                </div>
-                <div class="form-group row">
-                    <div class="col-lg-9">
-                        <label class="col-lg-3 col-form-label form-control-label">
+                    <div class="form-group row">
+                        <label style="margin-left: 50px">
                             <input type="reset" class="btn btn-secondary" value="<?= _('Cancel') ?>">
-                            <input type="button" class="btn btn-primary" value="<?= _('Save Changes') ?>">
+                            <input type="submit" class="btn btn-primary" value="<?= _('Save Changes') ?>">
                         </label>
                     </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    <br><br>
+
+                    <br><br>
 </main>
 <?php
+unset($_SESSION['error'], $_SESSION['valid']);
 include("footer.php");
 ?>
 </body>

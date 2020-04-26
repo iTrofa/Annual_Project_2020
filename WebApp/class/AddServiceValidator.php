@@ -1,17 +1,14 @@
 <?php
-require_once '../session.php';
 
 class AddServiceValidator extends Form
 {
-    private array $data;
-    private array $error;
-    private array $valid;
     private array $fields =
-        ['category', 'serviceName', 'price','serviceDescription'];
-    private DbManager $db;
-    private ImageValidator $validateImage;
+        ['category', 'serviceName', 'price', 'serviceDescription'];
 
-
+    public function __construct(array $post, ?array $file = null)
+    {
+        parent::__construct($post, $file, 'images/services/');
+    }
 
     public function validateInputs(): void
     {
@@ -36,10 +33,14 @@ class AddServiceValidator extends Form
         $this->validateLength('serviceDescription');
         $this->uniqueServiceName();
         $this->checkPrice();
-        if($this->checkImages() === false){
-            $_SESSION['valid'] = $this->valid;
-            $_SESSION['error'] = $this->error;
-            return;
+        if ($this->validateImage)
+        {
+            if ($this->checkImages() === false)
+            {
+                $_SESSION['valid'] = $this->valid;
+                $_SESSION['error'] = $this->error;
+                return;
+            }
         }
         if (!empty($this->error))
         {
@@ -48,7 +49,8 @@ class AddServiceValidator extends Form
             return;
         }
         $error = $this->validateImage->uploadImage();
-        if ($error !== 'ok'){
+        if ($error !== 'ok')
+        {
             $this->addError($error, 'image');
             $_SESSION['error'] = $this->error;
             $_SESSION['valid'] = $this->valid;
@@ -66,7 +68,7 @@ class AddServiceValidator extends Form
 
     private function uniqueServiceName(): void
     {
-        $q = $this->db->query('select name from service where name= ?',[$this->data['serviceName']]);
+        $q = $this->dbManager->query('select name from service where name= ?', [$this->data['serviceName']]);
         $res = $q->fetch();
         if (empty($res))
         {
@@ -80,7 +82,7 @@ class AddServiceValidator extends Form
 
     private function checkCategory():void {
         $this->data['category'] = ucfirst(strtolower($this->data['category']));
-        $q = $this->db->query('select idCategory from categoryservice where idCategory = ?',[$this->data['category']]);
+        $q = $this->dbManager->query('select idCategory from categoryservice where idCategory = ?', [$this->data['category']]);
         $res = $q->fetch();
         if (!empty($res)){
             $this->addDataService();
@@ -100,16 +102,16 @@ class AddServiceValidator extends Form
     private function addDataService(): void
     {
         $demo = isset($this->data['demo']);
-        $q = $this->db->query('INSERT INTO service (idService,category,name, price, image, demo,description)
+        $q = $this->dbManager->query('INSERT INTO service (idService,category,name, price, image, demo,description)
              VALUES (:idService,:idCategory,:service,:price,:image,:demo,:description)',
             [
-                ':idService'=> DbManager::v4(),
+                ':idService' => DbManager::v4(),
                 ':idCategory' => $this->data['category'],
                 ':service' => $this->data['serviceName'],
                 ':price' => $this->data['price'],
                 ':image' => $this->validateImage->getFullpath(),
                 ':demo' => $demo,
-                ':description' =>$this->data['serviceDescription']
+                ':description' => $this->data['serviceDescription']
             ]
         );
 

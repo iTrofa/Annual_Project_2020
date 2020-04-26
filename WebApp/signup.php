@@ -9,13 +9,6 @@ if (session_status() === PHP_SESSION_NONE)
     }
 }
 
-if (isset($_POST['english'])) {
-    $_SESSION['lang'] = "en_US";
-} else if (isset($_POST['french'])) {
-    $_SESSION['lang'] = "fr_FR";
-}
-
-
 // define constants
 define('PROJECT_DIR', realpath('./'));
 define('LOCALE_DIR', PROJECT_DIR .'/Lang/locale');
@@ -37,9 +30,8 @@ bindtextdomain($domain, LOCALE_DIR);
 if (function_exists('bind_textdomain_codeset'))
     bind_textdomain_codeset($domain, $encoding);
 textdomain($domain);
-
+require_once 'vendor/autoload.php';
 header("Content-type: text/html; charset=$encoding");
-
 if (!empty($_POST))
 {
     $validate = new SignupValidator($_POST);
@@ -67,36 +59,40 @@ if (!empty($_POST))
     <link rel="mask-icon"  href="http://production-assets.codepen
           .io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg"
           color="#111"/>
-    <link rel="canoniAacal" href="https://codepen.io/frytyler/pen/EGdtg"/>
+     <link rel="canoniAacal" href="https://codepen.io/frytyler/pen/EGdtg"/>
 
-    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js' defer></script>
-    <title>Signup - Flash Assistance</title>
-    <script src='http://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'
-            defer>
-    </script>
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-             crossorigin="anonymous" defer></script>-->
+     <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css'>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js' defer></script>
+     <title>Signup - Flash Assistance</title>
+     <script src='http://production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'
+             defer>
+     </script>
+     <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+              integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+              crossorigin="anonymous" defer></script>-->
      <!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
              integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
              crossorigin="anonymous" defer></script>-->
      <link rel="stylesheet" href="css/login.css" class="cp-pen-styles">
  </head>
-<body>
-<form method="post">
-    <div style="margin-left: 7%">
-        <input type="submit" name="english" style="display: inline-block; width: 15%" value="<?=_('Click here for English')?>"><img src="images/Countries/usa.png" style="width: 7%; height: 10%"><br>
-        <input type="submit" name="french" style="display: inline-block; width: 15%" value="<?=_('Click here for French')?>"><img src="images/Countries/france.png" style="width: 7%; height: 10%">
-    </div>
-</form>
+ <body>
+ <form method="post" action="changeLang.php">
+     <div style="margin-left: 7%">
+         <input type="submit" name="english" style="display: inline-block; width: 15%"
+                value="<?= _('Click here for English') ?>"><img src="images/Countries/usa.png"
+                                                                style="width: 7%; height: 10%"><br>
+         <input type="submit" name="french" style="display: inline-block; width: 15%"
+                value="<?= _('Click here for French') ?>"><img src="images/Countries/france.png"
+                                                               style="width: 7%; height: 10%">
+     </div>
+ </form>
 
- <h3><?php echo $_SESSION['valid']['request']  ?? '';
-                  echo $_SESSION['error']['request'] ?? '';
-                  if(isset($_SESSION['valid']['request']))
-                  unset($_SESSION['valid'], $_SESSION['error'])?></h3>
-        <div class="signup">
-            <form action="" method="post">
+ <h3><?php echo $_SESSION['valid']['request'] ?? '';
+     echo $_SESSION['error']['request'] ?? '';
+     if (isset($_SESSION['valid']['request']))
+         unset($_SESSION['valid'], $_SESSION['error']) ?></h3>
+ <div class="signup">
+     <form action="" method="post">
                 <label><?= _("First name")?>
                     <input  type="text" name="firstName" value="<?= $_SESSION['valid']['firstName'] ?? ''
                     ?>" required>
@@ -121,22 +117,23 @@ if (!empty($_POST))
                 <label> <?= _("Password") ?>
                     <input type="password" name="password" required>
                 </label>
-                <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
-                <br>
-                <label> <?= _("Retype Password") ?>
-                    <br>
-                    <input type="password" name="rePassword" required>
-                </label><br>
-                <label> <?= _("address") ?>
-                    <br>
-                    <input type="text" name="localisation" required>
-                </label><br>
-                <button type="submit" id="btn" class="btn btn-primary btn-block btn-large"><?= _("Signup") ?></button>
-                <br>
-            </form>
-        </div>
-<?php
-unset($_SESSION['error'], $_SESSION['valid']);
-?>
-</body>
+         <span class="error"><?= $_SESSION['error']['password'] ?? '' ?></span>
+         <br>
+         <label> <?= _("Retype Password") ?>
+             <br>
+             <input type="password" name="rePassword" required>
+         </label><br>
+         <label> <?= _("address") ?>
+             <br>
+             <input type="text" name="localisation" required>
+         </label><br>
+         <button type="submit" name="signup" id="btn" class="btn btn-primary btn-block btn-large"><?= _("Signup")
+             ?></button>
+         <br>
+     </form>
+ </div>
+ <?php
+ unset($_SESSION['error'], $_SESSION['valid']);
+ ?>
+ </body>
 </html>

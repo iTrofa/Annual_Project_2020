@@ -1,6 +1,10 @@
 <?php
-
-require_once __DIR__ .'/../autoload.php';
+if (session_status() === PHP_SESSION_NONE)
+{
+    session_start();
+}
+require_once __DIR__ . '/../autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 
 abstract class Form
@@ -9,15 +13,18 @@ abstract class Form
     protected array $valid;
     protected array $data;
     protected DbManager $dbManager;
-    protected ImageValidator $validateImage;
+    protected ?ImageValidator $validateImage;
 
 
-    public function __construct(array $post, array $file)
+    public function __construct(array $post, ?array $file = null, ?string $basePath = null)
     {
         $this->data = $post;
-        if ($file)
+        if ($file !== null && $basePath !== null)
         {
-            $this->validateImage = new ImageValidator($file, 'images/services/');
+            $this->validateImage = new ImageValidator($file, $basePath);
+        } else
+        {
+            $this->validateImage = null;
         }
         $this->valid = [];
         $this->error = [];
@@ -100,6 +107,8 @@ abstract class Form
             $_SESSION['valid'] = $this->valid;
             return false;
         }
+
+        $_SESSION['profilePic'] = $this->validateImage->getFullpath();
         return true;
     }
 }

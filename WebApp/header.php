@@ -2,9 +2,9 @@
 require_once "session.php";
 require_once "localization.php";
 
-$q = $DbManager->query("SELECT admin FROM Person Where idPerson = ?",
+$q = $DbManager->query("SELECT admin FROM person Where idPerson = ?",
     [
-    $_SESSION['id']
+        $_SESSION['id']
     ]);
 $res = $q->fetchAll();
 ?>

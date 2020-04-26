@@ -9,14 +9,14 @@ class ImageValidator
     private int $maxsize = 4194304;
     private string $basePath;
     private string $fullpath;
-    private DbManager $db;
+    private DbManager $dbManager;
     private string $ext;
 
     public function __construct(array $file, string $basePath)
     {
-        $this->db = App::getDb();
+        $this->dbManager = App::getDb();
         $this->data = $file;
-        $this->ext =  pathinfo ($_FILES['image']['name'],PATHINFO_EXTENSION);
+        $this->ext = pathinfo($file['image']['name'], PATHINFO_EXTENSION);
         $this->basePath = $basePath;
     }
 
@@ -74,30 +74,31 @@ class ImageValidator
     }
 
     /**
-     * @param string|null $deleteQuery query for delete old image like 'select profilePic from person where id = ?'
-     * @param string $updateQuery query for add new image 'UPDATE person SET profilePic=? where idPerson=?
+     * @param bool $updateQuery query for add new image 'UPDATE person SET profilePic=? where idPerson=?
      */
-    public function updateImage(string $deleteQuery  = null, string $updateQuery = null): void
+    public function updateImage(bool $updateQuery = false): void
     {
-        if ($deleteQuery!==null)
+        $q = $this->dbManager->query('select profilePic from flashAssistance.person where idPerson= ?',
+            [$_SESSION['id']]);
+        $oldPath = $q->fetch();
+        if ($oldPath['profilePic'] !== "images/profilePic/none.png")
         {
-            $q = $this->db->query($deleteQuery,[$_SESSION['id']]);
-            $oldPath = $q->fetch();
             unlink($oldPath['profilePic']);
         }
-        if ($updateQuery!==null)
+
+        if ($updateQuery)
         {
-            $q = $this->db->query($updateQuery,[$this->fullpath, $_SESSION['id']]);
+            $this->uploadImage();
+            $this->dbManager->query('UPDATE person SET profilePic=? where idPerson=?', [$this->fullpath, $_SESSION['id']]);
         }
     }
 
     public function uploadImage():string {
 
         if (move_uploaded_file($this->data['image']['tmp_name'],  $this->fullpath )) {
-            http_response_code(201);
             return 'ok';
         }
-        http_response_code(503);
+
         return 'can\'t upload image technical error ';
 
     }
