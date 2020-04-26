@@ -2,7 +2,6 @@
 
 
 require_once '../vendor/autoload.php';
-
 use Symfony\Component\Dotenv\Dotenv;
 
 class DbManager

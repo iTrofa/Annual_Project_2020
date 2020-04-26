@@ -15,7 +15,10 @@ abstract class Form
     public function __construct(array $post, array $file)
     {
         $this->data = $post;
-        $this->validateImage = new ImageValidator($file, 'images/services/');
+        if ($file)
+        {
+            $this->validateImage = new ImageValidator($file, 'images/services/');
+        }
         $this->valid = [];
         $this->error = [];
         $this->dbManager = App::getDb();

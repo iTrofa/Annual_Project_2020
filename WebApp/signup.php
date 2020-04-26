@@ -15,9 +15,6 @@ if (isset($_POST['english'])) {
     $_SESSION['lang'] = "fr_FR";
 }
 
-
-require_once 'SignupValidator.php';
-
 // define constants
 define('PROJECT_DIR', realpath('./'));
 define('LOCALE_DIR', PROJECT_DIR .'/Lang/locale');
