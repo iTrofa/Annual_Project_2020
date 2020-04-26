@@ -19,7 +19,7 @@ class SignupValidator extends Form
      * @param array $file $_FILES
      * @param bool $update true if it's for update profile else just signup
      */
-    public function __construct(array $post, array $file, bool $update = false)
+    public function __construct(array $post, array $file = null, bool $update = false)
     {
         parent::__construct($post, $file);
         $this->update = $update;
