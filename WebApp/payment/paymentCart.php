@@ -54,8 +54,7 @@ $res = $q->fetchAll();
             echo "<li>" . $service . " => " . $price . "€</li>";
             $finalprice += $price;
         }
-        $finalprice2 = $finalprice + $finalprice * 0.21;
-        $_SESSION['price'] = $finalprice2;
+        $_SESSION['price'] = $finalprice;
         ?>
     </ul>
     <div class="row py-5 p-4 bg-white rounded shadow-sm" style="margin-left: 0;margin-right: 0">
@@ -115,7 +114,7 @@ $res = $q->fetchAll();
                     .</p>
                 <ul class="list-unstyled mb-4">
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong
-                                class="text-muted"><?= _('Order Subtotal') ?> </strong><strong><?= $finalprice . "€" ?></strong>
+                                class="text-muted"><?= _('Order Subtotal') ?> </strong><strong><?= $finalprice - $finalprice * 0.21. "€" ?></strong>
                     </li>
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                 class="text-muted"><?= _('Tax') ?></strong><strong><?= $finalprice * 0.21 . "€" ?></strong>
@@ -126,15 +125,15 @@ $res = $q->fetchAll();
                         if (isset($valueSub)){
                         ?>
                         <h5 style="text-decoration: line-through"
-                            class="font-weight-bold"><?= $finalprice + $finalprice * 0.21 . "€" ?></h5>
+                            class="font-weight-bold"><?= $finalprice . "€" ?></h5>
                     <li class="d-flex justify-content-between py-3 border-bottom"><strong
                                 class="text-muted"><?= _('New Total') ?></strong>
 
-                        <h5 class="font-weight-bold"><?= ($finalprice + $finalprice * 0.21) * $valueSub . "€" ?></h5>
+                        <h5 class="font-weight-bold"><?= $finalprice * $valueSub . "€" ?></h5>
                         <?php
                         } else {
                             ?>
-                            <h5 class="font-weight-bold"><?= $finalprice + $finalprice * 0.21 . "€" ?></h5>
+                            <h5 class="font-weight-bold"><?= $finalprice . "€" ?></h5>
                             <?php
                         }
                         ?>

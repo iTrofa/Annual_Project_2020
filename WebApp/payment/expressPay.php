@@ -173,7 +173,7 @@ switch ($_GET['package']){
                 DbManager::v4(),
                 $uuid,
                 "timeVariable",
-                $_GET['day']
+                $endService
             ]);
         if($_GET['day'] <= 7) {
             $price *= $options;
