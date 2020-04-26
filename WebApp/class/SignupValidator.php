@@ -1,6 +1,6 @@
 <?php
 
-require_once('../Lang/gettext.inc');
+require_once __DIR__ . '/../Lang/gettext.inc';
 
 class SignupValidator extends Form
 {
