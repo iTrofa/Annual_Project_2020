@@ -91,7 +91,7 @@ if (!empty($_GET['services'])) {
         <br>
         <h3><?= _("Choose your Package")?></h3>
 
-        <form action='payment.php?services=<?=$_GET['services']?>' method="post" onchange='updatePrice()' id='reservation'>
+        <form action='payment/payment.php?services=<?=$_GET['services']?>' method="post" onchange='updatePrice()' id='reservation'>
             <input type="number" max='8' min='1' class='inputSmaller' name='reservationInput' id='reservationInput'
                    placeholder='<?= _("Number of..")?>'>
             <select name='userOption' onchange="myFunction()" id='userOption'>

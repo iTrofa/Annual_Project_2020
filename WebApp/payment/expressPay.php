@@ -1,5 +1,5 @@
 <?php
-require_once "session.php";
+require_once __DIR__."/../session.php";
 
 $q = $DbManager->query("SELECT * from service WHERE idService = :idService",
     [':idService'=> $_GET['service']]);

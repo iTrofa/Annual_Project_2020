@@ -10,7 +10,7 @@ $res = $q->fetchAll();
 ?>
 <header id="header">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary2">
-        <a class="navbar-brand" href="main.php">Flash Assistance</a>
+        <a class="navbar-brand" href="/Annual_Project_2020/WebApp/main.php">Flash Assistance</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
                 aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,56 +23,56 @@ $res = $q->fetchAll();
                             data-toggle="dropdown"><?= _("Account") ?>
                         <span class="caret"></span></button>
                     <ul class="dropdown-menu" style="background-color: orange">
-                        <li><a class="nav-link" href="yourAccount.php"><?= _("Your Account") ?></a></li>
+                        <li><a class="nav-link" href="/Annual_Project_2020/WebApp/yourAccount.php"><?= _("Your Account") ?></a></li>
                         <?php
                         if ($res[0]['admin']) {
                             ?>
-                            <li><a class="nav-link" href="addServices.php"><?= _("Add a Service") ?></a></li>
+                            <li><a class="nav-link" href="/Annual_Project_2020/WebApp/addServices.php"><?= _("Add a Service") ?></a></li>
                             <?php
                         }
                         ?>
                         <?php
                         if ($res[0]['admin']) {
                             ?>
-                            <li><a class="nav-link" href="addWebGL.php"><?= _("Add Demo WebGL") ?></a></li>
+                            <li><a class="nav-link" href="/Annual_Project_2020/WebApp/addWebGL.php"><?= _("Add Demo WebGL") ?></a></li>
                             <?php
                         }
                         ?>
                         <?php
                         if ($res[0]['admin']) {
                             ?>
-                            <li><a class="nav-link" href="clientManagement.php"><?= _("Client Management") ?></a></li>
+                            <li><a class="nav-link" href="/Annual_Project_2020/WebApp/clientManagement.php"><?= _("Client Management") ?></a></li>
                             <?php
                         }
                         ?>
                         <?php
                         if ($res[0]['admin']) {
                             ?>
-                            <li><a class="nav-link" href="partnerManagement.php"><?= _("Partner Management") ?></a></li>
+                            <li><a class="nav-link" href="/Annual_Project_2020/WebApp/partnerManagement.php"><?= _("Partner Management") ?></a></li>
                             <?php
                         }
                         ?>
                         <?php
                         if ($res[0]['admin']) {
                             ?>
-                            <li><a class="nav-link" href="updateSubscription.php"><?= _("Update Subscription") ?></a>
+                            <li><a class="nav-link" href="/Annual_Project_2020/WebApp/updateSubscription.php"><?= _("Update Subscription") ?></a>
                             </li>
                             <?php
                         }
                         ?>
-                        <li><a class="nav-link" href="logout.php"><?= _("Log Out") ?></a></li>
+                        <li><a class="nav-link" href="/Annual_Project_2020/WebApp/logout.php"><?= _("Log Out") ?></a></li>
                     </ul>
 
 
                 </div>
                 <li class="nav-item">
-                    <a class="nav-link" href="services.php"><?= _("Services") ?></a>
+                    <a class="nav-link" href="/Annual_Project_2020/WebApp/services.php"><?= _("Services") ?></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="subscription.php"> <?= _("Subscriptions") ?> </a>
+                    <a class="nav-link" href="/Annual_Project_2020/WebApp/subscription.php"> <?= _("Subscriptions") ?> </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="search.php"> <?= _("History") ?> </a>
+                    <a class="nav-link" href="/Annual_Project_2020/WebApp/search.php"> <?= _("History") ?> </a>
                 </li>
             </ul>
             <form class="form-inline">
@@ -82,7 +82,7 @@ $res = $q->fetchAll();
                         $_SESSION['id']
                     ]);
                 $res = $q->fetchAll();
-                $link = "paymentCart.php?";
+                $link = "/Annual_Project_2020/WebApp/payment/paymentCart.php?";
                 for($i = 0, $iMax = count($res); $i< $iMax; $i++){
                     if ($i > 0)
                         $link = $link . "&";

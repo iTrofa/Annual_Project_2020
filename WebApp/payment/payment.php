@@ -1,5 +1,5 @@
 <?php
-require_once "session.php";
+require_once __DIR__."/../session.php";
 if(isset($_GET['services']))
     $service = $_GET['services'];
 
@@ -8,7 +8,7 @@ $q = $DbManager->query('SELECT * from service WHERE idService = :idService',
     [':idService' => $service]);
 $chosenService = $q->fetchAll();
 if(empty($chosenService)){
-    header('Location: services.php?error=noservice');
+    header('Location: ../services.php?error=noservice');
     exit;
 }
 
@@ -20,7 +20,7 @@ function isValidUuid( $service ) {
 }
 
 if(!isValidUuid($service) && !isset($_GET['cart0'])) {
-    header('Location: services.php');
+    header('Location: ../services.php');
     exit;
 }
 
@@ -48,7 +48,7 @@ echo "<link href='https://fonts.googleapis.com/css?family=Playfair+Display&displ
 echo "<link rel='stylesheet' href='../css/services.css'>";
 ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" href="images/logo_dark.png"/>
+<link rel="icon" href="../images/logo_dark.png"/>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <!-- Optional JavaScript -->
@@ -62,10 +62,10 @@ echo "<link rel='stylesheet' href='../css/services.css'>";
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="../css/main.css">
 <title>Flash Assistance</title>
-<script src="javascript/header.js" defer></script>
-<script src="javascript/footer.js" defer></script>
+<script src="../javascript/header.js" defer></script>
+<script src="../javascript/footer.js" defer></script>
 <style>
     /* input:invalid {
          border: solid red 3px;
@@ -76,7 +76,7 @@ echo "<link rel='stylesheet' href='../css/services.css'>";
 </style>
 <body onload="checkFooter()">
 <?php
-include('header.php');
+include('../header.php');
 ?>
 <main>
     <?php
@@ -287,19 +287,19 @@ include('header.php');
                 $addCart = _("Add to cart");
                 switch ($_POST['userOption']) {
                     case "Hour(s)":
-                        echo "<a href=\"cart.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
+                        echo "<a href=\"../cart.php?service=$service&package=$userOption&date=$date&hour=$firstInput\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Day(s)":
-                        echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
+                        echo "<a href=\"../cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$week1&date2=$week2&date3=$week3&date4=$week4&date5=$week5&date6=$week6&date7=$week7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Month(s)":
-                        echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
+                        echo "<a href=\"../cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$month1&date2=$month2&date3=$month3&date4=$month4&date5=$month5&date6=$month6&date7=$month7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                     case "Year(s)":
-                        echo "<a href=\"cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
+                        echo "<a href=\"../cart.php?service=$service&package=$userOption&day=$firstInput&hour=$secondInput&date1=$year1&date2=$year2&date3=$year3&date4=$year4&date5=$year5&date6=$year6&date7=$year7\" class=\"btn btn-dark rounded-pill py-2 btn-block\">$addCart</a>";
                         break;
 
                 }
@@ -357,7 +357,7 @@ include('header.php');
     <br><br>
 </main>
 <?php
-include ("footer.php");
+include ("../footer.php");
 ?>
 </body>
 </html>

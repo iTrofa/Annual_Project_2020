@@ -33,7 +33,10 @@ if (!empty($_POST))
     $validator->validateEmptyInputsUpdate();
 } else
 {
-    $res = $DbManager->query('select firstName, lastName, email, phoneNumber,localisation,profilePic ');
+    $res = $DbManager->query('select firstName, lastName, email, phoneNumber,localisation,profilePic FROM person WHERE idPerson = ?',
+    [
+        $_SESSION['id']
+    ]);
 }
 ?>
 
@@ -103,8 +106,10 @@ include('header.php');
                             <?php else: ?>
                                 <input class="form-control" name="email" type="email"
                                        value="<?= $_SESSION['email'] ?? '' ?>">
-                            <?php endif; ?>
-                            < /div>
+                            <?php
+                            endif;
+                            ?>
+                        </div>
                     </label>
                 </div>
                 <div class="form-group row">

@@ -1,5 +1,5 @@
 <?php
-require_once "autoload.php";
+require_once __DIR__. "/../autoload.php";
 ini_set('error_log',1);
 ini_set('display_errors',1);
 use Stripe\Charge;
@@ -26,9 +26,15 @@ switch ($nameSub){
         break;
 }
 if(isset($valueSub)){
-    $finalprice =  $_SESSION['price'] * $valueSub * 100;
-}else $finalprice = $_SESSION['price'] * 100;
-require_once('vendor/autoload.php');
+    $finalprice =  $_SESSION['price'] * $valueSub;
+    $finalprice = number_format($finalprice, 2, '.', '');
+    $finalprice = $finalprice * 100;
+}else {
+    $finalprice = $_SESSION['price'];
+    $finalprice = number_format($finalprice, 2, '.', '');
+    $finalprice *= 100;
+}
+require_once __DIR__.'/../vendor/autoload.php';
 Stripe::setApiKey('sk_test_LgZBATKRdH41pyA60Bi3yxT600KSnzL8bW');
 $token = $_POST['stripeToken'];
 
