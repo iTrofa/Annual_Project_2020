@@ -110,8 +110,67 @@ $firstSerName = $service[0]['name'];
         <a href="subscription.php"><input type="button" value="<?=_('Get your Subscription')?>" class="btn-primary btn-large btn"/></a>
     </div>
 </div>
-<br><br><br>
+<br><br>
+<h1 style="color: midnightblue; text-align: center"><?=_("Check out a demo of one of our Services!")?></h1>
+<br><br>
+<?php
+$q = $DbManager->query('SELECT * FROM service WHERE demo = 1 AND demoPath is not NULL');
+$service = $q->fetchAll();
+$firstImage = $service[0]['image'];
+$firstDesc = $service[0]['description'];
+$firstSerName = $service[0]['name'];
+$demoLink = "WebGL/" . $service[0]['demoPath'];
+?>
+<a id="demoLink" href="<?=$demoLink?>">
+    <div class="bd-example">
+        <div id="carouselExampleCaptions" style="width: 50%;margin-left: 25%;" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <?php
+                echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\"0\" class=\"active\"></li>";
+                for($i=1, $iMax = count($service); $i< $iMax; $i++){
+                    echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\".$i.\" class=\"\"></li>";
+                }
+                ?>
+            </ol>
+            <?php
+            echo "<div class=\"carousel-inner\">";
+            echo "<div class=\"carousel-item active\">";
+            echo "<img class='d-block w-100' alt='' src='$firstImage' data-holder-rendered='true'>";
+            echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
+            echo "<h5 class=\"carousel-label-color\">$firstSerName</h5>";
+            echo "<p class=\"carousel-label-color\">$firstDesc</p>";
+            echo "</div>";
+            echo "</div>";
+            for ($i = 1, $iMax = count($service); $i< $iMax; $i++){
+                $image = $service[$i]['image'];
+                $desc = $service[$i]['description'];
+                $SerName = $service[$i]['name'];
+                $demoLink = "WebGL/" . $service[$i]['demoPath'];
+                echo "<script type='text/javascript'>
+                        changeDemoLink($demoLink)
+                        </script>";
+                echo "<div class=\"carousel-item\">";
+                echo "<img class=\"d-block w-100\" alt=\"\" src=\"$image\" data-holder-rendered=\"true\">";
+                echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
+                echo "<h5 class=\"carousel-label-color\">$SerName</h5>";
+                echo "<p class=\"carousel-label-color\">$desc</p>";
+                echo "</div>";
+                echo "</div>";
 
+            }
+            ?>
+            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</a>
+<br><br><br>
 
 <?php
 include("footer.php"); ?>
