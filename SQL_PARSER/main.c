@@ -2,78 +2,110 @@
 #include <stdlib.h>
 #include <string.h>
 #include <dirent.h>
+#include <mysql.h>
+#include <stdbool.h>
 
-int readFile(FILE* fpsrc, FILE* fpdest);
-
+int readFile(FILE* fpsrc, FILE* fpdest, MYSQL* mysql, FILE* conflict);
+bool testInsert(MYSQL* mysql, char* query, char* error);
 
 int main() {
     FILE *fp = NULL;
     FILE *newfp = NULL;
+    FILE* conflictfile = NULL;
     FILE *crashfp = NULL;
-    DIR *dir;
+    DIR *dir = NULL;
     struct  dirent* ent;
+    MYSQL* mysql ;
     int count = 0;
     char  path[256];
 
-    dir = opendir("sql/");
+    mysql = mysql_init(NULL);
+    mysql_options(mysql,MYSQL_READ_DEFAULT_GROUP,"option");
+    if(!mysql_real_connect(mysql,"localhost","admin","password",
+                           "flashAssistance",3306,NULL,0))
+    {
+        crashfp = fopen("../crash.log","a");
+        fputs("error credential or server\n",crashfp);
+        fclose(crashfp);
+        return EXIT_FAILURE;
+    }
+    mysql_query(mysql,"SET FOREIGN_KEY_CHECKS=0;");
+    dir = opendir("../sql/");
     if (!dir)
     {
-        crashfp = fopen("crash.log","a");
-        fprintf(crashfp, "SQL directory not found\n");
+        crashfp = fopen("../crash.log","a");
+        fprintf(crashfp, "folder sql not found\n");
         fclose(crashfp);
         return EXIT_FAILURE;
     }
-    newfp = fopen("FINAL.sql","w");
+    newfp = fopen("../new.sql","a");
     if (!newfp)
     {
-        crashfp = fopen("crash.log","a");
-        fprintf(crashfp, "Fusion file couldn't be created\n");
+        crashfp = fopen("../crash.log","a");
+        fprintf(crashfp, "merge file impossible to be ceate\n");
         fclose(crashfp);
         return EXIT_FAILURE;
     }
-    fputs("TRUNCATE person;\n",newfp);
-    fputs("TRUNCATE client;\n",newfp);
-    fputs("TRUNCATE worker;\n",newfp);
-    fputs("TRUNCATE log;\n",newfp);
-    fputs("TRUNCATE orders;\n",newfp);
-    fputs("TRUNCATE service;\n",newfp);
-    fputs("TRUNCATE subscription;\n",newfp);
-
+    conflictfile = fopen("../conflict.txt","wb");
+    if (!conflictfile)
+    {
+        crashfp = fopen("../crash.log","a");
+        fputs("conflict file impossible to be create\n",crashfp);
+        fclose(crashfp);
+        return EXIT_FAILURE;
+    }
     while ((ent = readdir (dir))!= NULL)
     {
         if (strstr(ent->d_name,".sql")) {
-            strcpy(path,"sql/");
+            strcpy(path,"../sql/");
             count++;
             strcat(path,ent->d_name);
-            puts(path);
             fp = fopen(path,"r");
             if (!fp)
             {
-                crashfp = fopen("crash.log","a");
-                fprintf(crashfp, "File not found %s \n",ent->d_name);
+                crashfp = fopen("../crash.log","a");
+                fprintf(crashfp, "file not opnable %s \n",ent->d_name);
                 fclose(crashfp);
                 return EXIT_FAILURE;
             }
-            printf("Lines copied %d\n",readFile(fp,newfp));
+            printf("line copied %d\n",readFile(fp,newfp,mysql,conflictfile));
         }
 
     }
-    printf("Number of SQL files found :%d",count);
+    mysql_query(mysql,"SET FOREIGN_KEY_CHECKS=1;");
+    mysql_close(mysql);
     fclose(fp);
     closedir(dir);
-
+    printf("number of file found:%d",count);
     return EXIT_SUCCESS;
 }
 
-int readFile(FILE *fpsrc, FILE *fpdest) {
+int readFile(FILE *fpsrc, FILE *fpdest, MYSQL* mysql, FILE* fpconflict) {
     int count = 0;
-    char st[1000];
+    char initial_query[600];
+    char error[255];
 
-    while (fgets(st, 1000, fpsrc),feof(fpsrc) ==0 ) {
-        if (strstr(st,"insert into")  || strstr(st,"INSERT INTO") ) {
-            fputs(st,fpdest);
-            count++;
+    while (fgets(initial_query, 600, fpsrc))
+    {
+        if (strstr(initial_query, "INSERT INTO") || strstr(initial_query, "insert into")) {
+
+            if (testInsert(mysql, initial_query, error) == true) {
+                puts("insert successfull");
+                fputs(initial_query, fpdest);
+                count++;
+            } else {
+                fputs("adding the conflict line in conflict.txt\n",stderr);
+                fwrite(&initial_query,sizeof(char),strlen(initial_query),fpconflict);
+            }
         }
     }
     return count;
+}
+bool testInsert(MYSQL *mysql, char *query, char* error) {
+    if(mysql_query(mysql,query)!= 0){
+        fputs("query can't be insert\n",stderr);
+        strcpy(error,mysql_error(mysql));
+        return false;
+    }
+    return true;
 }
