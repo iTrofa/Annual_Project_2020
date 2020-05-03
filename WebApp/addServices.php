@@ -124,7 +124,7 @@ $category = $q->fetchAll();
             <input type="file" name="image" required>
         </label>
         <br>
-        <label><?= _('Service Price')?>
+        <label><?= _('Service Price (for a 8h/day)')?>
             <br>            <span class="error"><?= $_SESSION['error']['price'] ?? '' ?></span>
             <br>
             <input width="100%" type="number"  step="0.01" value="<?= $_SESSION['valid']['price'] ?? '' ?>" name="price"

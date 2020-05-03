@@ -116,60 +116,39 @@ $firstSerName = $service[0]['name'];
 <?php
 $q = $DbManager->query('SELECT * FROM service WHERE demo = 1 AND demoPath is not NULL');
 $service = $q->fetchAll();
-$firstImage = $service[0]['image'];
-$firstDesc = $service[0]['description'];
-$firstSerName = $service[0]['name'];
-$demoLink = "WebGL/" . $service[0]['demoPath'];
-?>
-<a id="demoLink" href="<?=$demoLink?>">
-    <div class="bd-example">
-        <div id="carouselExampleCaptions" style="width: 50%;margin-left: 25%;" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <?php
-                echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\"0\" class=\"active\"></li>";
-                for($i=1, $iMax = count($service); $i< $iMax; $i++){
-                    echo "<li data-target=\"#carouselExampleCaptions\" data-slide-to=\".$i.\" class=\"\"></li>";
-                }
-                ?>
-            </ol>
-            <?php
-            echo "<div class=\"carousel-inner\">";
-            echo "<div class=\"carousel-item active\">";
-            echo "<img class='d-block w-100' alt='' src='$firstImage' data-holder-rendered='true'>";
-            echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
-            echo "<h5 class=\"carousel-label-color\">$firstSerName</h5>";
-            echo "<p class=\"carousel-label-color\">$firstDesc</p>";
-            echo "</div>";
-            echo "</div>";
-            for ($i = 1, $iMax = count($service); $i< $iMax; $i++){
-                $image = $service[$i]['image'];
-                $desc = $service[$i]['description'];
-                $SerName = $service[$i]['name'];
-                $demoLink = "WebGL/" . $service[$i]['demoPath'];
-                echo "<script type='text/javascript'>
-                        changeDemoLink($demoLink)
-                        </script>";
-                echo "<div class=\"carousel-item\">";
-                echo "<img class=\"d-block w-100\" alt=\"\" src=\"$image\" data-holder-rendered=\"true\">";
-                echo "<div class=\"carousel-caption d-none d-md-block carousel-color\">";
-                echo "<h5 class=\"carousel-label-color\">$SerName</h5>";
-                echo "<p class=\"carousel-label-color\">$desc</p>";
-                echo "</div>";
-                echo "</div>";
 
-            }
-            ?>
-            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
+?>
+<div class="row" style="margin-right: 0">
+    <?php
+    for ($i=0;$i<count($service);$i++){
+        $demoImage = $service[$i]['image'];
+        $demoDesc = $service[$i]['description'];
+        $demoSerName = $service[$i]['name'];
+        $demoLink = "WebGL/" . $service[$i]['demoPath'];
+        if($i%2 == 0){
+    ?>
+    <div class="col-sm-3" style="margin-left: 20%; margin-bottom: 5%">
+        <h5 style="margin-top: 15%"><?=$demoSerName ." : ". $demoDesc?></h5>
+        <a href="<?=$demoLink?>"><input type="button" value="<?=_('Check out our Demo')?>" class="btn-primary btn-large btn"/></a>
     </div>
-</a>
+    <div class="col-sm-5" style="margin-bottom: 5%">
+        <img src="<?=$demoImage?>" style="width: 59%;display: inline-block;">
+    </div><br>
+<?php
+        }else{
+            ?>
+            <div class="col-sm-3" style="margin-bottom: 5%; margin-left: 20%">
+                <img src="<?=$demoImage?>" style="width: 100%;display: inline-block;">
+            </div><br>
+            <div class="col-sm-5" style="margin-bottom: 5%;">
+                <h5 style="margin-top: 15%"><?=$demoSerName ." : ". $demoDesc?></h5>
+                <a href="<?=$demoLink?>"><input type="button" value="<?=_('Check out our Demo')?>" class="btn-primary btn-large btn"/></a>
+            </div>
+        <?php
+        }
+    }
+?>
+</div>
 <br><br><br>
 
 <?php
