@@ -110,8 +110,46 @@ $firstSerName = $service[0]['name'];
         <a href="subscription.php"><input type="button" value="<?=_('Get your Subscription')?>" class="btn-primary btn-large btn"/></a>
     </div>
 </div>
-<br><br><br>
+<br><br>
+<h1 style="color: midnightblue; text-align: center"><?=_("Check out a demo of one of our Services!")?></h1>
+<br><br>
+<?php
+$q = $DbManager->query('SELECT * FROM service WHERE demo = 1 AND demoPath is not NULL');
+$service = $q->fetchAll();
 
+?>
+<div class="row" style="margin-right: 0">
+    <?php
+    for ($i=0;$i<count($service);$i++){
+        $demoImage = $service[$i]['image'];
+        $demoDesc = $service[$i]['description'];
+        $demoSerName = $service[$i]['name'];
+        $demoLink = "WebGL/" . $service[$i]['demoPath'];
+        if($i%2 == 0){
+    ?>
+    <div class="col-sm-3" style="margin-left: 20%; margin-bottom: 5%">
+        <h5 style="margin-top: 15%"><?=$demoSerName ." : ". $demoDesc?></h5>
+        <a href="<?=$demoLink?>"><input type="button" value="<?=_('Check out our Demo')?>" class="btn-primary btn-large btn"/></a>
+    </div>
+    <div class="col-sm-5" style="margin-bottom: 5%">
+        <img src="<?=$demoImage?>" style="width: 59%;display: inline-block;">
+    </div><br>
+<?php
+        }else{
+            ?>
+            <div class="col-sm-3" style="margin-bottom: 5%; margin-left: 20%">
+                <img src="<?=$demoImage?>" style="width: 100%;display: inline-block;">
+            </div><br>
+            <div class="col-sm-5" style="margin-bottom: 5%;">
+                <h5 style="margin-top: 15%"><?=$demoSerName ." : ". $demoDesc?></h5>
+                <a href="<?=$demoLink?>"><input type="button" value="<?=_('Check out our Demo')?>" class="btn-primary btn-large btn"/></a>
+            </div>
+        <?php
+        }
+    }
+?>
+</div>
+<br><br><br>
 
 <?php
 include("footer.php"); ?>

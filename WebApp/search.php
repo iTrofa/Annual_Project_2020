@@ -28,51 +28,110 @@ require_once "localization.php";
      ?>
     <?php
     $DbManager = App::getDb();
-    $req =  $DbManager->query('SELECT function FROM person WHERE idPerson = ?',[$_SESSION['id']]);
-
-    // lancement de la requête
-    $res = $req->fetch();
-
-    if($res['function'] === 'admin'){
+    $q =$DbManager->getDb()->prepare("SELECT admin FROM Person Where idPerson = ?");
+    $q->execute([
+        $_SESSION['id']
+    ]);
+    $res = $q->fetchAll();
+    if($res[0]['admin']){
         ?>
     <h1 style="text-align: center"><?= _("History of all purchases:")?></h1>
-    <div>
         <?php
-        $req = $DbManager->query('SELECT dateLog,idService FROM log');
+        $req = $DbManager->query("SELECT idOrders, status, orders.price, dateOrder, service.name FROM orders LEFT JOIN service on service.idService = Orders.idService WHERE status = 'payed' or status ='complete'");
+        $req->execute();
         $res = $req->fetchAll();
-        $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
-        foreach ($res as $param)
-        {
+        if(!empty($res)){
+            ?>
+            <input class='form-control mb-4' id='tableSearch' type='text'
+                   placeholder='<?= _("Type something to search list items") ?>'>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><?= _("ID") ?></th>
+                    <th><?= _("Status") ?></th>
+                    <th><?= _("Price") ?></th>
+                    <th><?= _("Date") ?></th>
+                    <th><?= _("Service Name") ?></th>
 
-            $req->execute([':service'=>$param['idService']]);
-            $p = $req->fetch();
-            ?> <p><?= $param['dateLog']?>, <?=$p['name']?>,  <?= $p['category'] ?></p><br>
-        <?php
-        }
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                <?php
+
+                for ($i = 0; $i < count($res); $i++) {
+                    $id = $res[$i]['idOrders'];
+                    $status = $res[$i]['status'];
+                    $orderPrice = $res[$i]['price']."€";
+                    $dateOrder = $res[$i]['dateOrder'];
+                    $serviceName = $res[$i]['name'];
+
+
+                    echo "<tr>";
+                    echo "<td>" . $id . "</td>";
+                    echo "<td>" . $status . "</td>";
+                    echo "<td>" . $orderPrice . "</td>";
+                    echo "<td>" . $dateOrder . "</td>";
+                    echo "<td>" . $serviceName . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+      <?php
+      }else {
+      }
       }else{
         ?>
         <h1 style="text-align: center"><?=_("History of your purchases:")?></h1>
-        <div>
             <?php
-      $req = $DbManager->query('SELECT idService,dateLog FROM log WHERE idPerson = ?', [$_SESSION['id']]);
+      $req = $DbManager->query("SELECT idOrders, status, orders.price, dateOrder, service.name FROM orders LEFT JOIN service on service.idService = Orders.idService WHERE idPerson = ? and status = 'payed' or status ='complete'", [$_SESSION['id']]);
       $res = $req->fetchAll();
-            $req = $DbManager->getDb()->prepare('SELECT name,category FROM service where idService = :service ');
             if(!empty($res)) {
-         foreach ($res as $param) {
-             $req->execute([':service' => $param['idService']]);
-             $p = $req->fetch();
-             ?> <p><?= $param['dateLog'] ?>, <?= $p['name'] ?>, <?= $p['category'] ?></p><br>
-             <?php
-         }
-     }
-      else{
+?>
+            <input class='form-control mb-4' id='tableSearch' type='text'
+                   placeholder='<?= _("Type something to search list items") ?>'>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th><?= _("ID") ?></th>
+                    <th><?= _("Status") ?></th>
+                    <th><?= _("Price") ?></th>
+                    <th><?= _("Date") ?></th>
+                    <th><?= _("Service Name") ?></th>
+
+                </tr>
+                </thead>
+                <tbody id="myTable">
+                <?php
+
+                for ($i = 0; $i < count($res); $i++) {
+                    $id = $res[$i]['idOrders'];
+                    $status = $res[$i]['status'];
+                    $orderPrice = $res[$i]['price']."€";
+                    $dateOrder = $res[$i]['dateOrder'];
+                    $serviceName = $res[$i]['name'];
+
+
+                    echo "<tr>";
+                    echo "<td>" . $id . "</td>";
+                    echo "<td>" . $status . "</td>";
+                    echo "<td>" . $orderPrice . "</td>";
+                    echo "<td>" . $dateOrder . "</td>";
+                    echo "<td>" . $serviceName . "</td>";
+                    echo "</tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+            <?php
+
+     }else{
           $firstP = _("You haven't bought anything yet");
           $secondP = _("Perhaps you should buy something");
           echo "<p style='text-align: center'>$firstP<a href='services.php'> $secondP;) </a></p>";
       }
     }
   ?>
-    </div>
   </body>
   <?php 
     include'footer.php';

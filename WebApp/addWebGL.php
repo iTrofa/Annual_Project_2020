@@ -37,9 +37,22 @@ if(!$res[0]['admin']){
     ?>
     <main>
         <form method="post" enctype="multipart/form-data" style="text-align: center">
-            <label><?=_("Demo File Name")?></label><br><br>
-            <input type="text" name="fileDir"><br><br>
-            <label><?=_("Demo Zip File (Only Zip Files Allowed)")?></label><br><br>
+            <label><b><?=_("Choose the Service you want to Add a Demo to :")?></label></b></label><br>
+            <select name="idService">
+                <?php
+                $q = $DbManager->query("SELECT service.name, service.idService FROM service");
+                $services = $q->fetchAll();
+                for($i = 0; $i < count($services); $i++){
+                    $idService = $services[$i]['idService'];
+                    echo "<option value='$idService'>".$services[$i]['name']."</option>";
+                }
+                ?>
+            </select><br><br>
+            <label><?=_("Demo File Name")?></label><br>
+            <input type="text" name="filePath"><br><br>
+            <label><b><?=_("Demo Path ")?></b></label><br>
+            <input style="width: 30%" placeholder="Example: GardeningDemo/examples/gardening.html" type="text" name="fileDir"><br><br>
+            <label><i><?=_("Demo Zip File (Only Zip Files Allowed)")?></i></label><br>
             <input type="file" name="fileName"><br><br>
             <input type="submit" name="fileSubmit" value="<?=_('Submit Demo')?>">
         </form>
@@ -58,18 +71,22 @@ if(!empty($_FILES) && !empty($_POST['fileDir'])){
     $filename = $_FILES["fileName"]["tmp_name"];
     $zip = new ZipArchive();
     $res = $zip->open($filename);
-    echo $res;
-    if ($res === TRUE && $zip->locateName($_POST['fileDir']) !== false) {
+    if ($res == TRUE && $zip->locateName($_POST['fileDir']) != FALSE && !empty($_POST['idService']) && !empty($_POST['filePath'])) {
 
         // Unzip path
-        $path = _PATH . "/WebGL/". $_POST['fileDir']. "/";
+        $path = _PATH . "/WebGL/". $_POST['filePath']. "/";
 
         // Extract file
         $zip->extractTo($path);
         $zip->close();
 
+        $q = $DbManager->query("UPDATE service SET demo = ?, demoPath = ? WHERE idService = ? ",[
+                1,
+                $_POST['filePath']."/".$_POST['fileDir'],
+                $_POST['idService']
+        ]);
         echo 'Unzip!';
     } else {
-        echo "the file can't be open or the name is not existing";
+        echo "The file can't be opened or the name doesn't exist";
     }
 }

@@ -200,3 +200,7 @@ function updatePrice() {
     price = price + "€";
     place.innerHTML = price;
 }
+
+function changeDemoLink(link) {
+    document.getElementById("demoLink").setAttribute("href", link);
+}
