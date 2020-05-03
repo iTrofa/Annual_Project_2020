@@ -3,11 +3,11 @@ require_once "session.php";
 
 if(isset($_GET['lang'])){
  $DbManager = new DbManager();
- $q = $DbManager->getDb()->prepare("UPDATE Person SET lang = ? WHERE idPerson = ?");
- $q->execute([
-    $_GET['lang'],
-    $_SESSION['id']
- ]);
+    $q = $DbManager->getDb()->prepare("UPDATE person SET lang = ? WHERE idPerson = ?");
+    $q->execute([
+        $_GET['lang'],
+        $_SESSION['id']
+    ]);
 }
 $_SESSION['lang'] = $_GET['lang'];
 

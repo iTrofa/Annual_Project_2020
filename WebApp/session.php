@@ -14,17 +14,17 @@ $res = $q->fetchAll();
 if($res[0]['lang'] !== 'en_US'){
     $_SESSION['lang'] = $res[0]['lang'];
 }
-$q = $DbManager->getDb()->prepare("SELECT endSub from Person WHERE idPerson = ?");
+$q = $DbManager->getDb()->prepare("SELECT endSub from person WHERE idPerson = ?");
 $q->execute([
-   $_SESSION['id']
+    $_SESSION['id']
 ]);
 $res = $q->fetchAll();
 $endSub = $res[0]['endSub'];
 $today = date('Y-m-d', time());
 if($today > $endSub){
-    $q = $DbManager->getDb()->prepare("Update Person SET subscription = NULL, endSub = NULL WHERE idPerson = ?");
+    $q = $DbManager->getDb()->prepare("Update person SET subscription = NULL, endSub = NULL WHERE idPerson = ?");
     $q->execute([
-       $_SESSION['id']
+        $_SESSION['id']
     ]);
 }
 $q = $DbManager->query("SELECT orderoptions.options, orders.type, orders.idOrders FROM orderoptions LEFT JOIN orders on orders.idOrders = orderoptions.idOrders WHERE orders.idPerson = ? AND orderoptions.typeOptions = 'timeVariable' AND orders.status = 'payed'",
