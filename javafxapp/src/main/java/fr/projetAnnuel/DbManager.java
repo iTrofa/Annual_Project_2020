@@ -10,9 +10,8 @@ public class DbManager {
 
     public DbManager() {
             Properties config = new Properties();
-            try (FileInputStream fp =
-                         new FileInputStream("src/main/resources/db.properties")) {
-                config.load(fp);
+            try  {
+                config.load( getClass().getResourceAsStream("/db.properties"));
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(-1);
