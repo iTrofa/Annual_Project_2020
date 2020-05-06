@@ -1,0 +1,5 @@
+dbname flashAssistance
+dblogin admin
+dbpass password
+dbhost localhost
+dbport 3306
