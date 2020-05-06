@@ -2,7 +2,6 @@
 .gradle/
 build/
 gradle/
-src/test/
 src/main/resources/db.properties
  #example
  #jdbc.driver.class = org.mariadb.jdbc.Driver
