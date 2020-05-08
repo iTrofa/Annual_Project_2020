@@ -8,7 +8,7 @@ $db = new DbManager();
 $q = $db->query("SELECT idOrders,service.name,service.description,orders.price,firstName,lastName,localisation from orders join person on orders.idPerson = person.idPerson join
     service on orders.idService = service.idService
     where
-      status ='active' and
+      status ='express' and
       orders.idPerson = ?", [$_SESSION['id']]);
 $datas = $q->fetchAll();
 $q = $db->query("SELECT subscription.nameSub FROM person LEFT JOIN subscription on subscription.idSub = person.subscription WHERE idPerson = ?", [$_SESSION['id']]);
@@ -31,36 +31,34 @@ if (isset($sub[0]['nameSub'])) {
             break;
     }
 }
-$date = new DateTime('now');
-$date = $date->format('d-m-Y');
-$q = $db->query('update orders set dateOrder = STR_TO_DATE(?, "%d-%m-%Y") where idOrders = ?', [$date, $datas[0]['idOrders']]);
-$q = $db->getDb()->prepare('INSERT INTO bill(idBill, price, pdf, creationDate, idOrders) VALUES (?, ?, ?, STR_TO_DATE(?, "%d-%m-%Y"), ?)');
+    $date = new DateTime('now');
+    $date = $date->format('d-m-Y');
+    $q = $db->query('update orders set dateOrder = STR_TO_DATE(?, "%d-%m-%Y") where idOrders = ?', [$date, $datas[0]['idOrders']]);
+    $q = $db->getDb()->prepare('INSERT INTO bill(idBill, price, pdf, creationDate, idOrders) VALUES (?, ?, ?, STR_TO_DATE(?, "%d-%m-%Y"), ?)');
 
-foreach ($datas as $service)
-{
-    $discount = 0;
-    if(isset($valueSub)){
-    $discount = $valueSub;
-    }
-
+    foreach ($datas as $service) {
+        $discount = 0;
+        if (isset($valueSub)) {
+            $discount = $valueSub;
+        }
     $invoice = new InvoicePrinter();
     /* Header Settings */
-    $invoice->setLogo(__DIR__."/images/logo.png");
+    $invoice->setLogo(__DIR__ . "/images/logo.png");
     $invoice->setColor("#AA3939");
     $invoice->setType("Sale Invoice");
     $invoice->setReference("INV-" . bin2hex(random_bytes(5)));
 
 
-    $invoice->setDate(date(' D d M,Y',time()));
+    $invoice->setDate(date(' D d M,Y', time()));
 
     $invoice->setFrom(['Flash Assistance', 'Flash Assistance', '242 Faubourg Saint Antoine', 'Paris 75016', 'France']);
-    $invoice->setTo([$datas[0]['firstName']. ' ' . $datas[0]['lastName'],$datas[0]['localisation'], 'France']);
+    $invoice->setTo([$datas[0]['firstName'] . ' ' . $datas[0]['lastName'], $datas[0]['localisation'], 'France']);
 
-    $invoice->addItem($service['name'], $service['description'], 1, $service['price']*0.21,
-        $service['price']-$service['price']*0.21+$service['price']*$discount, $service['price']*$discount,
+    $invoice->addItem($service['name'], $service['description'], 1, $service['price'] * 0.21,
+        $service['price'] - $service['price'] * 0.21 + $service['price'] * $discount, $service['price'] * $discount,
         $service['price']);
     /* Add totals */
-    $invoice->addTotal('Total due',$service['price'],true);
+    $invoice->addTotal('Total due', $service['price'], true);
     /* Set badge */
     $invoice->addBadge('Invoice');
     /* Add title */
@@ -72,7 +70,7 @@ foreach ($datas as $service)
     /* Render */
     $name = 'bills/';
     $name .= bin2hex(random_bytes(10));
-    $name .='.pdf';
-    $invoice->render(__DIR__."/". $name,'F');
+    $name .= '.pdf';
+    $invoice->render(__DIR__ . "/" . $name, 'F');
     $q->execute([$db::v4(), $service['price'], $name, $date, $service['idOrders']]);
 }

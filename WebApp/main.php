@@ -45,6 +45,12 @@ while ($user = $req->fetch()) {
 $q = $DbManager->query('SELECT * FROM service');
 
 $service = $q->fetchAll();
+if (isset($_GET['return'])){
+    echo $_GET['return'];
+    echo "<br>";
+    echo "Get your bill ";
+    echo "<a href='search.php'>here</a> :";
+}
 if(isset($_SESSION['firstName'])){?>
     <h1 id="welcomeInput"><?= _("Welcome to Flash Assistance") . " " . $_SESSION['firstName']?></h1><br><br>
 <?php

@@ -106,36 +106,49 @@ if (!empty($_GET['services'])) {
             <div onchange="retrieveHour()" id="hourForm" style="text-align: initial; margin-left: 20%;display: block">
                 <input class="inputSmaller" id="hourInput" type="date" name="hourInput"><br><br>
             </div>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('#checkBtn').click(function() {
+                        checked = $("input[type=checkbox]:checked").length;
+
+                        if(!checked) {
+                            alert("You must check at least one checkbox.");
+                            return false;
+                        }
+
+                    });
+                });
+                </script>
             <div id="dayForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' onchange="updatePrice()" name='Monday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Monday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Tuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Tuesday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Wednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Wednesday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Thursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Thursday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Friday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Friday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Saturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Saturday")?></p><br>
-                <input class='inputSmaller' onchange="updatePrice()" name='Sunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Sunday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Monday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Monday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Tuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Tuesday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Wednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Wednesday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Thursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Thursday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Friday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Friday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Saturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Saturday")?></p><br>
+                <input class='inputSmaller checkBox' onchange="updatePrice()" name='Sunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("Each Sunday")?></p><br>
             </div>
             <div id="monthForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' name='monthMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Mondays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Tuesdays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Wednesdays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Thursdays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Fridays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Saturdays of the Month")?></p><br>
-                <input class='inputSmaller' name='monthSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Sundays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Mondays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Tuesdays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Wednesdays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Thursdays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Fridays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Saturdays of the Month")?></p><br>
+                <input class='inputSmaller checkBox' name='monthSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All the Sundays of the Month")?></p><br>
             </div>
             <div id="yearForm" style="text-align: left; margin-left: 20%;display: none">
-                <input class='inputSmaller' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Mondays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Tuesdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Wednesdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Thursdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Fridays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Saturdays of each Month")?></p><br>
-                <input class='inputSmaller' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Sundays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearMonday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Mondays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearTuesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Tuesdays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearWednesday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Wednesdays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearThursday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Thursdays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearFriday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Fridays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearSaturday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Saturdays of each Month")?></p><br>
+                <input class='inputSmaller checkBox' name='yearSunday' style='width: 1.5%' type='checkbox'><p class= 'font-italic mb-4' style='display: inline-block'> &nbsp&nbsp<?=_("All Sundays of each Month")?></p><br>
             </div>
-            <button type="submit" class="btn btn-primary btn-block2 btn-large"><?= _("Confirm")?></button>
+            <button id="checkBtn" type="submit" class="btn btn-primary btn-block2 btn-large"><?= _("Confirm")?></button>
         </form>
-        <div class="card col-lg-6" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">
+        <!--<div class="card col-lg-6" style="width: 18rem;padding-left: 0px;left: 75%;top: 100%;position: absolute">
             <div class="card-header">
                 <?=_("Price")?> <span title="<?= _('Estimated price if you all the checkboxes.')?>">*</span>
             </div>
@@ -143,7 +156,7 @@ if (!empty($_GET['services'])) {
                 <li class='list-group-item'> <?= $chosenService ?></li>
                 <li id="updatePrice" value="<?= $chosenServicePrice ?>" class="list-group-item"></li>
             </ul>
-        </div>
+        </div>-->
     </div>
     <?php
 } else {

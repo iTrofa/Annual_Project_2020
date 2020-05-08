@@ -52,7 +52,9 @@ $charge = Charge::create(array(
     "customer" => $customer->id
 ));
 $DbManager = App::getDb();
+
 if(isset($_GET['express']) && $_GET['express'] == true ){
+    require_once '../pdf-invoice/invoiceExpress.php';
     $q = $DbManager->query("UPDATE orders SET status = 'payed' WHERE status = 'express'");
 }else if(isset($_GET['sub'])){
     $old_date = date('Y-m-d');
@@ -65,9 +67,9 @@ if(isset($_GET['express']) && $_GET['express'] == true ){
         $_SESSION['id']
     ]);
 }else{
+    require_once '../pdf-invoice/invoice.php';
     $q = $DbManager->query("UPDATE orders SET status = 'payed' WHERE status = 'active'");
 }
-require_once '../pdf-invoice/invoice.php';
 // You can charge the customer later by using the customer id.
 header('Location: ../main.php?return=your%20payment%20was%20processed%20successfully.');
 exit();

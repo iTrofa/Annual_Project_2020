@@ -305,7 +305,9 @@ include('../header.php');
                 }
                 ?>
             </div>
-
+            <?php
+            echo "<a href=\"../pdf-invoice/estimate.php?service=$service&price=$finalPrice\" class=\"btn btn-primary rounded-pill py-2\">ESTIMATE</a>";
+            ?>
         </div>
         <div class="col-lg-6">
             <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold"><?=_('Order summary')?></div>

@@ -112,6 +112,7 @@ require "header.php";
                 <th><?= _("Phone Number") ?></th>
                 <th><?= _("Function") ?></th>
                 <th><?= _("Localisation") ?></th>
+                <th><?= _("Admin") ?></th>
             </tr>
             </thead>
             <tbody id="myTable">
@@ -125,6 +126,7 @@ require "header.php";
                 $idPerson = $results[$i]['idPerson'];
                 $function = $results[$i]['function'];
                 $localisation = $results[$i]['localisation'];
+                $admin = $results[$i]['admin']? "True":"False" ;
 
 
                 echo "<tr>";
@@ -135,6 +137,7 @@ require "header.php";
                 echo "<td>" . $phone . "</td>";
                 echo "<td>" . $function . "</td>";
                 echo "<td>" . $localisation . "</td>";
+                echo "<td>" . $admin . "</td>";
                 echo "</tr>";
             }
             ?>

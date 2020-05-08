@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Annual Project 2020\n"
 "POT-Creation-Date: 2020-04-26 15:46+0200\n"
-"PO-Revision-Date: 2020-04-26 15:47+0200\n"
+"PO-Revision-Date: 2020-05-07 11:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -97,8 +97,6 @@ msgid "Add a Service"
 msgstr "Ajouter un Service"
 
 #: addWebGL.php:40
-#, fuzzy
-#| msgid "Demo Directory Name"
 msgid "Demo File Name"
 msgstr "Nom du Dossier de la Demo"
 
@@ -123,8 +121,6 @@ msgid "is empty"
 msgstr "est vide"
 
 #: class/SignupValidator.php:124
-#, fuzzy
-#| msgid "the email must ve valid"
 msgid "the email must be valid"
 msgstr "L'email doit être valide"
 
@@ -150,7 +146,7 @@ msgstr "Vous êtes bien inscris"
 
 #: class/SignupValidator.php:209
 msgid "there is a technical problem try later"
-msgstr ""
+msgstr "Il y a un problème technique, essayez plus tard"
 
 #: clientManagement.php:57
 msgid "Client Management - Flash Assistance"
@@ -279,13 +275,11 @@ msgstr "Obtient ton Abonnement"
 
 #: partnerManagement.php:116
 msgid "List of all Available Workers:"
-msgstr "Liste de tout les Prestataires:"
+msgstr "Liste de tous les Prestataires disponibles:"
 
 #: partnerManagement.php:157
-#, fuzzy
-#| msgid "List of all Available Workers:"
 msgid "List of all Available Jobs:"
-msgstr "Liste de tout les Prestataires:"
+msgstr "Liste de tous les Prestataires disponibles:"
 
 #: partnerManagement.php:163 partnerManagement.php:238
 msgid "Order ID"
@@ -296,22 +290,16 @@ msgid "Client ID"
 msgstr "ID du Client"
 
 #: partnerManagement.php:165 partnerManagement.php:240
-#, fuzzy
-#| msgid "Services"
 msgid "Service Requested"
-msgstr "Services"
+msgstr "Service Demandé"
 
 #: partnerManagement.php:190
-#, fuzzy
-#| msgid "List of all Available Workers:"
 msgid "List of all Active Workers:"
-msgstr "Liste de tout les Prestataires:"
+msgstr "Liste de tout les Prestataires Occupés:"
 
 #: partnerManagement.php:232
-#, fuzzy
-#| msgid "List of all Users:"
 msgid "List of all Active Jobs:"
-msgstr "Liste de tout les Utilisateurs:"
+msgstr "Liste de tout les Utilisateurs en cours:"
 
 #: partnerManagement.php:241
 msgid "Worker ID"
@@ -327,7 +315,7 @@ msgstr "Tu as le "
 
 #: payment/payment.php:272 payment/paymentCart.php:90
 msgid "Look at our other Subscriptions"
-msgstr "Regarde tout nos autres Abonnements"
+msgstr "Regarde tous nos autres Abonnements"
 
 #: payment/payment.php:278 payment/paymentCart.php:98
 msgid "If you have a subscription, please enter it in the box below"
@@ -386,15 +374,15 @@ msgid ""
 "Tax costs are calculated based on values you have entered and each service."
 msgstr ""
 "Les côuts des taxes sont calculés à partir des valeurs que vous avez rentré "
-"et chaque service"
+"et chaque service."
 
 #: search.php:38
 msgid "History of all purchases:"
-msgstr "Historique de tout les achats:"
+msgstr "Historique de tous les achats:"
 
 #: search.php:54
 msgid "History of your purchases:"
-msgstr "Historique de tout tes achats:"
+msgstr "Historique de tous tes achats:"
 
 #: search.php:69
 msgid "You haven't bought anything yet"
@@ -573,14 +561,10 @@ msgid "Edit Profile"
 msgstr "Editer Profil"
 
 #: yourAccount.php:64
-#, fuzzy
-#| msgid "First name"
 msgid "First Name"
 msgstr "Prénom"
 
 #: yourAccount.php:77
-#, fuzzy
-#| msgid "Last name"
 msgid "Last Name"
 msgstr "Nom"
 
@@ -589,8 +573,6 @@ msgid "Confirm password"
 msgstr "Confirmer Mot de Passe"
 
 #: yourAccount.php:132
-#, fuzzy
-#| msgid "Phone number"
 msgid "Telephone number"
 msgstr "Numéro de Téléphone"
 

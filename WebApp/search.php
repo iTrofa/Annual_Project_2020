@@ -37,7 +37,9 @@ require_once "localization.php";
         ?>
     <h1 style="text-align: center"><?= _("History of all purchases:")?></h1>
         <?php
-        $req = $DbManager->query("SELECT idOrders, status, orders.price, dateOrder, service.name FROM orders LEFT JOIN service on service.idService = Orders.idService WHERE status = 'payed' or status ='complete'");
+        $req = $DbManager->query("SELECT orders.idOrders, status, orders.price, dateOrder, service.name, bill.pdf FROM orders
+    LEFT JOIN service on service.idService = Orders.idService 
+    LEFT JOIN bill ON bill.idOrders = orders.idOrders WHERE status = 'payed' or status ='complete' ORDER BY dateOrder desc");
         $req->execute();
         $res = $req->fetchAll();
         if(!empty($res)){
@@ -48,6 +50,7 @@ require_once "localization.php";
                 <thead>
                 <tr>
                     <th><?= _("ID") ?></th>
+                    <th><?= _("PDF") ?></th>
                     <th><?= _("Status") ?></th>
                     <th><?= _("Price") ?></th>
                     <th><?= _("Date") ?></th>
@@ -60,6 +63,7 @@ require_once "localization.php";
 
                 for ($i = 0; $i < count($res); $i++) {
                     $id = $res[$i]['idOrders'];
+                    $pdf = "pdf-invoice/".$res[$i]['pdf'];
                     $status = $res[$i]['status'];
                     $orderPrice = $res[$i]['price']."€";
                     $dateOrder = $res[$i]['dateOrder'];
@@ -68,6 +72,11 @@ require_once "localization.php";
 
                     echo "<tr>";
                     echo "<td>" . $id . "</td>";
+                    if ($pdf != "pdf-invoice/") {
+                        echo "<td><a href=" . $pdf . ">PDF</a></td>";
+                    }else{
+                        echo "<td>NO PDF</td>";
+                    }
                     echo "<td>" . $status . "</td>";
                     echo "<td>" . $orderPrice . "</td>";
                     echo "<td>" . $dateOrder . "</td>";
@@ -84,7 +93,7 @@ require_once "localization.php";
         ?>
         <h1 style="text-align: center"><?=_("History of your purchases:")?></h1>
             <?php
-      $req = $DbManager->query("SELECT idOrders, status, orders.price, dateOrder, service.name FROM orders LEFT JOIN service on service.idService = Orders.idService WHERE idPerson = ? and status = 'payed' or status ='complete'", [$_SESSION['id']]);
+      $req = $DbManager->query("SELECT orders.idOrders, status, orders.price, dateOrder, service.name, bill.pdf FROM orders LEFT JOIN service on service.idService = Orders.idService LEFT JOIN bill ON bill.idOrders = orders.idOrders WHERE idPerson = ? and status = 'payed' or status ='complete' ORDER BY dateOrder desc", [$_SESSION['id']]);
       $res = $req->fetchAll();
             if(!empty($res)) {
 ?>
@@ -94,6 +103,7 @@ require_once "localization.php";
                 <thead>
                 <tr>
                     <th><?= _("ID") ?></th>
+                    <th><?= _("PDF") ?></th>
                     <th><?= _("Status") ?></th>
                     <th><?= _("Price") ?></th>
                     <th><?= _("Date") ?></th>
@@ -106,6 +116,7 @@ require_once "localization.php";
 
                 for ($i = 0; $i < count($res); $i++) {
                     $id = $res[$i]['idOrders'];
+                    $pdf = "pdf-invoice/".$res[$i]['pdf'];
                     $status = $res[$i]['status'];
                     $orderPrice = $res[$i]['price']."€";
                     $dateOrder = $res[$i]['dateOrder'];
@@ -114,6 +125,11 @@ require_once "localization.php";
 
                     echo "<tr>";
                     echo "<td>" . $id . "</td>";
+                    if ($pdf == "pdf-invoice/") {
+                        echo "<td><a href=" . $pdf . ">PDF</a></td>";
+                    }else{
+                        echo "<td>NO PDF</td>";
+                    }
                     echo "<td>" . $status . "</td>";
                     echo "<td>" . $orderPrice . "</td>";
                     echo "<td>" . $dateOrder . "</td>";
